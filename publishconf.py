@@ -9,10 +9,10 @@ DEFAULT_PAGINATION = 10
 DELETE_OUTPUT_DIRECTORY = True
 DISQUS_SITENAME = 'aclark-blog'
 FEED_ATOM = 'feeds/all.atom.xml'
-GITHUB_URL = 'https://github.com/ACLARKNET/aclarknet.github.com'
+GITHUB_URL = 'https://github.com/ACLARKNET/blog'
 GOOGLE_ANALYTICS = 'UA-34988446-1'
 SITENAME = u'Alex Clark - Python Web Developer'
-SITEURL = 'http://blog.aclark.net'
+SITEURL = 'http://aclark.net/blog'
 SOCIAL = (
     ('aclark4life', 'http://twitter.com/aclark4life'),
     ('aclark4life (Gittip)', 'https://www.gittip.com/aclark4life'),
