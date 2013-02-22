@@ -14,7 +14,7 @@ What
 
 Recently with a tweet, I announced the start of a new personal project:
 
-.. image:: images/tweet.png
+.. image:: https://raw.github.com/ACLARKNET/blog/gh-pages/images/tweet.png
 
 When
 ----
@@ -36,7 +36,7 @@ How
 
 I think a lot about what other people think about Plone, so I decided this book will feature comments from the general public in it. E.g.:
 
-.. image:: images/comments.png
+.. image:: https://raw.github.com/ACLARKNET/blog/gh-pages/images/comments.png
 
 How much?
 ---------

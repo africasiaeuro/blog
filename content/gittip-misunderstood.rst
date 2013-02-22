@@ -6,7 +6,7 @@ Gittip, Misunderstood
 
 People do not understand gittip. Or, they do not understand how I use it. Worse, they **think** they understand it [1]_. So much so, some choose to comment about it publicly.
 
-.. image:: images/condescend.jpg
+.. image:: https://raw.github.com/ACLARKNET/blog/gh-pages/images/condescend.jpg
 
 Remember `gittip is the future`_? Someone commented: 
 

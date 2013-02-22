@@ -343,7 +343,7 @@ Customize templates
 
 As you may have noticed above I use ``z3c.jbot`` to customize various Plone templates.
 
-.. image:: images/custom-templates.png
+.. image:: https://raw.github.com/ACLARKNET/blog/gh-pages/images/custom-templates.png
 
 Add content
 -----------
@@ -361,7 +361,7 @@ Use Sunburst theme for content editing
 If you are Diazo-savvy, you may notice I completely ignore styling the content editing interface. Instead I rely on the unthemed [2]_ site for content editing.
 
 
-.. image:: images/edit-ui.png
+.. image:: https://raw.github.com/ACLARKNET/blog/gh-pages/images/edit-ui.png
 
 Use Diazo theme for public facing view
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
