@@ -17,10 +17,10 @@ LINKS = (
 SITENAME = u'Alex Clark - Python Web Developer'
 SITEURL = 'http://aclark.net/blog'
 SOCIAL = (
-    ('atom feed (Django)', 'http://blog.aclark.net/feeds/Django.atom.xml'),
-    ('atom feed (Mozilla)', 'http://blog.aclark.net/feeds/Mozilla.atom.xml'),
-    ('atom feed (Plone)', 'http://blog.aclark.net/feeds/Plone.atom.xml'),
-    ('atom feed (Python)', 'http://blog.aclark.net/feeds/Python.atom.xml'),
+    ('atom feed (Django)', 'http://aclark.net/blog/feeds/Django.atom.xml'),
+    ('atom feed (Mozilla)', 'http://aclark.net/blog/feeds/Mozilla.atom.xml'),
+    ('atom feed (Plone)', 'http://aclark.net/blog/feeds/Plone.atom.xml'),
+    ('atom feed (Python)', 'http://aclark.net/blog/feeds/Python.atom.xml'),
     ('aclark4life', 'http://twitter.com/aclark4life'),
     ('aclark4life (Gittip)', 'https://www.gittip.com/aclark4life'),
 )
