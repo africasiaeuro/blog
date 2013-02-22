@@ -4,7 +4,7 @@
 &lt;img alt="/blog/images/httrack.png" src="/blog/images/httrack.png" /&gt;
 &lt;div class="section" id="plone-in-the-cloud"&gt;
 &lt;h2&gt;Plone in the cloud&lt;/h2&gt;
-&lt;p&gt;Plone is still too &amp;quot;heavy&amp;quot; to easily run &amp;quot;in the cloud&amp;quot;, but it's getting there. In particular, I find this effort by David Bain very inspiring:&lt;/p&gt;
+&lt;p&gt;Plone is still too &amp;quot;heavy&amp;quot; to easily run &amp;quot;in the cloud&amp;quot; (except via &lt;a class="reference external" href="http://ploud.com"&gt;http://ploud.com&lt;/a&gt;, HT), but it's getting there. In particular, I find this effort by David Bain very inspiring:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://github.com/pigeonflight/stack-python-plone"&gt;https://github.com/pigeonflight/stack-python-plone&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
