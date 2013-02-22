@@ -23,6 +23,7 @@ SOCIAL = (
     ('atom feed (Python)', 'http://aclark.net/blog/feeds/Python.atom.xml'),
     ('aclark4life', 'http://twitter.com/aclark4life'),
     ('aclark4life (Gittip)', 'https://www.gittip.com/aclark4life'),
+    ('alex.clark (about.me)', 'http:///about.me/alex.clark'),
 )
 TAG_FEED_ATOM = 'feeds/%s.atom.xml'
 TAG_FEED_RSS = None
