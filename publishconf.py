@@ -1,5 +1,5 @@
 ARTICLE_SAVE_AS = '{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html'
-ARTICLE_URL = 'http://aclark.net/blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/'
+ARTICLE_URL = '/blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/'
 AUTHOR = u'aclark'
 CATEGORY_FEED_ATOM = None
 CATEGORY_FEED_RSS = None
@@ -16,7 +16,7 @@ LINKS = (
     ('ACLARK.NET, LLC', 'http://aclark.net'),
 )
 SITENAME = u'Alex Clark - Python Web Developer'
-SITEURL = 'http://aclark.net/blog'
+SITEURL = 'http://aclark.net'
 SOCIAL = (
     ('atom feed (Django)', 'http://aclark.net/blog/feeds/Django.atom.xml'),
     ('atom feed (Mozilla)', 'http://aclark.net/blog/feeds/Mozilla.atom.xml'),
