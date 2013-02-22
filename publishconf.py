@@ -15,7 +15,7 @@ LINKS = (
     ('ACLARK.NET, LLC', 'http://aclark.net'),
 )
 SITENAME = u'Alex Clark - Python Web Developer'
-SITEURL = 'http://aclark.net/blog/'
+SITEURL = 'http://aclark.net/blog'
 SOCIAL = (
     ('atom feed (Django)', 'http://aclark.net/blog/feeds/Django.atom.xml'),
     ('atom feed (Mozilla)', 'http://aclark.net/blog/feeds/Mozilla.atom.xml'),
