@@ -1,5 +1,5 @@
 ARTICLE_SAVE_AS = '{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html'
-ARTICLE_URL = '/blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/'
+ARTICLE_URL = 'http://aclark.net/blog/{date:%Y}/{date:%m}/{date:%d}/{slug}/'
 AUTHOR = u'aclark'
 CATEGORY_FEED_ATOM = None
 CATEGORY_FEED_RSS = None
