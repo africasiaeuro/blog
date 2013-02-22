@@ -10,7 +10,7 @@
 &lt;div class="section" id="shell"&gt;
 &lt;h2&gt;Shell&lt;/h2&gt;
 &lt;p&gt;One of the first things I do on a new system is change my shell to &lt;strong&gt;Zsh&lt;/strong&gt; in &lt;tt class="docutils literal"&gt;System Preferences &lt;span class="pre"&gt;-&amp;gt;&lt;/span&gt; Users &amp;amp; Groups &lt;span class="pre"&gt;-&amp;gt;&lt;/span&gt; Current User &lt;span class="pre"&gt;-&amp;gt;&lt;/span&gt; Right Click &lt;span class="pre"&gt;-&amp;gt;&lt;/span&gt; Advanced &lt;span class="pre"&gt;Options...&lt;/span&gt;&lt;/tt&gt;. Don't forget to &lt;tt class="docutils literal"&gt;Click the lock to make changes&lt;/tt&gt; first.&lt;/p&gt;
-&lt;img alt="images/zsh.png" src="images/zsh.png" /&gt;
+&lt;img alt="/blog/images/zsh.png" src="/blog/images/zsh.png" /&gt;
 &lt;div class="section" id="zsh"&gt;
 &lt;h3&gt;Zsh&lt;/h3&gt;
 &lt;p&gt;Why &lt;strong&gt;Zsh&lt;/strong&gt;? One of my favorite features is &lt;strong&gt;shared history between open sessions&lt;/strong&gt;. So I can run a command in one window, and then run the same command from another window by fetching it from the history (with CTRL-R).&lt;/p&gt;
@@ -19,11 +19,11 @@
 &lt;div class="section" id="xcode"&gt;
 &lt;h2&gt;XCode&lt;/h2&gt;
 &lt;p&gt;After I take possession of my new laptop (running &lt;strong&gt;Mountain Lion&lt;/strong&gt;, the newest OS X at the time of this writing), I head to the App Store to download XCode. &lt;a class="footnote-reference" href="#id12" id="id2"&gt;[2]&lt;/a&gt; Among many other things, XCode gives me the GNU C Compiler and allows me to type &amp;quot;gcc&amp;quot; in my &lt;tt class="docutils literal"&gt;Applications &lt;span class="pre"&gt;-&amp;gt;&lt;/span&gt; Utilities &lt;span class="pre"&gt;-&amp;gt;&lt;/span&gt; Terminal&lt;/tt&gt;.&lt;/p&gt;
-&lt;img alt="images/gcc.png" src="images/gcc.png" /&gt;
+&lt;img alt="/blog/images/gcc.png" src="/blog/images/gcc.png" /&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id3"&gt;
 &lt;h2&gt;Python&lt;/h2&gt;
-&lt;img alt="images/homebrew.png" src="images/homebrew.png" /&gt;
+&lt;img alt="/blog/images/homebrew.png" src="/blog/images/homebrew.png" /&gt;
 &lt;p&gt;Now I need a Python interpreter &lt;a class="footnote-reference" href="#id13" id="id4"&gt;[3]&lt;/a&gt;. For development I use the &lt;a class="reference external" href="https://github.com/collective/buildout.python"&gt;Collective Python Buildout&lt;/a&gt; but I also enjoy using &lt;a class="reference external" href="http://mxcl.github.com/homebrew/"&gt;Homebrew's&lt;/a&gt; Python 2.7. I use Homebrew for a variety of other things too (e.g. mobile-shell AKA mosh) so here we go:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 $ ruby -e &amp;quot;$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)&amp;quot;
@@ -40,7 +40,7 @@ $ brew install python
 $ brew install git
 &lt;/pre&gt;
 &lt;p&gt;Which reminds me, don't forget that installing the command line utilities in Mountain Lion's XCode requires an additional step in &lt;tt class="docutils literal"&gt;Preferences &lt;span class="pre"&gt;-&amp;gt;&lt;/span&gt; Downloads &lt;span class="pre"&gt;-&amp;gt;&lt;/span&gt; Command Line Tools &lt;span class="pre"&gt;-&amp;gt;&lt;/span&gt; Install&lt;/tt&gt;:&lt;/p&gt;
-&lt;img alt="images/command-line-utils.png" src="images/command-line-utils.png" /&gt;
+&lt;img alt="/blog/images/command-line-utils.png" src="/blog/images/command-line-utils.png" /&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id5"&gt;
 &lt;h2&gt;Dotfiles&lt;/h2&gt;
