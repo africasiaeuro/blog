@@ -10,7 +10,7 @@ This scene is tricky for non-stockbrokers to understand because you need to know
 Important Plot Detail #1
 ------------------------
 
-The Crop Reports, real and fake. In the movie, the Dukes plan to cheat. But the "good guys" (Valentine and Winthrope) foil them by replacing their stolen, ill-gotten crop report with a fake. This allows the "good guys" to win. To understand the swindle, you must understand the crop reports (real and fake) and the market repercussions of each:
+The Crop Reports, real and fake. In the movie, the Dukes plan to cheat. But the "good guys" (Valentine and Winthrope) foil them by replacing their stolen, ill-gotten crop report with a fake. This allows the "good guys" to win. To understand the reverse-swindle, you must understand the crop reports (real and fake) and the market repercussions of each:
 
 +------------+----------+----------+
 |            |**Report**|**Report**|
