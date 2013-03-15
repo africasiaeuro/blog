@@ -4,8 +4,6 @@ The Story of Pillow
 :date: 2013-03-15 17:00
 :tags: Django, Plone, Python
 
-.. image:: https://raw.github.com/ACLARKNET/blog/gh-pages/images/story-of-pillow.png
-
 On March 4, 2013 I got an email from the Python Software Foundation (PSF):
 
     This email notification is being sent to you to inform you of the PSF Board’s decision to fund the facilitation of a Python 3 compatible release of the Python Imaging Library for the amount of $1,300 USD. Please see the resolution that was passed unanimously on March 4, 2013 via email below:
@@ -22,6 +20,8 @@ That release is now done! And I have had an absolute blast working on Pillow ful
 
 About 2.0.0
 -----------
+
+.. image:: https://raw.github.com/ACLARKNET/blog/gh-pages/images/story-of-pillow.png
 
 This release marks the first "serious effort" I have put into Pillow. While I've always enjoyed working on it in my spare time, I knew that there was no way I could finish it in time for PyCon 2013 (as I promised) without getting some financial assistance.
 
