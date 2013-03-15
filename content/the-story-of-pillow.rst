@@ -4,7 +4,7 @@ The Story of Pillow
 :date: 2013-03-15 17:00
 :tags: Django, Plone, Python
 
-.. image:: images/story-of-pillow.png
+.. image:: https://raw.github.com/ACLARKNET/blog/gh-pages/images/story-of-pillow.png
 
 On March 4, 2013 I got an email from the Python Software Foundation (PSF):
 
