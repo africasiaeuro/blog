@@ -33,8 +33,54 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="../2013/02/08/i-love-checkoutmanager-and-dotfiles/">I love checkoutmanager and dotfiles</a></h1> 
+                    <h1 class="entry-title"><a href="../2013/03/15/the-story-of-pillow/">The Story of Pillow</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2013-03-15T17:00:00">
+                Fri 15 March 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/aclark.html">aclark</a>
+        </address>
+        <p>In <a href="../category/blog.html">Blog</a>. </p>
+<p>tags: <a href="../tag/django.html">Django</a><a href="../tag/plone.html">Plone</a><a href="../tag/python.html">Python</a></p></footer><!-- /.post-info --><p>On March 4, 2013 I got an email from the Python Software Foundation (PSF):</p>
+<blockquote>
+This email notification is being sent to you to inform you of the PSF Board’s decision to fund the facilitation of a Python 3 compatible release of the Python Imaging Library for the amount of $1,300 USD. Please see the resolution that was passed unanimously on March 4, 2013 via email below:</blockquote>
+<p>Yay! That was in response to <a class="reference external" href="https://github.com/python-imaging/psf-grant-proposal">my proposal</a> asking for funding to finish a Pillow 2.0.0 release. In that proposal, I presented the &quot;story of Pillow&quot; which I'd like to present again now, for anyone interested:</p>
+<blockquote>
+<p>Tired of seeing the proliferation of third party packagings of the Python Imaging Library, in 2010 Alex Clark took Hanno Schlicting's repackaging and used it to create a fork of the Python Imaging Library on GitHub. He subsequently released that fork to PyPI as Pillow 1.0. The ability to add additional development library paths to setup.py (e.g. 64 bit library and headers directories) and make releases quickly eventually led to widespread adoption of Pillow.</p>
+<p>A little over a year later on 2011-09-08, Takayuki Shimizukawa uploaded the first Windows (win32) eggs. Since then, every Pillow release included Windows eggs thanks to Takayuki. And on 2013-02-02, the first 64-bit Windows eggs (amd64) were uploaded to PyPI by Takayuki.</p>
+<p>For the first 3 years, the fork focused on packaging fixes only. Now a Python 3 compatible pull request from Brian Crowell has been merged, and the final stages of release preparation are underway. In early 2013, Barry Warsaw created an Ubuntu Personal Package Archive and tested it with Python 3. And the Fedora Project is now planning to include Pillow with their release of Fedora 19. Finally, the Pillow project has promised a Python 3 compatible release of Pillow by PyCon 2013.</p>
+</blockquote>
+<p>That release is now done! And I have had an absolute blast working on Pillow full time over the course of the last week or so. So much so, that I'm going to propose you help me continue to have fun and be productive with Pillow… but more on that later. First, about the new release.</p>
+<div class="section" id="about-2-0-0">
+<h2>About 2.0.0</h2>
+<p>This release marks the first &quot;serious effort&quot; I have put into Pillow. While I've always enjoyed working on it in my spare time, I knew that there was no way I could finish it in time for PyCon 2013 (as I promised) without getting some financial assistance.</p>
+<p>Enter: The PSF, who graciously offered to fund my work (and the work of one other contributor). Once I had funding in place, I knew exactly what needed to be done:</p>
+<ul class="simple">
+<li>So much time has passed since the fork, no one seemed to care if we made image code changes (we were originally a packaging fork), so this release contains <strong>EVERY PATCH EVER SUBMITTED TO PIL</strong> but not released until now. I'm exaggerating, but we really crammed a lot of &quot;goodness&quot; in to the 2.0.0 release along with Python 3 support which is what prompted the release in the first place.</li>
+<li>In order to fully test, I fine-tuned my tox environment on Mac OS X (tox is awesome) as well as fired up a new Windows VM (and used an already-existing Linux VM). Additionally, other folks joined in to test on their environments (most notably Christophe Gohlke and Eric Soroos). You'll find the results here: <a class="reference external" href="https://github.com/python-imaging/Pillow#platform-support">https://github.com/python-imaging/Pillow#platform-support</a>. That means: <strong>THIS RELEASE HAS BEEN FULLY, EXTENSIVELY, AND EXHAUSTIVELY DEVELOPED AND TESTED</strong>. Aside from the possible inconvenience of Pillow 2.0.0 dropping 2.4 and 2.5 support (use Pillow 1.x if you need Python 2.4,2.5), you should not have any trouble with it. If you do, please open a ticket here: <a class="reference external" href="https://github.com/python-imaging/Pillow/issues">https://github.com/python-imaging/Pillow/issues</a>.</li>
+<li>As important as quality software is to me, quality presentation is almost equally important. (That's developer-eye quality, not designer-eye quality. ;-)) So I spent a lot of time cleaning up and enhancing the more subtle aspects of the release e.g. README.rst, docs/* (including the pythondoc documentation and HISTORY.txt and CONTRIBUTORS.txt). The pythondoc documentation has been converted to re-structured text and is hosted on ReadTheDocs: <a class="reference external" href="http://pillow.readthedocs.org/en/latest/">http://pillow.readthedocs.org/en/latest/</a>. The website has been updated to include an <strong>actual</strong> image generated by PIL :-) <a class="reference external" href="http://python-imaging.github.com/">http://python-imaging.github.com/</a>.</li>
+</ul>
+<p>I hope you enjoy and use Pillow 2.0.0. If you'd like to see me continue to devote significant time to maintaining Pillow, please <a class="reference external" href="http://gittip.com/aclark4life">consider a gittip</a>! Thank you.</p>
+</div>
+<p>There are <a href="../2013/03/15/the-story-of-pillow/#disqus_thread">comments</a>.</p>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../2013/02/08/i-love-checkoutmanager-and-dotfiles/" rel="bookmark"
+                           title="Permalink to I love checkoutmanager and dotfiles">I love checkoutmanager and dotfiles</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2013-02-08T12:00:00">
                 Fri 08 February 2013
         </abbr>
@@ -43,325 +89,15 @@
                 By <a class="url fn" href="../author/aclark.html">aclark</a>
         </address>
         <p>In <a href="../category/blog.html">Blog</a>. </p>
-<p>tags: <a href="../tag/django.html">Django</a><a href="../tag/mozilla.html">Mozilla</a><a href="../tag/plone.html">Plone</a><a href="../tag/python.html">Python</a></p></footer><!-- /.post-info --><p><em>An ode to my OS X development workstation setup</em> <a class="footnote-reference" href="#id11" id="id1">[1]</a></p>
+<p>tags: <a href="../tag/django.html">Django</a><a href="../tag/mozilla.html">Mozilla</a><a href="../tag/plone.html">Plone</a><a href="../tag/python.html">Python</a></p></footer><!-- /.post-info -->                <p><em>An ode to my OS X development workstation setup</em> <a class="footnote-reference" href="#id11" id="id1">[1]</a></p>
 <p>I am big on setting up my development environment, and enjoying the environment I work in. And I'm very thankful to the folks who make my life easier, including the authors of:</p>
 <ul class="simple">
 <li><a class="reference external" href="http://www.ohloh.net/p/python/contributors/summary">Python</a>: Python Core Developers</li>
-<li><a class="reference external" href="http://pypi.python.org/pypi/dotfiles">dotfiles</a>: Jon Bernard</li>
-<li><a class="reference external" href="http://pypi.python.org/pypi/checkoutmanager">checkoutmanager</a>: Reinout Van Rees</li>
-</ul>
-<p>I also love <strong>repetition</strong>. So picture if you will, a new <strong>Macbook Air or Pro</strong> ready to serve as my development workstation. I like to perform, and study, the steps required to turn a new laptop in to my development workstation. So here we go. In this article, I will walk through the steps required to turn a new machine in to my developer workstation. Do follow along!</p>
-<div class="section" id="shell">
-<h2>Shell</h2>
-<p>One of the first things I do on a new system is change my shell to <strong>Zsh</strong> in <tt class="docutils literal">System Preferences <span class="pre">-&gt;</span> Users &amp; Groups <span class="pre">-&gt;</span> Current User <span class="pre">-&gt;</span> Right Click <span class="pre">-&gt;</span> Advanced <span class="pre">Options...</span></tt>. Don't forget to <tt class="docutils literal">Click the lock to make changes</tt> first.</p>
-<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/zsh.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/zsh.png" />
-<div class="section" id="zsh">
-<h3>Zsh</h3>
-<p>Why <strong>Zsh</strong>? One of my favorite features is <strong>shared history between open sessions</strong>. So I can run a command in one window, and then run the same command from another window by fetching it from the history (with CTRL-R).</p>
-</div>
-</div>
-<div class="section" id="xcode">
-<h2>XCode</h2>
-<p>After I take possession of my new laptop (running <strong>Mountain Lion</strong>, the newest OS X at the time of this writing), I head to the App Store to download XCode. <a class="footnote-reference" href="#id12" id="id2">[2]</a> Among many other things, XCode gives me the GNU C Compiler and allows me to type &quot;gcc&quot; in my <tt class="docutils literal">Applications <span class="pre">-&gt;</span> Utilities <span class="pre">-&gt;</span> Terminal</tt>.</p>
-<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/gcc.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/gcc.png" />
-</div>
-<div class="section" id="id3">
-<h2>Python</h2>
-<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/homebrew.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/homebrew.png" />
-<p>Now I need a Python interpreter <a class="footnote-reference" href="#id13" id="id4">[3]</a>. For development I use the <a class="reference external" href="https://github.com/collective/buildout.python">Collective Python Buildout</a> but I also enjoy using <a class="reference external" href="http://mxcl.github.com/homebrew/">Homebrew's</a> Python 2.7. I use Homebrew for a variety of other things too (e.g. mobile-shell AKA mosh) so here we go:</p>
-<pre class="literal-block">
-$ ruby -e &quot;$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)&quot;
-</pre>
-<p>… follow instructions …</p>
-<pre class="literal-block">
-$ brew install python
-</pre>
-</div>
-<div class="section" id="git">
-<h2>Git</h2>
-<p>I think OS X (or XCode) includes git, but just in case:</p>
-<pre class="literal-block">
-$ brew install git
-</pre>
-<p>Which reminds me, don't forget that installing the command line utilities in Mountain Lion's XCode requires an additional step in <tt class="docutils literal">Preferences <span class="pre">-&gt;</span> Downloads <span class="pre">-&gt;</span> Command Line Tools <span class="pre">-&gt;</span> Install</tt>:</p>
-<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/command-line-utils.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/command-line-utils.png" />
-</div>
-<div class="section" id="id5">
-<h2>Dotfiles</h2>
-<p>At this point, I can begin to get serious about turning this new machine in to my developer workstation. And that means: <strong>installing my private ssh key</strong> so I can check out code without typing a password, of course. Normally this would be tedious, but with git and dotfiles it's not so bad. This is what I do from my home directory:</p>
-<pre class="literal-block">
-$ git clone https://super_secret_url/dotfiles.git Dotfiles
-</pre>
-<p>I use https which requires a password for the first time only. Then I edit <tt class="docutils literal"><span class="pre">Dotfiles/.git/config</span></tt> and change the repository URL to <tt class="docutils literal">git&#64;super_secret_url/dotfiles.git</tt>. So every subsequent pull and push will require no password. And to &quot;install&quot; these dotfiles, I do <a class="footnote-reference" href="#id16" id="id6">[6]</a>:</p>
-<pre class="literal-block">
-$ pip install dotfiles
-$ dotfiles -s --force
-</pre>
-<p>Note: the dotfiles command finds my dotfiles in the default directory &quot;Dotfiles&quot; and create symbolic links to them.</p>
-<div class="section" id="distribute-pip">
-<h3>Distribute &amp; Pip</h3>
-<p>Homebrew's Python includes pip, but even if it didn't:</p>
-<pre class="literal-block">
-$ curl -O http://python-distribute.org/distribute_setup.py
-$ /usr/local/bin/python distribute_setup.py
-$ {easy_install, pip install} dotfiles
-</pre>
-<p>In other words, you can always install Distribute <a class="footnote-reference" href="#id14" id="id7">[4]</a>. After which you can use <tt class="docutils literal">easy_install</tt> or <tt class="docutils literal">pip</tt> to install dotfiles. (You can read up on the differences. TL;DR: neither is &quot;better&quot; or &quot;worse&quot;, it's just a question of which tradeoffs you are willing to make. I tend to use pip just because it's newer and I like its requirements.txt feature, but easy_install is still very well supported as part of the Distribute project.)</p>
-</div>
-</div>
-<div class="section" id="id8">
-<h2>Checkoutmanager</h2>
-<p>Now I need some things to develop. Since I work on a bunch of different projects, I need a way to keep track of what should be checked out at any given time. So I do this <a class="footnote-reference" href="#id15" id="id9">[5]</a>:</p>
-<pre class="literal-block">
-$ pip install checkoutmanager
-$ checkoutmanager co
-</pre>
-<p>This creates and populates my <tt class="docutils literal">~/Developer</tt> directory with code. And it &quot;just works&quot; because I keep a <tt class="docutils literal">.checkoutmanager.cfg</tt> in my Dotfiles repository. It currently looks like this:</p>
-<pre class="literal-block">
-[aclark]
-basedir = /Users/aclark/Developer/aclark
-checkouts =
-    git&#64;github.com:aclark4life/aclark4life.github.com.git resume
-    git&#64;github.com:aclark4life/desktops.git
-    git&#64;github.com:aclark4life/hireme.git
-    git&#64;github.com:aclark4life/projects.git
-    git&#64;github.com:aclark4life/reinstall.git
-    git&#64;github.com:ACLARKNET/tweets.git
-    git&#64;github.com:aclark4life/usesthis.git
-vcs = git
-
-[alt]
-basedir = /Users/aclark/Developer/alt
-checkouts =
-    git&#64;github.com:alt-aclark-net/alt-aclark-net.github.com.git
-    git&#64;github.com:alt-aclark-net/dexter.git
-    git&#64;github.com:alt-aclark-net/headstraight.git
-vcs = git
-
-[buildout]
-basedir = /Users/aclark/Developer/buildout
-checkouts =
-    git&#64;github.com:collective/buildout.bootstrap.git
-    git&#64;github.com:buildout/buildout.git
-    git&#64;github.com:buildout/buildout.github.com.git
-vcs = git
-
-[distribute]
-basedir = /Users/aclark/Developer
-checkouts = ssh://hg&#64;bitbucket.org/tarek/distribute
-vcs = hg
-
-[clients]
-basedir = /Users/aclark/Developer
-checkouts =
-; Bunch o client repos
-vcs = git
-
-[clients-hg]
-basedir = /Users/aclark/Developer
-checkouts =
-; Bunch o client repos
-vcs = hg
-
-[dcpython]
-basedir = /Users/aclark/Developer/dcpython
-checkouts =
-    git&#64;github.com:DCPython/dcpython.github.com.git
-    git&#64;github.com:DCPython/pyramid-tutorials.git
-vcs = git
-
-[misc]
-basedir = /Users/aclark/Developer
-checkouts =
-    git&#64;github.com:ACLARKNET/aclarknet.github.com.git blog
-    git&#64;github.com:ACLARKNET/new_style.git
-    git&#64;github.com:aclark4life/binfiles.git
-;    git&#64;github.com:aclark4life/pyramid_python_3.git
-    git&#64;github.com:aclark4life/vanity.git
-    git&#64;github.com:aclark4life/zope2-heroku.git
-    git&#64;github.com:aclark4life/zope2_bootstrap.git
-    git&#64;github.com:codekoala/django-axes.git
-    git&#64;github.com:collective/buildout.python
-vcs = git
-
-[pillow]
-basedir = /Users/aclark/Developer/pillow
-checkouts =
-    git&#64;github.com:python-imaging/Pillow.git
-    git&#64;github.com:python-imaging/python-imaging.github.com.git
-vcs = git
-
-[plethorasociety]
-basedir = /Users/aclark/Developer/plethorasociety
-checkouts =
-    git&#64;github.com:plethorasociety/plethorasociety.github.com.git
-vcs = git
-
-[plone]
-basedir = /Users/aclark/Developer/plone
-checkouts =
-    git&#64;github.com:aclark4life/Plone-Debug-Assistant.git
-    git&#64;github.com:aclark4life/collective.recipe.bluebream.git
-    git&#64;github.com:aclark4life/event_days_indexer.git
-    git&#64;github.com:aclark4life/hello_plone.git
-    git&#64;github.com:aclark4life/mr_migrator_demo.git
-    git&#64;github.com:aclark4life/parse2plone.git
-    git&#64;github.com:aclark4life/plone_1_fun.git
-    git&#64;github.com:aclark4life/plone_addon_upgrade.git
-    git&#64;github.com:aclark4life/plone_guide.git
-    git&#64;github.com:aclark4life/plone_workflow_events.git
-    git&#64;github.com:aclark4life/schemaextender-facetednav-demo.git
-    git&#64;github.com:aclark4life/silly_content_import.git
-    git&#64;github.com:aclark4life/transmogrify.extract.git
-    git&#64;github.com:aclark4life/transmogrify.regexp.git
-    git&#64;github.com:aclark4life/viewlets_dont_suck.git
-    git&#64;github.com:aclark4life/wordpress2plone.git
-    git&#64;github.com:collective/Products.AttachmentField.git
-    git&#64;github.com:collective/Products.CalendarX.git
-    git&#64;github.com:collective/Products.EventRegistration.git
-    git&#64;github.com:collective/Products.PloneSoftwareCenter.git
-    git&#64;github.com:collective/Products.ifQuotes.git
-    git&#64;github.com:collective/Products.naked_plone.git
-    git&#64;github.com:collective/buildout.plonetest.git
-    git&#64;github.com:collective/collective.contacts.git
-    git&#64;github.com:collective/collective.controlpanel.edit_css.git
-    git&#64;github.com:collective/collective.developermanual.git
-    git&#64;github.com:collective/collective.formtoy.git
-    git&#64;github.com:collective/collective.github.com.git
-    git&#64;github.com:collective/collective.googleanalytics.git
-    git&#64;github.com:collective/collective.package.git
-    git&#64;github.com:collective/collective.project.git
-    git&#64;github.com:collective/collective.recaptcha.git
-    git&#64;github.com:collective/collective.recipe.grp.git
-    git&#64;github.com:collective/collective.recipe.rsync.git
-    git&#64;github.com:collective/collective.rip.git
-    git&#64;github.com:collective/collective.stats.git
-    git&#64;github.com:collective/funnelweb.git
-    git&#64;github.com:collective/github-collective.git
-    git&#64;github.com:collective/mr.migrator.git
-    git&#64;github.com:collective/plonecom-buildout.git
-    git&#64;github.com:collective/plonecom.theme.git
-    git&#64;github.com:collective/plonetheme.coolblue.git
-    git&#64;github.com:collective/plonetheme.freshpick.git
-    git&#64;github.com:collective/plonetheme.grungeera.git
-    git&#64;github.com:collective/plonetheme.keepitsimple.git
-    git&#64;github.com:collective/plonetheme.unilluminated.git
-    git&#64;github.com:collective/transmogrify.filesystem.git
-    git&#64;github.com:plone/Installers-OS-X.git
-    git&#64;github.com:plone/Products.PloneOrg.git
-    git&#64;github.com:plone/admin-docs.git
-    git&#64;github.com:plone/buildout.coredev.git
-    git&#64;github.com:plone/planet.plone.org.git
-    git&#64;github.com:plone/plone.api.git
-    git&#64;github.com:plone/plone.github.com.git
-    git&#64;github.com:plone/ploneorg.admin.git
-    git&#64;github.com:plone/plonetheme.ploneorg.git
-vcs = git
-
-[pythonpackages]
-basedir = /Users/aclark/Developer/pythonpackages
-checkouts =
-    git&#64;github.com:aclark4life/buildout-apache-mysql.git
-    git&#64;github.com:aclark4life/buildout-munin.git
-    git&#64;github.com:aclark4life/buildout-mysql.git
-    git&#64;github.com:aclark4life/buildout-nginx.git
-    git&#64;github.com:aclark4life/buildout-plone-haproxy.git
-    git&#64;github.com:aclark4life/buildout-plone-varnish.git
-    git&#64;github.com:aclark4life/buildout-zenoss.git
-    git&#64;bitbucket.org:pythonpackages/pythonpackages.com.git vanity_app
-    git&#64;github.com:pythonpackages/buildout-apache-modwsgi.git
-    git&#64;github.com:pythonpackages/buildout-bluebream.git
-    git&#64;github.com:pythonpackages/buildout-django.git
-    git&#64;github.com:pythonpackages/buildout-jenkins.git
-    git&#64;github.com:pythonpackages/buildout-plone-getpaid.git
-    git&#64;github.com:pythonpackages/buildout-plone.git
-    git&#64;github.com:pythonpackages/buildout-wordpress.git
-    git&#64;github.com:pythonpackages/buildout-zope2.git
-    git&#64;github.com:pythonpackages/experimental.pythonpackages.git
-    git&#64;github.com:pythonpackages/github-services.git pythonpackages-github-services
-    git&#64;github.com:pythonpackages/pyramidpypi.git pythonpackages-index
-    git&#64;github.com:pythonpackages/pythonpackages-blog.git
-    git&#64;github.com:pythonpackages/pythonpackages-docs.git
-    git&#64;github.com:pythonpackages/pythonpackages-graphs.git
-    git&#64;github.com:pythonpackages/pythonpackages-paste.git
-    git&#64;github.com:pythonpackages/pythonpackages-scaffolds.git
-    git&#64;github.com:pythonpackages/pythonpackages.sendpickedversions.git
-    git&#64;github.com:pythonpackages/pythonpackages-whiskers.git
-    git&#64;github.com:pythonpackages/pythonpackages.git
-vcs = git
-
-[toys]
-basedir = /Users/aclark/Developer/toys
-checkouts =
-    git&#64;github.com:aclark4life/basic_pyramid_zodb.git
-    git&#64;github.com:aclark4life/github_repos_cloner.git
-    git&#64;github.com:aclark4life/other.git
-    git&#64;github.com:aclark4life/python_study.git
-    git&#64;github.com:aclark4life/django-hello.git
-vcs = git
-</pre>
-<p>Now it's time to bootstrap the Collective Python Buildout, which gives me <strong>all versions of Python, ever</strong> <a class="footnote-reference" href="#id17" id="id10">[7]</a>. And off we go:</p>
-<pre class="literal-block">
-$ cd Developer/buildout.python
-$ python bootstrap.py
-</pre>
-<p>Finally, there is some PATH configuration required to make all of this seemless. The Collective Python Buildout gets installed in /opt while brew's stuff is in /usr/local. My PATH config currently looks like this:</p>
-<pre class="literal-block">
-export PATH=/usr/local/bin:/usr/local/sbin:/opt/local/bin:/Users/aclark/Developer/buildout.python/python-2.7/bin:$PATH
-export PATH=~/Developer/binfiles:/usr/local/share/npm/bin:$PATH
-</pre>
-<p>With the above configuration, I default to the Python 2.7 in the Collective Python Buildout. That means that is the &quot;python&quot; or &quot;virtualenv&quot; I get when I type those commands. I use the full path or expanded binary name when I need them e.g. /usr/local/bin/python or python3.3.</p>
-<p>That's it! I hope you will check out dotfiles and checkoutmanager for all your development needs.</p>
-<table class="docutils footnote" frame="void" id="id11" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Not really an ode: <a class="reference external" href="http://en.wikipedia.org/wiki/Ode">http://en.wikipedia.org/wiki/Ode</a></td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id12" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>I know about Kenneth Reitz's XCode Command line Tools only, but if I recall correctly there is some &quot;gotcha&quot; that has bitten me more than once if I use that instead of the full XCode. I wish I could remember what it was now, but it's not coming to me. If it works for you though, great!</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id13" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td>I know about the system Python, and for small things like checkoutmanager and dotfiles I don't mind using it. But there is merit in avoiding it because Apple treats it like &quot;their&quot; Python and makes decisions for you that you may prefer to make yourself. E.g. I believe they use a crippled version of the readline library.</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id14" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id7">[4]</a></td><td>Distribute is a more actively maintained fork of the venerable setuptools library (which itself is built on top of the Python standard library's distutils). Are we having fun yet?</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id15" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id9">[5]</a></td><td>I also alias checkoutmanager to cm :-)</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id16" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id6">[6]</a></td><td>I force because I want to replace the newly created .ssh dir with the one I keep in my Dotfiles repository.</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id17" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id10">[7]</a></td><td>Well, 2.4 through 3.3 at last count.</td></tr>
-</tbody>
-</table>
-</div>
-<p>There are <a href="../2013/02/08/i-love-checkoutmanager-and-dotfiles/#disqus_thread">comments</a>.</p>                </article>
-                            </aside><!-- /#featured -->
-                            <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-                                                
+<li><a class="reference external" href="http://pypi.python.org/pypi/dotfiles">dotfiles</a>: Jon Bernard ...</li></ul>
+                <a class="readmore" href="../2013/02/08/i-love-checkoutmanager-and-dotfiles/">read more</a>
+                <p>There are <a href="../2013/02/08/i-love-checkoutmanager-and-dotfiles/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
 
                  
                         <li><article class="hentry">    
