@@ -1,5 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Alex Clark - Python Web Developer</title><link href="http://aclark.net/blog/" rel="alternate"></link><link href="http://aclark.net/blog/feeds/all.atom.xml" rel="self"></link><id>http://aclark.net/blog/</id><updated>2013-03-15T17:00:00-04:00</updated><entry><title>The Story of Pillow</title><link href="http://aclark.net/blog/2013/03/15/the-story-of-pillow/" rel="alternate"></link><updated>2013-03-15T17:00:00-04:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-03-15:2013/03/15/the-story-of-pillow/</id><summary type="html">&lt;p&gt;On March 4, 2013 I got an email from the Python Software Foundation (PSF):&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Alex Clark - Python Web Developer</title><link href="http://aclark.net/blog/" rel="alternate"></link><link href="http://aclark.net/blog/feeds/all.atom.xml" rel="self"></link><id>http://aclark.net/blog/</id><updated>2013-04-22T12:00:00-04:00</updated><entry><title>New Pyramid Site</title><link href="http://aclark.net/blog/2013/04/22/new-pyramid-site/" rel="alternate"></link><updated>2013-04-22T12:00:00-04:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-04-22:2013/04/22/new-pyramid-site/</id><summary type="html">&lt;img alt="https://raw.github.com/ACLARKNET/aclarknet/master/screenshot.png" src="https://raw.github.com/ACLARKNET/aclarknet/master/screenshot.png" style="width: 98%;" /&gt;
+&lt;p&gt;For the first time in 10 years, &lt;a class="reference external" href="http://aclark.net"&gt;aclark.net&lt;/a&gt; is not powered by Plone. Nothing against Plone: it's still one of the greatest loves of my life (inasmuch as you can love a software and community, as I do).&lt;/p&gt;
+&lt;div class="section" id="why"&gt;
+&lt;h2&gt;Why&lt;/h2&gt;
+&lt;p&gt;This was not the result of a revolutionary plan, rather more of an evolution. It happened like this:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;As soon as Plone 4.3a1 was released (a year ago?) I deployed a new Plone site to aclark.net with it, featuring a &lt;strong&gt;Diazo&lt;/strong&gt; (new Plone theming engine) theme.&lt;/li&gt;
+&lt;li&gt;Around the same time I became obsessed with deploying to Heroku, and also gained an interest in &lt;strong&gt;Python 3&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;A few months ago, I got tired of paying $11/month to host my Plone site so I converted the site to &lt;strong&gt;static HTML&lt;/strong&gt; and moved it to &lt;strong&gt;GitHub pages&lt;/strong&gt;. But the result was flawed because maintenance involved editing duplicate copies of the website content (e.g. both clients.html and clients/foo.html contained the same text describing &amp;quot;foo&amp;quot;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So when it came time to do more than a few casual edits, I knew I had to find a new approach. That's when various elements of the Universe conspired to lead me in a new direction.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="how"&gt;
+&lt;h2&gt;How&lt;/h2&gt;
+&lt;div class="section" id="pyramid"&gt;
+&lt;h3&gt;Pyramid&lt;/h3&gt;
+&lt;p&gt;I spent a lot of time (~ 1 year) developing &lt;a class="reference external" href="http://pythonpackages.com"&gt;pythonpackages.com&lt;/a&gt; in Pyramid, but the result was a mess (code-wise). I'm in the process of rewriting and open sourcing it, but it's slow going. So what better way to get started than to do a small-ish site in Pyramid for fun?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="about-me"&gt;
+&lt;h3&gt;about.me&lt;/h3&gt;
+&lt;p&gt;I also recently gave in and created an &lt;a class="reference external" href="http://about.me/alex.clark"&gt;about.me site&lt;/a&gt;. I was impressed by their content editing features, and my ability to create a page that looked OK using them.&lt;/p&gt;
+&lt;p&gt;In my about.me profile, I used a picture of me and a picture of DC I took in early 2012. When it came time to redo aclark.net I felt like I really wanted to capture the simplicity of the about.me site, so I used the same photo in the background.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="bootstrap"&gt;
+&lt;h3&gt;Bootstrap&lt;/h3&gt;
+&lt;p&gt;Bootstrap is old news at this point, but I really enjoy using it and I particularly like that they have added more example templates. So I combined my background photo with one of &lt;a class="reference external" href="http://twitter.github.io/bootstrap/getting-started.html#examples"&gt;their example templates&lt;/a&gt; and a new site idea was born. As I'm not a particularly talented visual artist, my ability to produce something that looked OK (with code this time) was exciting.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="what"&gt;
+&lt;h2&gt;What&lt;/h2&gt;
+&lt;p&gt;Until I added a contact form, the site was entirely unremarkable. There are views and routes and templates, typical fare for a web framework. Here is the entire &amp;quot;main routine&amp;quot;:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+from pyramid.session import UnencryptedCookieSessionFactoryConfig
+from pyramid.config import Configurator
+from .redir import blog
+from .redir import blog_entry
+from .redir import blog_slash
+from .views import contact
+from .views import default
+import deform_bootstrap
+
+
+def main(global_config, **settings):
+    &amp;quot;&amp;quot;&amp;quot;
+    Oppan wsgi style! Configure and return WSGI application.
+    &amp;quot;&amp;quot;&amp;quot;
+    my_session_factory = UnencryptedCookieSessionFactoryConfig('itsaseekreet')
+    config = Configurator(session_factory=my_session_factory)
+    config.add_route('blog', '/blog')
+    config.add_route('blog_entry', '/blog/{entry:.*}')
+    config.add_route('blog_slash', '/blog/')
+    config.add_route('contact', '/contact')
+    config.add_route('clients', '/clients')
+    config.add_route('projects', '/projects')
+    config.add_route('services', '/services')
+    config.add_route('team', '/team')
+    config.add_route('testimonials', '/testimonials')
+    config.add_route('root', '/')
+    config.add_static_view(
+        'static', 'aclarknet:static', cache_max_age=3600)
+    config.add_view(blog, route_name='blog')
+    config.add_view(blog_entry, route_name='blog_entry')
+    config.add_view(blog_slash, route_name='blog_slash')
+    config.add_view(
+        default,
+        renderer='aclarknet:templates/clients.mak',
+        route_name='clients')
+    config.add_view(
+        contact,
+        renderer='aclarknet:templates/contact.mak',
+        route_name='contact')
+    config.add_view(
+        default,
+        renderer='aclarknet:templates/projects.mak',
+        route_name='projects')
+    config.add_view(
+        default,
+        renderer='aclarknet:templates/root.mak',
+        route_name='root')
+    config.add_view(
+        default,
+        renderer='aclarknet:templates/services.mak',
+        route_name='services')
+    config.add_view(
+        default,
+        renderer='aclarknet:templates/testimonials.mak',
+        route_name='testimonials')
+    config.add_view(
+        default,
+        renderer='aclarknet:templates/team.mak',
+        route_name='team')
+    config.include(deform_bootstrap)
+    return config.make_wsgi_app()
+&lt;/pre&gt;
+&lt;div class="section" id="contact-form"&gt;
+&lt;h3&gt;Contact form&lt;/h3&gt;
+&lt;p&gt;But then I wanted a contact form. Which lead me to wanting an elegant way to send mail via Heroku. Which lead me to discover &lt;a class="reference external" href="http://sendgrid.com/"&gt;SendGrid&lt;/a&gt;. Which lead me create some primitive marketing features I am quite proud of and excited about.&lt;/p&gt;
+&lt;p&gt;I still ended up sending mail &amp;quot;the old way&amp;quot; via GMail. But now I send two mails: one to &lt;a class="reference external" href="mailto:info&amp;#64;aclark.net"&gt;info&amp;#64;aclark.net&lt;/a&gt; to alert our staff about the lead (using GMail). And one to the lead acknowledging their submission (using SendGrid). SendGrid keeps a record of all the leads we've contacted, amongst other &amp;quot;fancy marketing features&amp;quot;. Here's the relevant view code:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+import deform
+import smtplib
+
+from email.mime.text import MIMEText
+
+from .config import FORM_ERROR
+from .config import FORM_SUCCESS
+
+from .config import MIME_ONE_RECIPIENT
+from .config import MIME_ONE_SUBJECT
+from .config import MIME_TWO_MESSAGE
+from .config import MIME_TWO_SUBJECT
+
+from .config import GMAIL_HOSTNAME
+from .config import GMAIL_PASSWORD
+from .config import GMAIL_USERNAME
+
+from .config import SENDGRID_HOSTNAME
+from .config import SENDGRID_PASSWORD
+from .config import SENDGRID_USERNAME
+
+from .forms import ContactFormSchema
+
+
+def contact(request):
+    &amp;quot;&amp;quot;&amp;quot;
+    Create and render deform form containing colander schema. Provide
+    sendgrid integration for marketing.
+    &amp;quot;&amp;quot;&amp;quot;
+    button = deform.Button('Send', css_class='span9 btn-block btn-large')
+    schema = ContactFormSchema().bind(request=request)
+    form = deform.Form(schema, buttons=(button, ))
+    if 'Send' in request.POST:
+        items = request.POST.items()
+        try:
+            appstruct = form.validate(items)
+        except deform.ValidationFailure:
+            return {
+                'form': form.render(),
+                'request': request,
+            }
+        # This is the form contents
+        email = appstruct['email']
+        message = appstruct['message']
+
+        # This is the mail to info&amp;#64;aclark.net
+        mime_document_one = MIMEText(message)
+        mime_document_one['Subject'] = MIME_ONE_SUBJECT
+        mime_document_one['To'] = MIME_ONE_RECIPIENT
+        mime_document_one['From'] = email
+        mime_document_one = mime_document_one.as_string()
+
+        # This is the mail to the new lead
+        mime_document_two = MIMEText(MIME_TWO_MESSAGE)
+        mime_document_two['Subject'] = MIME_TWO_SUBJECT
+        mime_document_two['To'] = email
+        mime_document_two['From'] = MIME_ONE_RECIPIENT
+        mime_document_two = mime_document_two.as_string()
+
+        try:
+            # This is the mail to info&amp;#64;aclark.net
+            smtp_server = smtplib.SMTP(GMAIL_HOSTNAME)
+            smtp_server.starttls()
+            smtp_server.login(GMAIL_USERNAME, GMAIL_PASSWORD)
+            smtp_server.sendmail(email, MIME_ONE_RECIPIENT, mime_document_one)
+            smtp_server.quit()
+
+            # This is the mail to the new lead
+            smtp_server = smtplib.SMTP(SENDGRID_HOSTNAME)
+            smtp_server.starttls()
+            smtp_server.login(SENDGRID_USERNAME, SENDGRID_PASSWORD)
+            smtp_server.sendmail(MIME_ONE_RECIPIENT, email, mime_document_two)
+            smtp_server.quit()
+            request.session.flash(FORM_SUCCESS)
+        except:
+            request.session.flash(FORM_ERROR, 'errors')
+        return {
+            'form': form.render(appstruct={}),
+            'request': request,
+        }
+    return {
+        'form': form.render(),
+        'request': request,
+    }
+
+
+def default(request):
+    &amp;quot;&amp;quot;&amp;quot;
+    This is the default view, to be used with most routes since we do not
+    provide any content editing ability yet. Even then, maybe a default view
+    would still be helpful.
+    &amp;quot;&amp;quot;&amp;quot;
+    return {}
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="who-cares"&gt;
+&lt;h2&gt;Who cares&lt;/h2&gt;
+&lt;p&gt;The best thing about all of this being able to run the site &lt;strong&gt;100% for free on Heroku&lt;/strong&gt;. Also:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Python 3 compat!&lt;/li&gt;
+&lt;li&gt;Free caching via CloudFlare&lt;/li&gt;
+&lt;li&gt;Free ping service from Pingdom keeps the site from &amp;quot;going to sleep&amp;quot; (HT: natea).&lt;/li&gt;
+&lt;li&gt;Updating the site fits my workflow. If I'm the content editor, I don't necessarily need or want to use Plone to edit my content. I can save Plone for my clients, and focus on &lt;strong&gt;what makes them happy&lt;/strong&gt; with their CMS system.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</summary><category term="Django"></category><category term="Mozilla"></category><category term="Plone"></category><category term="Python"></category></entry><entry><title>The Story of Pillow</title><link href="http://aclark.net/blog/2013/03/15/the-story-of-pillow/" rel="alternate"></link><updated>2013-03-15T17:00:00-04:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-03-15:2013/03/15/the-story-of-pillow/</id><summary type="html">&lt;p&gt;On March 4, 2013 I got an email from the Python Software Foundation (PSF):&lt;/p&gt;
 &lt;blockquote&gt;
 This email notification is being sent to you to inform you of the PSF Board’s decision to fund the facilitation of a Python 3 compatible release of the Python Imaging Library for the amount of $1,300 USD. Please see the resolution that was passed unanimously on March 4, 2013 via email below:&lt;/blockquote&gt;
 &lt;p&gt;Yay! That was in response to &lt;a class="reference external" href="https://github.com/python-imaging/psf-grant-proposal"&gt;my proposal&lt;/a&gt; asking for funding to finish a Pillow 2.0.0 release. In that proposal, I presented the &amp;quot;story of Pillow&amp;quot; which I'd like to present again now, for anyone interested:&lt;/p&gt;
@@ -77,45 +282,30 @@ They (the &amp;quot;good guys&amp;quot;) need to buy--a lot--to zero their posit
 &lt;p&gt;Finally, the &amp;quot;good guys&amp;quot; are able to buy enough to contracts to fulfill the number of &amp;quot;short&amp;quot; sales they made. And they are able to purchase them for much less then they made the &amp;quot;short&amp;quot; sales for. Profit!&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Does it make sense now? If not, let me know in the comments.&lt;/strong&gt;&lt;/p&gt;
 &lt;/div&gt;
-</summary></entry><entry><title>Built with Plone, Powered By GitHub Pages</title><link href="http://aclark.net/blog/2013/02/23/built-with-plone-powered-by-github-pages/" rel="alternate"></link><updated>2013-02-23T11:00:00-05:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-02-23:2013/02/23/built-with-plone-powered-by-github-pages/</id><summary type="html">&lt;p&gt;&lt;em&gt;Is Plone the next great static website generator? Probably not, but it definitely could be&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;I am always looking for ways to improve, streamline and otherwise hack my e-life. And this post is about all of the above.&lt;/p&gt;
-&lt;img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/httrack.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/httrack.png" /&gt;
-&lt;div class="section" id="plone-in-the-cloud"&gt;
-&lt;h2&gt;Plone in the cloud&lt;/h2&gt;
+</summary></entry><entry><title>Built with Plone, Powered by GitHub Pages</title><link href="http://aclark.net/blog/2013/02/23/built-with-plone-powered-by-github-pages/" rel="alternate"></link><updated>2013-02-23T12:00:00-05:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-02-23:2013/02/23/built-with-plone-powered-by-github-pages/</id><summary type="html">&lt;p&gt;Is Plone the next great static website generator? Probably not, but it definitely could be&lt;/p&gt;
+&lt;p&gt;I am always looking for ways to improve, streamline and otherwise hack my e-life. And this post is about all of the above.
+&lt;a class="reference external" href="https://raw.github.com/ACLARKNET/blog/gh-pages/images/httrack.png"&gt;https://raw.github.com/ACLARKNET/blog/gh-pages/images/httrack.png&lt;/a&gt;
+Plone in the cloud&lt;/p&gt;
 &lt;p&gt;Plone is still too &amp;quot;heavy&amp;quot; to easily run &amp;quot;in the cloud&amp;quot; (except via &lt;a class="reference external" href="http://ploud.com"&gt;http://ploud.com&lt;/a&gt;, HT), but it's getting there. In particular, I find this effort by David Bain very inspiring:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://github.com/pigeonflight/stack-python-plone"&gt;https://github.com/pigeonflight/stack-python-plone&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;a class="reference external" href="https://github.com/pigeonflight/stack-python-plone"&gt;https://github.com/pigeonflight/stack-python-plone&lt;/a&gt;&lt;/blockquote&gt;
 &lt;p&gt;And based on my experiments and research on Heroku:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://github.com/aclark4life/zope2-heroku"&gt;https://github.com/aclark4life/zope2-heroku&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;a class="reference external" href="https://github.com/aclark4life/zope2-heroku"&gt;https://github.com/aclark4life/zope2-heroku&lt;/a&gt;&lt;/blockquote&gt;
 &lt;p&gt;The only &amp;quot;real&amp;quot; remaining issue seems to be packaging; we need this PLIP to happen sooner, rather than later:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://dev.plone.org/ticket/13283"&gt;https://dev.plone.org/ticket/13283&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="cheating"&gt;
-&lt;h2&gt;Cheating&lt;/h2&gt;
-&lt;p&gt;In the meantime, one way you can cheat is to export the contents of your Plone site with &lt;a class="reference external" href="http://www.httrack.com/"&gt;httrack&lt;/a&gt; then host the results for free on &lt;a class="reference external" href="http://pages.github.com"&gt;GitHub Pages&lt;/a&gt; (i.e. &amp;quot;the cloud&amp;quot;)&lt;/p&gt;
-&lt;p&gt;This process if far from perfect &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[1]&lt;/a&gt;, but in a pinch it can work. And it recently worked very well for me so I thought I'd share. See:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://aclark.net"&gt;http://aclark.net&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://github.com/ACLARKNET/aclarknet.github.com"&gt;https://github.com/ACLARKNET/aclarknet.github.com&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;These links are my website, and GitHub Pages repository respectively. The website was created with Plone (&lt;a class="reference external" href="https://github.com/ACLARKNET/new_style"&gt;https://github.com/ACLARKNET/new_style&lt;/a&gt;) then exported via httrack, then uploaded to GitHub Pages (to the gh-pages branch of any repo except &amp;lt;{org,user}&amp;gt;&amp;gt;.github.com repos).&lt;/p&gt;
-&lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;httrack got &amp;quot;stuck&amp;quot; on my &amp;#64;&amp;#64;search links, and I've got a lot of duplicate content now. Fortunately I don't mind editing lots and lots of text files :-).&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;div class="section" id="conclusion"&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;a class="reference external" href="https://dev.plone.org/ticket/13283"&gt;https://dev.plone.org/ticket/13283&lt;/a&gt;&lt;/blockquote&gt;
+&lt;p&gt;Cheating&lt;/p&gt;
+&lt;p&gt;In the meantime, one way you can cheat is to export the contents of your Plone site with httrack then host the results for free on GitHub Pages (i.e. &amp;quot;the cloud&amp;quot;)&lt;/p&gt;
+&lt;p&gt;This process if far from perfect [1], but in a pinch it can work. And it recently worked very well for me so I thought I'd share. See:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;a class="reference external" href="http://aclark.net"&gt;http://aclark.net&lt;/a&gt;
+&lt;a class="reference external" href="https://github.com/ACLARKNET/aclarknet.github.com"&gt;https://github.com/ACLARKNET/aclarknet.github.com&lt;/a&gt;&lt;/blockquote&gt;
+&lt;p&gt;These links are my website, and GitHub Pages repository respectively. The website was created with Plone (&lt;a class="reference external" href="https://github.com/ACLARKNET/new_style"&gt;https://github.com/ACLARKNET/new_style&lt;/a&gt;) then exported via httrack, then uploaded to GitHub Pages (to the gh-pages branch of any repo except &amp;lt;{org,user}&amp;gt;&amp;gt;.github.com repos).
+[1] httrack got &amp;quot;stuck&amp;quot; on my &amp;#64;&amp;#64;search links, and I've got a lot of duplicate content now. Fortunately I don't mind editing lots and lots of text files :-).
+Conclusion&lt;/p&gt;
 &lt;p&gt;In doing this, I was able to turn off my $11/month &amp;quot;website and IRC server&amp;quot; which makes the CFO happy. And in a year or so with Plone 5, hopefully I'll be able to return to the cloud and edit content &amp;quot;live&amp;quot; again.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;What do you think about Plone as a static site generator and/or Plone in the cloud? Let me know in the comments below.&lt;/strong&gt;&lt;/p&gt;
-&lt;/div&gt;
+&lt;p&gt;What do you think about Plone as a static site generator and/or Plone in the cloud? Let me know in the comments below.&lt;/p&gt;
 </summary><category term="Plone"></category></entry><entry><title>I love checkoutmanager and dotfiles</title><link href="http://aclark.net/blog/2013/02/08/i-love-checkoutmanager-and-dotfiles/" rel="alternate"></link><updated>2013-02-08T12:00:00-05:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-02-08:2013/02/08/i-love-checkoutmanager-and-dotfiles/</id><summary type="html">&lt;p&gt;&lt;em&gt;An ode to my OS X development workstation setup&lt;/em&gt; &lt;a class="footnote-reference" href="#id11" id="id1"&gt;[1]&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;I am big on setting up my development environment, and enjoying the environment I work in. And I'm very thankful to the folks who make my life easier, including the authors of:&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -517,6 +707,4 @@ src="https://www.gittip.com/assets/widgets/0002.js"&gt;
 &lt;/ul&gt;
 &lt;p&gt;So, let me say this: I'm thinking about what happened today, and I'm going to comment about it in the future. I.e. after 24 hours or so. Regardless of future updates, please consider me: &amp;quot;around in some capacity, but not as fully engaged for personal reasons&amp;quot; :-). This is an attempt to revert my abrubt departure, while at the same time not fully re-engaging until such time as I can determine the best course of action. Note that above all, and aside from my personal and professional goals, I don't want to be disruptive to the community if I can help it.&lt;/p&gt;
 &lt;p&gt;Thanks for reading.&lt;/p&gt;
-</summary><category term="Plone"></category></entry><entry><title>Goodbye Plone</title><link href="http://aclark.net/blog/2013/01/09/goodbye-plone/" rel="alternate"></link><updated>2013-01-09T13:30:00-05:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-01-09:2013/01/09/goodbye-plone/</id><summary type="html">&lt;p&gt;After experiencing an unexpectedly negative reaction in #plone to my most recent post &amp;quot;Introducing The Plone Kitty&amp;quot; (which was intended to be light-hearted and fun), I have decided to leave the Plone community for good. I wish you all the best! It's been fun.&lt;/p&gt;
-&lt;p&gt;To be clear: I'll still be doing some Plone consulting as part of my &amp;quot;day job&amp;quot; at ACLARK.NET, LLC. But I won't be participating in any community events because it has become clear to me that my vision for Plone, and the Plone Community, may be inconsistent with the vision held by other members of the core team.&lt;/p&gt;
 </summary><category term="Plone"></category></entry></feed>

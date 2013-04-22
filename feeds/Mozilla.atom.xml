@@ -1,5 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Alex Clark - Python Web Developer</title><link href="http://aclark.net/blog/" rel="alternate"></link><link href="http://aclark.net/blog/feeds/Mozilla.atom.xml" rel="self"></link><id>http://aclark.net/blog/</id><updated>2013-02-08T12:00:00-05:00</updated><entry><title>I love checkoutmanager and dotfiles</title><link href="http://aclark.net/blog/2013/02/08/i-love-checkoutmanager-and-dotfiles/" rel="alternate"></link><updated>2013-02-08T12:00:00-05:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-02-08:2013/02/08/i-love-checkoutmanager-and-dotfiles/</id><summary type="html">&lt;p&gt;&lt;em&gt;An ode to my OS X development workstation setup&lt;/em&gt; &lt;a class="footnote-reference" href="#id11" id="id1"&gt;[1]&lt;/a&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Alex Clark - Python Web Developer</title><link href="http://aclark.net/blog/" rel="alternate"></link><link href="http://aclark.net/blog/feeds/Mozilla.atom.xml" rel="self"></link><id>http://aclark.net/blog/</id><updated>2013-04-22T12:00:00-04:00</updated><entry><title>New Pyramid Site</title><link href="http://aclark.net/blog/2013/04/22/new-pyramid-site/" rel="alternate"></link><updated>2013-04-22T12:00:00-04:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-04-22:2013/04/22/new-pyramid-site/</id><summary type="html">&lt;img alt="https://raw.github.com/ACLARKNET/aclarknet/master/screenshot.png" src="https://raw.github.com/ACLARKNET/aclarknet/master/screenshot.png" style="width: 98%;" /&gt;
+&lt;p&gt;For the first time in 10 years, &lt;a class="reference external" href="http://aclark.net"&gt;aclark.net&lt;/a&gt; is not powered by Plone. Nothing against Plone: it's still one of the greatest loves of my life (inasmuch as you can love a software and community, as I do).&lt;/p&gt;
+&lt;div class="section" id="why"&gt;
+&lt;h2&gt;Why&lt;/h2&gt;
+&lt;p&gt;This was not the result of a revolutionary plan, rather more of an evolution. It happened like this:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;As soon as Plone 4.3a1 was released (a year ago?) I deployed a new Plone site to aclark.net with it, featuring a &lt;strong&gt;Diazo&lt;/strong&gt; (new Plone theming engine) theme.&lt;/li&gt;
+&lt;li&gt;Around the same time I became obsessed with deploying to Heroku, and also gained an interest in &lt;strong&gt;Python 3&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;A few months ago, I got tired of paying $11/month to host my Plone site so I converted the site to &lt;strong&gt;static HTML&lt;/strong&gt; and moved it to &lt;strong&gt;GitHub pages&lt;/strong&gt;. But the result was flawed because maintenance involved editing duplicate copies of the website content (e.g. both clients.html and clients/foo.html contained the same text describing &amp;quot;foo&amp;quot;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So when it came time to do more than a few casual edits, I knew I had to find a new approach. That's when various elements of the Universe conspired to lead me in a new direction.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="how"&gt;
+&lt;h2&gt;How&lt;/h2&gt;
+&lt;div class="section" id="pyramid"&gt;
+&lt;h3&gt;Pyramid&lt;/h3&gt;
+&lt;p&gt;I spent a lot of time (~ 1 year) developing &lt;a class="reference external" href="http://pythonpackages.com"&gt;pythonpackages.com&lt;/a&gt; in Pyramid, but the result was a mess (code-wise). I'm in the process of rewriting and open sourcing it, but it's slow going. So what better way to get started than to do a small-ish site in Pyramid for fun?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="about-me"&gt;
+&lt;h3&gt;about.me&lt;/h3&gt;
+&lt;p&gt;I also recently gave in and created an &lt;a class="reference external" href="http://about.me/alex.clark"&gt;about.me site&lt;/a&gt;. I was impressed by their content editing features, and my ability to create a page that looked OK using them.&lt;/p&gt;
+&lt;p&gt;In my about.me profile, I used a picture of me and a picture of DC I took in early 2012. When it came time to redo aclark.net I felt like I really wanted to capture the simplicity of the about.me site, so I used the same photo in the background.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="bootstrap"&gt;
+&lt;h3&gt;Bootstrap&lt;/h3&gt;
+&lt;p&gt;Bootstrap is old news at this point, but I really enjoy using it and I particularly like that they have added more example templates. So I combined my background photo with one of &lt;a class="reference external" href="http://twitter.github.io/bootstrap/getting-started.html#examples"&gt;their example templates&lt;/a&gt; and a new site idea was born. As I'm not a particularly talented visual artist, my ability to produce something that looked OK (with code this time) was exciting.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="what"&gt;
+&lt;h2&gt;What&lt;/h2&gt;
+&lt;p&gt;Until I added a contact form, the site was entirely unremarkable. There are views and routes and templates, typical fare for a web framework. Here is the entire &amp;quot;main routine&amp;quot;:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+from pyramid.session import UnencryptedCookieSessionFactoryConfig
+from pyramid.config import Configurator
+from .redir import blog
+from .redir import blog_entry
+from .redir import blog_slash
+from .views import contact
+from .views import default
+import deform_bootstrap
+
+
+def main(global_config, **settings):
+    &amp;quot;&amp;quot;&amp;quot;
+    Oppan wsgi style! Configure and return WSGI application.
+    &amp;quot;&amp;quot;&amp;quot;
+    my_session_factory = UnencryptedCookieSessionFactoryConfig('itsaseekreet')
+    config = Configurator(session_factory=my_session_factory)
+    config.add_route('blog', '/blog')
+    config.add_route('blog_entry', '/blog/{entry:.*}')
+    config.add_route('blog_slash', '/blog/')
+    config.add_route('contact', '/contact')
+    config.add_route('clients', '/clients')
+    config.add_route('projects', '/projects')
+    config.add_route('services', '/services')
+    config.add_route('team', '/team')
+    config.add_route('testimonials', '/testimonials')
+    config.add_route('root', '/')
+    config.add_static_view(
+        'static', 'aclarknet:static', cache_max_age=3600)
+    config.add_view(blog, route_name='blog')
+    config.add_view(blog_entry, route_name='blog_entry')
+    config.add_view(blog_slash, route_name='blog_slash')
+    config.add_view(
+        default,
+        renderer='aclarknet:templates/clients.mak',
+        route_name='clients')
+    config.add_view(
+        contact,
+        renderer='aclarknet:templates/contact.mak',
+        route_name='contact')
+    config.add_view(
+        default,
+        renderer='aclarknet:templates/projects.mak',
+        route_name='projects')
+    config.add_view(
+        default,
+        renderer='aclarknet:templates/root.mak',
+        route_name='root')
+    config.add_view(
+        default,
+        renderer='aclarknet:templates/services.mak',
+        route_name='services')
+    config.add_view(
+        default,
+        renderer='aclarknet:templates/testimonials.mak',
+        route_name='testimonials')
+    config.add_view(
+        default,
+        renderer='aclarknet:templates/team.mak',
+        route_name='team')
+    config.include(deform_bootstrap)
+    return config.make_wsgi_app()
+&lt;/pre&gt;
+&lt;div class="section" id="contact-form"&gt;
+&lt;h3&gt;Contact form&lt;/h3&gt;
+&lt;p&gt;But then I wanted a contact form. Which lead me to wanting an elegant way to send mail via Heroku. Which lead me to discover &lt;a class="reference external" href="http://sendgrid.com/"&gt;SendGrid&lt;/a&gt;. Which lead me create some primitive marketing features I am quite proud of and excited about.&lt;/p&gt;
+&lt;p&gt;I still ended up sending mail &amp;quot;the old way&amp;quot; via GMail. But now I send two mails: one to &lt;a class="reference external" href="mailto:info&amp;#64;aclark.net"&gt;info&amp;#64;aclark.net&lt;/a&gt; to alert our staff about the lead (using GMail). And one to the lead acknowledging their submission (using SendGrid). SendGrid keeps a record of all the leads we've contacted, amongst other &amp;quot;fancy marketing features&amp;quot;. Here's the relevant view code:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+import deform
+import smtplib
+
+from email.mime.text import MIMEText
+
+from .config import FORM_ERROR
+from .config import FORM_SUCCESS
+
+from .config import MIME_ONE_RECIPIENT
+from .config import MIME_ONE_SUBJECT
+from .config import MIME_TWO_MESSAGE
+from .config import MIME_TWO_SUBJECT
+
+from .config import GMAIL_HOSTNAME
+from .config import GMAIL_PASSWORD
+from .config import GMAIL_USERNAME
+
+from .config import SENDGRID_HOSTNAME
+from .config import SENDGRID_PASSWORD
+from .config import SENDGRID_USERNAME
+
+from .forms import ContactFormSchema
+
+
+def contact(request):
+    &amp;quot;&amp;quot;&amp;quot;
+    Create and render deform form containing colander schema. Provide
+    sendgrid integration for marketing.
+    &amp;quot;&amp;quot;&amp;quot;
+    button = deform.Button('Send', css_class='span9 btn-block btn-large')
+    schema = ContactFormSchema().bind(request=request)
+    form = deform.Form(schema, buttons=(button, ))
+    if 'Send' in request.POST:
+        items = request.POST.items()
+        try:
+            appstruct = form.validate(items)
+        except deform.ValidationFailure:
+            return {
+                'form': form.render(),
+                'request': request,
+            }
+        # This is the form contents
+        email = appstruct['email']
+        message = appstruct['message']
+
+        # This is the mail to info&amp;#64;aclark.net
+        mime_document_one = MIMEText(message)
+        mime_document_one['Subject'] = MIME_ONE_SUBJECT
+        mime_document_one['To'] = MIME_ONE_RECIPIENT
+        mime_document_one['From'] = email
+        mime_document_one = mime_document_one.as_string()
+
+        # This is the mail to the new lead
+        mime_document_two = MIMEText(MIME_TWO_MESSAGE)
+        mime_document_two['Subject'] = MIME_TWO_SUBJECT
+        mime_document_two['To'] = email
+        mime_document_two['From'] = MIME_ONE_RECIPIENT
+        mime_document_two = mime_document_two.as_string()
+
+        try:
+            # This is the mail to info&amp;#64;aclark.net
+            smtp_server = smtplib.SMTP(GMAIL_HOSTNAME)
+            smtp_server.starttls()
+            smtp_server.login(GMAIL_USERNAME, GMAIL_PASSWORD)
+            smtp_server.sendmail(email, MIME_ONE_RECIPIENT, mime_document_one)
+            smtp_server.quit()
+
+            # This is the mail to the new lead
+            smtp_server = smtplib.SMTP(SENDGRID_HOSTNAME)
+            smtp_server.starttls()
+            smtp_server.login(SENDGRID_USERNAME, SENDGRID_PASSWORD)
+            smtp_server.sendmail(MIME_ONE_RECIPIENT, email, mime_document_two)
+            smtp_server.quit()
+            request.session.flash(FORM_SUCCESS)
+        except:
+            request.session.flash(FORM_ERROR, 'errors')
+        return {
+            'form': form.render(appstruct={}),
+            'request': request,
+        }
+    return {
+        'form': form.render(),
+        'request': request,
+    }
+
+
+def default(request):
+    &amp;quot;&amp;quot;&amp;quot;
+    This is the default view, to be used with most routes since we do not
+    provide any content editing ability yet. Even then, maybe a default view
+    would still be helpful.
+    &amp;quot;&amp;quot;&amp;quot;
+    return {}
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="who-cares"&gt;
+&lt;h2&gt;Who cares&lt;/h2&gt;
+&lt;p&gt;The best thing about all of this being able to run the site &lt;strong&gt;100% for free on Heroku&lt;/strong&gt;. Also:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Python 3 compat!&lt;/li&gt;
+&lt;li&gt;Free caching via CloudFlare&lt;/li&gt;
+&lt;li&gt;Free ping service from Pingdom keeps the site from &amp;quot;going to sleep&amp;quot; (HT: natea).&lt;/li&gt;
+&lt;li&gt;Updating the site fits my workflow. If I'm the content editor, I don't necessarily need or want to use Plone to edit my content. I can save Plone for my clients, and focus on &lt;strong&gt;what makes them happy&lt;/strong&gt; with their CMS system.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</summary><category term="Django"></category><category term="Mozilla"></category><category term="Plone"></category><category term="Python"></category></entry><entry><title>I love checkoutmanager and dotfiles</title><link href="http://aclark.net/blog/2013/02/08/i-love-checkoutmanager-and-dotfiles/" rel="alternate"></link><updated>2013-02-08T12:00:00-05:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-02-08:2013/02/08/i-love-checkoutmanager-and-dotfiles/</id><summary type="html">&lt;p&gt;&lt;em&gt;An ode to my OS X development workstation setup&lt;/em&gt; &lt;a class="footnote-reference" href="#id11" id="id1"&gt;[1]&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;I am big on setting up my development environment, and enjoying the environment I work in. And I'm very thankful to the folks who make my life easier, including the authors of:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.ohloh.net/p/python/contributors/summary"&gt;Python&lt;/a&gt;: Python Core Developers&lt;/li&gt;
@@ -548,45 +753,4 @@ TWITTER_USERNAME = 'aclark4life'
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
-</summary><category term="Mozilla"></category><category term="Plone"></category><category term="Python"></category></entry><entry><title>Gittip is the future</title><link href="http://aclark.net/blog/2012/09/21/gittip-is-the-future/" rel="alternate"></link><updated>2012-09-21T21:45:00-04:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2012-09-21:2012/09/21/gittip-is-the-future/</id><summary type="html">&lt;p&gt;Heard of Gittip? If not, you should know: it has a lot of people (including me) excited about the potential to make a living doing what they love. From the Gittip blog &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[1]&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-Gittip is a system for funding people who build free culture. The core is small weekly gifts. The idea is that if 1,000 people give $1 a week to a great programmer, musician, scientist, teacher, etc., then that frees them up to pursue their vision even further for making the world better.&lt;/blockquote&gt;
-&lt;p&gt;I love this idea! In particular, because it speaks to me more than other similar offerings:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Chipin&lt;/li&gt;
-&lt;li&gt;Flattr&lt;/li&gt;
-&lt;li&gt;Kickstarter&lt;/li&gt;
-&lt;li&gt;Paypal&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Why? If for no other reason, because it comes from a member of the Python community: Chad Whitacre of &lt;a class="reference external" href="http://aspen.io"&gt;http://aspen.io&lt;/a&gt; fame. And the Python community has become near and dear to me, second only to my-one-true-open-source-love: Plone. So I want to see open source developers, particularly Python developers, succeed.&lt;/p&gt;
-&lt;img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/gittip.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/gittip.png" /&gt;
-&lt;p&gt;And succeed they will, with gittip. Some particularly impressive results so far:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Chad Whitacre, the founder, is making almost $160 per week: &lt;a class="reference external" href="https://www.gittip.com/whit537/"&gt;https://www.gittip.com/whit537/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;David Glick, a newly independent Plone developer, is making over $100 per week: &lt;a class="reference external" href="https://www.gittip.com/davisagli/"&gt;https://www.gittip.com/davisagli/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Read The Docs, everyone's favorite documentation hosting site, is making almost $100 per week: &lt;a class="reference external" href="https://www.gittip.com/readthedocs/"&gt;https://www.gittip.com/readthedocs/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Whilst no one is making a living off of gittip yet, with enough support and momentum it's only a matter of time before they do. Toward that end, I have written a blog entry for the &lt;a class="reference external" href="http://blog.gittip.com"&gt;gittip blog&lt;/a&gt; describing among other things: how I'd like to make a living with gittip. Here is an excerpt:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Chad’s vision for Gittip really speaks to me. All over the world there are thousands of open source developers writing code, managing projects, and moving the world of open source technology forward. This helps millions of individuals, companies and the entire world with a variety of its endeavours.&lt;/p&gt;
-&lt;p&gt;What if those folks could easily show their appreciation to individuals known to make open source happen? What if these volunteer developers didn’t need to go get “day jobs” to make a living because the world has taken care of them? What if companies didn’t need to hire employees in the traditional sense because their needs have already been met by open source?&lt;/p&gt;
-&lt;p&gt;There is a lot to think about and strive for here, and I’m really excited to help Chad with his mission. On a daily basis I’m involved with, and influential to the following open source projects: Plone (Python-based CMS), Pillow (Python Imaging Library fork), Buildout (Python-based build system), and more. I hope Gittip can help me help you, the open source community and the world.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;You can read the rest of the article here:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://blog.gittip.com/post/31960853095/back-the-stack-pythonpackages-com"&gt;http://blog.gittip.com/post/31960853095/back-the-stack-pythonpackages-com&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And if you'd like to help me, I'm attempting to cover the hosting costs for my startup business: &lt;a class="reference external" href="http://pythonpackages.com"&gt;pythonpackages.com&lt;/a&gt;, so I can keep developing it for another year. I truly believe in my vision of a &amp;quot;hosted packaging service&amp;quot;, and I really want to help the Python community fix its packaging story in any way that I can. If in no other way, than by making it so you don't have to think about Python packaging at all (i.e. I'll worry about the various complexities, so you don't have to). You can find me on gittip here:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://www.gittip.com/aclark4life/"&gt;https://www.gittip.com/aclark4life/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Now, go be generous and help build the commons!&lt;/p&gt;
-&lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
-&lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="http://blog.gittip.com/post/30116848405/with-payouts-gittip-is-minimally-viable"&gt;http://blog.gittip.com/post/30116848405/with-payouts-gittip-is-minimally-viable&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
 </summary><category term="Mozilla"></category><category term="Plone"></category><category term="Python"></category></entry></feed>

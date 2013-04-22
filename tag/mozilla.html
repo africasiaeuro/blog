@@ -33,8 +33,238 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="../2013/02/08/i-love-checkoutmanager-and-dotfiles/">I love checkoutmanager and dotfiles</a></h1> 
+                    <h1 class="entry-title"><a href="../2013/04/22/new-pyramid-site/">New Pyramid Site</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2013-04-22T12:00:00">
+                Mon 22 April 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/aclark.html">aclark</a>
+        </address>
+        <p>In <a href="../category/blog.html">Blog</a>. </p>
+<p>tags: <a href="../tag/django.html">Django</a><a href="../tag/mozilla.html">Mozilla</a><a href="../tag/plone.html">Plone</a><a href="../tag/python.html">Python</a></p></footer><!-- /.post-info --><img alt="https://raw.github.com/ACLARKNET/aclarknet/master/screenshot.png" src="https://raw.github.com/ACLARKNET/aclarknet/master/screenshot.png" style="width: 98%;" />
+<p>For the first time in 10 years, <a class="reference external" href="http://aclark.net">aclark.net</a> is not powered by Plone. Nothing against Plone: it's still one of the greatest loves of my life (inasmuch as you can love a software and community, as I do).</p>
+<div class="section" id="why">
+<h2>Why</h2>
+<p>This was not the result of a revolutionary plan, rather more of an evolution. It happened like this:</p>
+<ul class="simple">
+<li>As soon as Plone 4.3a1 was released (a year ago?) I deployed a new Plone site to aclark.net with it, featuring a <strong>Diazo</strong> (new Plone theming engine) theme.</li>
+<li>Around the same time I became obsessed with deploying to Heroku, and also gained an interest in <strong>Python 3</strong>.</li>
+<li>A few months ago, I got tired of paying $11/month to host my Plone site so I converted the site to <strong>static HTML</strong> and moved it to <strong>GitHub pages</strong>. But the result was flawed because maintenance involved editing duplicate copies of the website content (e.g. both clients.html and clients/foo.html contained the same text describing &quot;foo&quot;).</li>
+</ul>
+<p>So when it came time to do more than a few casual edits, I knew I had to find a new approach. That's when various elements of the Universe conspired to lead me in a new direction.</p>
+</div>
+<div class="section" id="how">
+<h2>How</h2>
+<div class="section" id="pyramid">
+<h3>Pyramid</h3>
+<p>I spent a lot of time (~ 1 year) developing <a class="reference external" href="http://pythonpackages.com">pythonpackages.com</a> in Pyramid, but the result was a mess (code-wise). I'm in the process of rewriting and open sourcing it, but it's slow going. So what better way to get started than to do a small-ish site in Pyramid for fun?</p>
+</div>
+<div class="section" id="about-me">
+<h3>about.me</h3>
+<p>I also recently gave in and created an <a class="reference external" href="http://about.me/alex.clark">about.me site</a>. I was impressed by their content editing features, and my ability to create a page that looked OK using them.</p>
+<p>In my about.me profile, I used a picture of me and a picture of DC I took in early 2012. When it came time to redo aclark.net I felt like I really wanted to capture the simplicity of the about.me site, so I used the same photo in the background.</p>
+</div>
+<div class="section" id="bootstrap">
+<h3>Bootstrap</h3>
+<p>Bootstrap is old news at this point, but I really enjoy using it and I particularly like that they have added more example templates. So I combined my background photo with one of <a class="reference external" href="http://twitter.github.io/bootstrap/getting-started.html#examples">their example templates</a> and a new site idea was born. As I'm not a particularly talented visual artist, my ability to produce something that looked OK (with code this time) was exciting.</p>
+</div>
+</div>
+<div class="section" id="what">
+<h2>What</h2>
+<p>Until I added a contact form, the site was entirely unremarkable. There are views and routes and templates, typical fare for a web framework. Here is the entire &quot;main routine&quot;:</p>
+<pre class="literal-block">
+from pyramid.session import UnencryptedCookieSessionFactoryConfig
+from pyramid.config import Configurator
+from .redir import blog
+from .redir import blog_entry
+from .redir import blog_slash
+from .views import contact
+from .views import default
+import deform_bootstrap
+
+
+def main(global_config, **settings):
+    &quot;&quot;&quot;
+    Oppan wsgi style! Configure and return WSGI application.
+    &quot;&quot;&quot;
+    my_session_factory = UnencryptedCookieSessionFactoryConfig('itsaseekreet')
+    config = Configurator(session_factory=my_session_factory)
+    config.add_route('blog', '/blog')
+    config.add_route('blog_entry', '/blog/{entry:.*}')
+    config.add_route('blog_slash', '/blog/')
+    config.add_route('contact', '/contact')
+    config.add_route('clients', '/clients')
+    config.add_route('projects', '/projects')
+    config.add_route('services', '/services')
+    config.add_route('team', '/team')
+    config.add_route('testimonials', '/testimonials')
+    config.add_route('root', '/')
+    config.add_static_view(
+        'static', 'aclarknet:static', cache_max_age=3600)
+    config.add_view(blog, route_name='blog')
+    config.add_view(blog_entry, route_name='blog_entry')
+    config.add_view(blog_slash, route_name='blog_slash')
+    config.add_view(
+        default,
+        renderer='aclarknet:templates/clients.mak',
+        route_name='clients')
+    config.add_view(
+        contact,
+        renderer='aclarknet:templates/contact.mak',
+        route_name='contact')
+    config.add_view(
+        default,
+        renderer='aclarknet:templates/projects.mak',
+        route_name='projects')
+    config.add_view(
+        default,
+        renderer='aclarknet:templates/root.mak',
+        route_name='root')
+    config.add_view(
+        default,
+        renderer='aclarknet:templates/services.mak',
+        route_name='services')
+    config.add_view(
+        default,
+        renderer='aclarknet:templates/testimonials.mak',
+        route_name='testimonials')
+    config.add_view(
+        default,
+        renderer='aclarknet:templates/team.mak',
+        route_name='team')
+    config.include(deform_bootstrap)
+    return config.make_wsgi_app()
+</pre>
+<div class="section" id="contact-form">
+<h3>Contact form</h3>
+<p>But then I wanted a contact form. Which lead me to wanting an elegant way to send mail via Heroku. Which lead me to discover <a class="reference external" href="http://sendgrid.com/">SendGrid</a>. Which lead me create some primitive marketing features I am quite proud of and excited about.</p>
+<p>I still ended up sending mail &quot;the old way&quot; via GMail. But now I send two mails: one to <a class="reference external" href="mailto:info&#64;aclark.net">info&#64;aclark.net</a> to alert our staff about the lead (using GMail). And one to the lead acknowledging their submission (using SendGrid). SendGrid keeps a record of all the leads we've contacted, amongst other &quot;fancy marketing features&quot;. Here's the relevant view code:</p>
+<pre class="literal-block">
+import deform
+import smtplib
+
+from email.mime.text import MIMEText
+
+from .config import FORM_ERROR
+from .config import FORM_SUCCESS
+
+from .config import MIME_ONE_RECIPIENT
+from .config import MIME_ONE_SUBJECT
+from .config import MIME_TWO_MESSAGE
+from .config import MIME_TWO_SUBJECT
+
+from .config import GMAIL_HOSTNAME
+from .config import GMAIL_PASSWORD
+from .config import GMAIL_USERNAME
+
+from .config import SENDGRID_HOSTNAME
+from .config import SENDGRID_PASSWORD
+from .config import SENDGRID_USERNAME
+
+from .forms import ContactFormSchema
+
+
+def contact(request):
+    &quot;&quot;&quot;
+    Create and render deform form containing colander schema. Provide
+    sendgrid integration for marketing.
+    &quot;&quot;&quot;
+    button = deform.Button('Send', css_class='span9 btn-block btn-large')
+    schema = ContactFormSchema().bind(request=request)
+    form = deform.Form(schema, buttons=(button, ))
+    if 'Send' in request.POST:
+        items = request.POST.items()
+        try:
+            appstruct = form.validate(items)
+        except deform.ValidationFailure:
+            return {
+                'form': form.render(),
+                'request': request,
+            }
+        # This is the form contents
+        email = appstruct['email']
+        message = appstruct['message']
+
+        # This is the mail to info&#64;aclark.net
+        mime_document_one = MIMEText(message)
+        mime_document_one['Subject'] = MIME_ONE_SUBJECT
+        mime_document_one['To'] = MIME_ONE_RECIPIENT
+        mime_document_one['From'] = email
+        mime_document_one = mime_document_one.as_string()
+
+        # This is the mail to the new lead
+        mime_document_two = MIMEText(MIME_TWO_MESSAGE)
+        mime_document_two['Subject'] = MIME_TWO_SUBJECT
+        mime_document_two['To'] = email
+        mime_document_two['From'] = MIME_ONE_RECIPIENT
+        mime_document_two = mime_document_two.as_string()
+
+        try:
+            # This is the mail to info&#64;aclark.net
+            smtp_server = smtplib.SMTP(GMAIL_HOSTNAME)
+            smtp_server.starttls()
+            smtp_server.login(GMAIL_USERNAME, GMAIL_PASSWORD)
+            smtp_server.sendmail(email, MIME_ONE_RECIPIENT, mime_document_one)
+            smtp_server.quit()
+
+            # This is the mail to the new lead
+            smtp_server = smtplib.SMTP(SENDGRID_HOSTNAME)
+            smtp_server.starttls()
+            smtp_server.login(SENDGRID_USERNAME, SENDGRID_PASSWORD)
+            smtp_server.sendmail(MIME_ONE_RECIPIENT, email, mime_document_two)
+            smtp_server.quit()
+            request.session.flash(FORM_SUCCESS)
+        except:
+            request.session.flash(FORM_ERROR, 'errors')
+        return {
+            'form': form.render(appstruct={}),
+            'request': request,
+        }
+    return {
+        'form': form.render(),
+        'request': request,
+    }
+
+
+def default(request):
+    &quot;&quot;&quot;
+    This is the default view, to be used with most routes since we do not
+    provide any content editing ability yet. Even then, maybe a default view
+    would still be helpful.
+    &quot;&quot;&quot;
+    return {}
+</pre>
+</div>
+</div>
+<div class="section" id="who-cares">
+<h2>Who cares</h2>
+<p>The best thing about all of this being able to run the site <strong>100% for free on Heroku</strong>. Also:</p>
+<ul class="simple">
+<li>Python 3 compat!</li>
+<li>Free caching via CloudFlare</li>
+<li>Free ping service from Pingdom keeps the site from &quot;going to sleep&quot; (HT: natea).</li>
+<li>Updating the site fits my workflow. If I'm the content editor, I don't necessarily need or want to use Plone to edit my content. I can save Plone for my clients, and focus on <strong>what makes them happy</strong> with their CMS system.</li>
+</ul>
+</div>
+<p>There are <a href="../2013/04/22/new-pyramid-site/#disqus_thread">comments</a>.</p>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../2013/02/08/i-love-checkoutmanager-and-dotfiles/" rel="bookmark"
+                           title="Permalink to I love checkoutmanager and dotfiles">I love checkoutmanager and dotfiles</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2013-02-08T12:00:00">
                 Fri 08 February 2013
         </abbr>
@@ -43,325 +273,15 @@
                 By <a class="url fn" href="../author/aclark.html">aclark</a>
         </address>
         <p>In <a href="../category/blog.html">Blog</a>. </p>
-<p>tags: <a href="../tag/django.html">Django</a><a href="../tag/mozilla.html">Mozilla</a><a href="../tag/plone.html">Plone</a><a href="../tag/python.html">Python</a></p></footer><!-- /.post-info --><p><em>An ode to my OS X development workstation setup</em> <a class="footnote-reference" href="#id11" id="id1">[1]</a></p>
+<p>tags: <a href="../tag/django.html">Django</a><a href="../tag/mozilla.html">Mozilla</a><a href="../tag/plone.html">Plone</a><a href="../tag/python.html">Python</a></p></footer><!-- /.post-info -->                <p><em>An ode to my OS X development workstation setup</em> <a class="footnote-reference" href="#id11" id="id1">[1]</a></p>
 <p>I am big on setting up my development environment, and enjoying the environment I work in. And I'm very thankful to the folks who make my life easier, including the authors of:</p>
 <ul class="simple">
 <li><a class="reference external" href="http://www.ohloh.net/p/python/contributors/summary">Python</a>: Python Core Developers</li>
-<li><a class="reference external" href="http://pypi.python.org/pypi/dotfiles">dotfiles</a>: Jon Bernard</li>
-<li><a class="reference external" href="http://pypi.python.org/pypi/checkoutmanager">checkoutmanager</a>: Reinout Van Rees</li>
-</ul>
-<p>I also love <strong>repetition</strong>. So picture if you will, a new <strong>Macbook Air or Pro</strong> ready to serve as my development workstation. I like to perform, and study, the steps required to turn a new laptop in to my development workstation. So here we go. In this article, I will walk through the steps required to turn a new machine in to my developer workstation. Do follow along!</p>
-<div class="section" id="shell">
-<h2>Shell</h2>
-<p>One of the first things I do on a new system is change my shell to <strong>Zsh</strong> in <tt class="docutils literal">System Preferences <span class="pre">-&gt;</span> Users &amp; Groups <span class="pre">-&gt;</span> Current User <span class="pre">-&gt;</span> Right Click <span class="pre">-&gt;</span> Advanced <span class="pre">Options...</span></tt>. Don't forget to <tt class="docutils literal">Click the lock to make changes</tt> first.</p>
-<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/zsh.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/zsh.png" />
-<div class="section" id="zsh">
-<h3>Zsh</h3>
-<p>Why <strong>Zsh</strong>? One of my favorite features is <strong>shared history between open sessions</strong>. So I can run a command in one window, and then run the same command from another window by fetching it from the history (with CTRL-R).</p>
-</div>
-</div>
-<div class="section" id="xcode">
-<h2>XCode</h2>
-<p>After I take possession of my new laptop (running <strong>Mountain Lion</strong>, the newest OS X at the time of this writing), I head to the App Store to download XCode. <a class="footnote-reference" href="#id12" id="id2">[2]</a> Among many other things, XCode gives me the GNU C Compiler and allows me to type &quot;gcc&quot; in my <tt class="docutils literal">Applications <span class="pre">-&gt;</span> Utilities <span class="pre">-&gt;</span> Terminal</tt>.</p>
-<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/gcc.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/gcc.png" />
-</div>
-<div class="section" id="id3">
-<h2>Python</h2>
-<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/homebrew.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/homebrew.png" />
-<p>Now I need a Python interpreter <a class="footnote-reference" href="#id13" id="id4">[3]</a>. For development I use the <a class="reference external" href="https://github.com/collective/buildout.python">Collective Python Buildout</a> but I also enjoy using <a class="reference external" href="http://mxcl.github.com/homebrew/">Homebrew's</a> Python 2.7. I use Homebrew for a variety of other things too (e.g. mobile-shell AKA mosh) so here we go:</p>
-<pre class="literal-block">
-$ ruby -e &quot;$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)&quot;
-</pre>
-<p>… follow instructions …</p>
-<pre class="literal-block">
-$ brew install python
-</pre>
-</div>
-<div class="section" id="git">
-<h2>Git</h2>
-<p>I think OS X (or XCode) includes git, but just in case:</p>
-<pre class="literal-block">
-$ brew install git
-</pre>
-<p>Which reminds me, don't forget that installing the command line utilities in Mountain Lion's XCode requires an additional step in <tt class="docutils literal">Preferences <span class="pre">-&gt;</span> Downloads <span class="pre">-&gt;</span> Command Line Tools <span class="pre">-&gt;</span> Install</tt>:</p>
-<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/command-line-utils.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/command-line-utils.png" />
-</div>
-<div class="section" id="id5">
-<h2>Dotfiles</h2>
-<p>At this point, I can begin to get serious about turning this new machine in to my developer workstation. And that means: <strong>installing my private ssh key</strong> so I can check out code without typing a password, of course. Normally this would be tedious, but with git and dotfiles it's not so bad. This is what I do from my home directory:</p>
-<pre class="literal-block">
-$ git clone https://super_secret_url/dotfiles.git Dotfiles
-</pre>
-<p>I use https which requires a password for the first time only. Then I edit <tt class="docutils literal"><span class="pre">Dotfiles/.git/config</span></tt> and change the repository URL to <tt class="docutils literal">git&#64;super_secret_url/dotfiles.git</tt>. So every subsequent pull and push will require no password. And to &quot;install&quot; these dotfiles, I do <a class="footnote-reference" href="#id16" id="id6">[6]</a>:</p>
-<pre class="literal-block">
-$ pip install dotfiles
-$ dotfiles -s --force
-</pre>
-<p>Note: the dotfiles command finds my dotfiles in the default directory &quot;Dotfiles&quot; and create symbolic links to them.</p>
-<div class="section" id="distribute-pip">
-<h3>Distribute &amp; Pip</h3>
-<p>Homebrew's Python includes pip, but even if it didn't:</p>
-<pre class="literal-block">
-$ curl -O http://python-distribute.org/distribute_setup.py
-$ /usr/local/bin/python distribute_setup.py
-$ {easy_install, pip install} dotfiles
-</pre>
-<p>In other words, you can always install Distribute <a class="footnote-reference" href="#id14" id="id7">[4]</a>. After which you can use <tt class="docutils literal">easy_install</tt> or <tt class="docutils literal">pip</tt> to install dotfiles. (You can read up on the differences. TL;DR: neither is &quot;better&quot; or &quot;worse&quot;, it's just a question of which tradeoffs you are willing to make. I tend to use pip just because it's newer and I like its requirements.txt feature, but easy_install is still very well supported as part of the Distribute project.)</p>
-</div>
-</div>
-<div class="section" id="id8">
-<h2>Checkoutmanager</h2>
-<p>Now I need some things to develop. Since I work on a bunch of different projects, I need a way to keep track of what should be checked out at any given time. So I do this <a class="footnote-reference" href="#id15" id="id9">[5]</a>:</p>
-<pre class="literal-block">
-$ pip install checkoutmanager
-$ checkoutmanager co
-</pre>
-<p>This creates and populates my <tt class="docutils literal">~/Developer</tt> directory with code. And it &quot;just works&quot; because I keep a <tt class="docutils literal">.checkoutmanager.cfg</tt> in my Dotfiles repository. It currently looks like this:</p>
-<pre class="literal-block">
-[aclark]
-basedir = /Users/aclark/Developer/aclark
-checkouts =
-    git&#64;github.com:aclark4life/aclark4life.github.com.git resume
-    git&#64;github.com:aclark4life/desktops.git
-    git&#64;github.com:aclark4life/hireme.git
-    git&#64;github.com:aclark4life/projects.git
-    git&#64;github.com:aclark4life/reinstall.git
-    git&#64;github.com:ACLARKNET/tweets.git
-    git&#64;github.com:aclark4life/usesthis.git
-vcs = git
-
-[alt]
-basedir = /Users/aclark/Developer/alt
-checkouts =
-    git&#64;github.com:alt-aclark-net/alt-aclark-net.github.com.git
-    git&#64;github.com:alt-aclark-net/dexter.git
-    git&#64;github.com:alt-aclark-net/headstraight.git
-vcs = git
-
-[buildout]
-basedir = /Users/aclark/Developer/buildout
-checkouts =
-    git&#64;github.com:collective/buildout.bootstrap.git
-    git&#64;github.com:buildout/buildout.git
-    git&#64;github.com:buildout/buildout.github.com.git
-vcs = git
-
-[distribute]
-basedir = /Users/aclark/Developer
-checkouts = ssh://hg&#64;bitbucket.org/tarek/distribute
-vcs = hg
-
-[clients]
-basedir = /Users/aclark/Developer
-checkouts =
-; Bunch o client repos
-vcs = git
-
-[clients-hg]
-basedir = /Users/aclark/Developer
-checkouts =
-; Bunch o client repos
-vcs = hg
-
-[dcpython]
-basedir = /Users/aclark/Developer/dcpython
-checkouts =
-    git&#64;github.com:DCPython/dcpython.github.com.git
-    git&#64;github.com:DCPython/pyramid-tutorials.git
-vcs = git
-
-[misc]
-basedir = /Users/aclark/Developer
-checkouts =
-    git&#64;github.com:ACLARKNET/aclarknet.github.com.git blog
-    git&#64;github.com:ACLARKNET/new_style.git
-    git&#64;github.com:aclark4life/binfiles.git
-;    git&#64;github.com:aclark4life/pyramid_python_3.git
-    git&#64;github.com:aclark4life/vanity.git
-    git&#64;github.com:aclark4life/zope2-heroku.git
-    git&#64;github.com:aclark4life/zope2_bootstrap.git
-    git&#64;github.com:codekoala/django-axes.git
-    git&#64;github.com:collective/buildout.python
-vcs = git
-
-[pillow]
-basedir = /Users/aclark/Developer/pillow
-checkouts =
-    git&#64;github.com:python-imaging/Pillow.git
-    git&#64;github.com:python-imaging/python-imaging.github.com.git
-vcs = git
-
-[plethorasociety]
-basedir = /Users/aclark/Developer/plethorasociety
-checkouts =
-    git&#64;github.com:plethorasociety/plethorasociety.github.com.git
-vcs = git
-
-[plone]
-basedir = /Users/aclark/Developer/plone
-checkouts =
-    git&#64;github.com:aclark4life/Plone-Debug-Assistant.git
-    git&#64;github.com:aclark4life/collective.recipe.bluebream.git
-    git&#64;github.com:aclark4life/event_days_indexer.git
-    git&#64;github.com:aclark4life/hello_plone.git
-    git&#64;github.com:aclark4life/mr_migrator_demo.git
-    git&#64;github.com:aclark4life/parse2plone.git
-    git&#64;github.com:aclark4life/plone_1_fun.git
-    git&#64;github.com:aclark4life/plone_addon_upgrade.git
-    git&#64;github.com:aclark4life/plone_guide.git
-    git&#64;github.com:aclark4life/plone_workflow_events.git
-    git&#64;github.com:aclark4life/schemaextender-facetednav-demo.git
-    git&#64;github.com:aclark4life/silly_content_import.git
-    git&#64;github.com:aclark4life/transmogrify.extract.git
-    git&#64;github.com:aclark4life/transmogrify.regexp.git
-    git&#64;github.com:aclark4life/viewlets_dont_suck.git
-    git&#64;github.com:aclark4life/wordpress2plone.git
-    git&#64;github.com:collective/Products.AttachmentField.git
-    git&#64;github.com:collective/Products.CalendarX.git
-    git&#64;github.com:collective/Products.EventRegistration.git
-    git&#64;github.com:collective/Products.PloneSoftwareCenter.git
-    git&#64;github.com:collective/Products.ifQuotes.git
-    git&#64;github.com:collective/Products.naked_plone.git
-    git&#64;github.com:collective/buildout.plonetest.git
-    git&#64;github.com:collective/collective.contacts.git
-    git&#64;github.com:collective/collective.controlpanel.edit_css.git
-    git&#64;github.com:collective/collective.developermanual.git
-    git&#64;github.com:collective/collective.formtoy.git
-    git&#64;github.com:collective/collective.github.com.git
-    git&#64;github.com:collective/collective.googleanalytics.git
-    git&#64;github.com:collective/collective.package.git
-    git&#64;github.com:collective/collective.project.git
-    git&#64;github.com:collective/collective.recaptcha.git
-    git&#64;github.com:collective/collective.recipe.grp.git
-    git&#64;github.com:collective/collective.recipe.rsync.git
-    git&#64;github.com:collective/collective.rip.git
-    git&#64;github.com:collective/collective.stats.git
-    git&#64;github.com:collective/funnelweb.git
-    git&#64;github.com:collective/github-collective.git
-    git&#64;github.com:collective/mr.migrator.git
-    git&#64;github.com:collective/plonecom-buildout.git
-    git&#64;github.com:collective/plonecom.theme.git
-    git&#64;github.com:collective/plonetheme.coolblue.git
-    git&#64;github.com:collective/plonetheme.freshpick.git
-    git&#64;github.com:collective/plonetheme.grungeera.git
-    git&#64;github.com:collective/plonetheme.keepitsimple.git
-    git&#64;github.com:collective/plonetheme.unilluminated.git
-    git&#64;github.com:collective/transmogrify.filesystem.git
-    git&#64;github.com:plone/Installers-OS-X.git
-    git&#64;github.com:plone/Products.PloneOrg.git
-    git&#64;github.com:plone/admin-docs.git
-    git&#64;github.com:plone/buildout.coredev.git
-    git&#64;github.com:plone/planet.plone.org.git
-    git&#64;github.com:plone/plone.api.git
-    git&#64;github.com:plone/plone.github.com.git
-    git&#64;github.com:plone/ploneorg.admin.git
-    git&#64;github.com:plone/plonetheme.ploneorg.git
-vcs = git
-
-[pythonpackages]
-basedir = /Users/aclark/Developer/pythonpackages
-checkouts =
-    git&#64;github.com:aclark4life/buildout-apache-mysql.git
-    git&#64;github.com:aclark4life/buildout-munin.git
-    git&#64;github.com:aclark4life/buildout-mysql.git
-    git&#64;github.com:aclark4life/buildout-nginx.git
-    git&#64;github.com:aclark4life/buildout-plone-haproxy.git
-    git&#64;github.com:aclark4life/buildout-plone-varnish.git
-    git&#64;github.com:aclark4life/buildout-zenoss.git
-    git&#64;bitbucket.org:pythonpackages/pythonpackages.com.git vanity_app
-    git&#64;github.com:pythonpackages/buildout-apache-modwsgi.git
-    git&#64;github.com:pythonpackages/buildout-bluebream.git
-    git&#64;github.com:pythonpackages/buildout-django.git
-    git&#64;github.com:pythonpackages/buildout-jenkins.git
-    git&#64;github.com:pythonpackages/buildout-plone-getpaid.git
-    git&#64;github.com:pythonpackages/buildout-plone.git
-    git&#64;github.com:pythonpackages/buildout-wordpress.git
-    git&#64;github.com:pythonpackages/buildout-zope2.git
-    git&#64;github.com:pythonpackages/experimental.pythonpackages.git
-    git&#64;github.com:pythonpackages/github-services.git pythonpackages-github-services
-    git&#64;github.com:pythonpackages/pyramidpypi.git pythonpackages-index
-    git&#64;github.com:pythonpackages/pythonpackages-blog.git
-    git&#64;github.com:pythonpackages/pythonpackages-docs.git
-    git&#64;github.com:pythonpackages/pythonpackages-graphs.git
-    git&#64;github.com:pythonpackages/pythonpackages-paste.git
-    git&#64;github.com:pythonpackages/pythonpackages-scaffolds.git
-    git&#64;github.com:pythonpackages/pythonpackages.sendpickedversions.git
-    git&#64;github.com:pythonpackages/pythonpackages-whiskers.git
-    git&#64;github.com:pythonpackages/pythonpackages.git
-vcs = git
-
-[toys]
-basedir = /Users/aclark/Developer/toys
-checkouts =
-    git&#64;github.com:aclark4life/basic_pyramid_zodb.git
-    git&#64;github.com:aclark4life/github_repos_cloner.git
-    git&#64;github.com:aclark4life/other.git
-    git&#64;github.com:aclark4life/python_study.git
-    git&#64;github.com:aclark4life/django-hello.git
-vcs = git
-</pre>
-<p>Now it's time to bootstrap the Collective Python Buildout, which gives me <strong>all versions of Python, ever</strong> <a class="footnote-reference" href="#id17" id="id10">[7]</a>. And off we go:</p>
-<pre class="literal-block">
-$ cd Developer/buildout.python
-$ python bootstrap.py
-</pre>
-<p>Finally, there is some PATH configuration required to make all of this seemless. The Collective Python Buildout gets installed in /opt while brew's stuff is in /usr/local. My PATH config currently looks like this:</p>
-<pre class="literal-block">
-export PATH=/usr/local/bin:/usr/local/sbin:/opt/local/bin:/Users/aclark/Developer/buildout.python/python-2.7/bin:$PATH
-export PATH=~/Developer/binfiles:/usr/local/share/npm/bin:$PATH
-</pre>
-<p>With the above configuration, I default to the Python 2.7 in the Collective Python Buildout. That means that is the &quot;python&quot; or &quot;virtualenv&quot; I get when I type those commands. I use the full path or expanded binary name when I need them e.g. /usr/local/bin/python or python3.3.</p>
-<p>That's it! I hope you will check out dotfiles and checkoutmanager for all your development needs.</p>
-<table class="docutils footnote" frame="void" id="id11" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Not really an ode: <a class="reference external" href="http://en.wikipedia.org/wiki/Ode">http://en.wikipedia.org/wiki/Ode</a></td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id12" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>I know about Kenneth Reitz's XCode Command line Tools only, but if I recall correctly there is some &quot;gotcha&quot; that has bitten me more than once if I use that instead of the full XCode. I wish I could remember what it was now, but it's not coming to me. If it works for you though, great!</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id13" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td>I know about the system Python, and for small things like checkoutmanager and dotfiles I don't mind using it. But there is merit in avoiding it because Apple treats it like &quot;their&quot; Python and makes decisions for you that you may prefer to make yourself. E.g. I believe they use a crippled version of the readline library.</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id14" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id7">[4]</a></td><td>Distribute is a more actively maintained fork of the venerable setuptools library (which itself is built on top of the Python standard library's distutils). Are we having fun yet?</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id15" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id9">[5]</a></td><td>I also alias checkoutmanager to cm :-)</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id16" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id6">[6]</a></td><td>I force because I want to replace the newly created .ssh dir with the one I keep in my Dotfiles repository.</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id17" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id10">[7]</a></td><td>Well, 2.4 through 3.3 at last count.</td></tr>
-</tbody>
-</table>
-</div>
-<p>There are <a href="../2013/02/08/i-love-checkoutmanager-and-dotfiles/#disqus_thread">comments</a>.</p>                </article>
-                            </aside><!-- /#featured -->
-                            <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-                                                
+<li><a class="reference external" href="http://pypi.python.org/pypi/dotfiles">dotfiles</a>: Jon Bernard ...</li></ul>
+                <a class="readmore" href="../2013/02/08/i-love-checkoutmanager-and-dotfiles/">read more</a>
+                <p>There are <a href="../2013/02/08/i-love-checkoutmanager-and-dotfiles/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
 
                  
                         <li><article class="hentry">    
@@ -575,31 +495,6 @@ export PATH=~/Developer/binfiles:/usr/local/share/npm/bin:$PATH
 <h2>publishconf ...</h2></div>
                 <a class="readmore" href="../2012/09/22/sorry-for-the-blog-spam/">read more</a>
                 <p>There are <a href="../2012/09/22/sorry-for-the-blog-spam/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../2012/09/21/gittip-is-the-future/" rel="bookmark"
-                           title="Permalink to Gittip is the future">Gittip is the future</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-09-21T21:45:00">
-                Fri 21 September 2012
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/aclark.html">aclark</a>
-        </address>
-        <p>In <a href="../category/blog.html">Blog</a>. </p>
-<p>tags: <a href="../tag/mozilla.html">Mozilla</a><a href="../tag/plone.html">Plone</a><a href="../tag/python.html">Python</a></p></footer><!-- /.post-info -->                <p>Heard of Gittip? If not, you should know: it has a lot of people (including me) excited about the potential to make a living doing what they love. From the Gittip blog <a class="footnote-reference" href="#id2" id="id1">[1]</a>:</p>
-<blockquote>
-Gittip is a system for funding people who build free culture. The core is small weekly gifts ...</blockquote>
-                <a class="readmore" href="../2012/09/21/gittip-is-the-future/">read more</a>
-                <p>There are <a href="../2012/09/21/gittip-is-the-future/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->
                             <p class="paginator">
