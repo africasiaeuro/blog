@@ -117,7 +117,7 @@ $ ssh -L 8080:10.57.0.107:5011 direct.plone.org
 &lt;p&gt;That's it! I hope this helps folks wrap their head around the plone.org upgrade process. A few closing thoughts:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;With Cloudflare in front, we probably don't need Varnish anymore.&lt;/li&gt;
-&lt;li&gt;Leaving a note in &lt;tt class="docutils literal"&gt;portal_skins/custom&lt;/tt&gt; to encourage folks to &amp;quot;please keep area clean&amp;quot; — does not work.&lt;/li&gt;
+&lt;li&gt;Leaving a note in &lt;tt class="docutils literal"&gt;portal_skins/custom&lt;/tt&gt; to encourage folks to &amp;quot;please keep this area clean&amp;quot; — does not work.&lt;/li&gt;
 &lt;li&gt;plone.com anyone? I don't know the future of plone.org and I have mixed feelings about it: on the one hand, I'm proud to help maintain such an old and venerable system. On the other hand, I think plone.org should be retired in a way similar to old.zope.org. What do you think?&lt;/li&gt;
 &lt;/ul&gt;
 &lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;

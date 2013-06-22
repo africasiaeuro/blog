@@ -119,7 +119,7 @@ Conclusion
 That's it! I hope this helps folks wrap their head around the plone.org upgrade process. A few closing thoughts:
 
 - With Cloudflare in front, we probably don't need Varnish anymore.
-- Leaving a note in ``portal_skins/custom`` to encourage folks to "please keep area clean" — does not work.
+- Leaving a note in ``portal_skins/custom`` to encourage folks to "please keep this area clean" — does not work.
 - plone.com anyone? I don't know the future of plone.org and I have mixed feelings about it: on the one hand, I'm proud to help maintain such an old and venerable system. On the other hand, I think plone.org should be retired in a way similar to old.zope.org. What do you think?
 
 .. [1] It shouldn't take this long. See: https://github.com/plone/Products.PloneOrg/commit/b04105f7c9cacf3880c12effba5ffe261d4b5163#commitcomment-3384259 for a discussion about this issue.
