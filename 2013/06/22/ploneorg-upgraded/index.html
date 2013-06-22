@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Plone.org upgraded</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://aclark.net/blog/theme/css/main.css" type="text/css" />
+                <link href="http://aclark.net/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Alex Clark - Python Web Developer Atom Feed" />
+                
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://aclark.net/blog/css/ie.css"/>
+                <script src="http://aclark.net/blog/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://aclark.net/blog/css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+<a href="https://github.com/ACLARKNET/blog">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+</a>
+        <header id="banner" class="body">
+                <h1><a href="http://aclark.net/blog">Alex Clark - Python Web Developer </a></h1>
+                <nav><ul>
+                                                                                                    <li class="active"><a href="http://aclark.net/blog/category/blog.html">Blog</a></li>
+                                </ul></nav>
+        </header><!-- /#banner -->
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="2013/06/22/ploneorg-upgraded/" rel="bookmark"
+           title="Permalink to Plone.org upgraded">Plone.org upgraded</a></h1>
+      <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="aclark4life">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2013-06-22T00:00:00">
+                Sat 22 June 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://aclark.net/blog/author/aclark.html">aclark</a>
+        </address>
+        <p>In <a href="http://aclark.net/blog/category/blog.html">Blog</a>. </p>
+<p>tags: <a href="http://aclark.net/blog/tag/plone.html">Plone</a><a href="http://aclark.net/blog/tag/python.html">Python</a></p></footer><!-- /.post-info -->      <p>Recently at the behest of Liz Leddy, I <a class="reference external" href="https://github.com/plone/Products.PloneOrg/commit/b04105f7c9cacf3880c12effba5ffe261d4b5163">upgraded plone.org from Plone 4.2 to Plone 4.3</a>. It's been a while since I had the pleasure, so I thought I'd make some notes: for myself, the AI Team and anyone else interested in the process.</p>
+<div class="section" id="background">
+<h2>Background</h2>
+<ol class="arabic simple">
+<li>Plone.org is one of the <strong>oldest Plone sites in existence</strong>, having been launched circa Plone 1 and upgraded in place ever since.</li>
+<li>It functions remarkably well, given #1.</li>
+<li>It's not without its issues, but all of them are manageable —&nbsp;for some value of manageable.</li>
+<li>It's often very time consuming to work on.</li>
+</ol>
+</div>
+<div class="section" id="pre-process">
+<h2>Pre-Process</h2>
+<ol class="arabic">
+<li><p class="first">The first step is always to get a local copy:</p>
+<pre class="literal-block">
+$ git clone git&#64;github.com:plone/Products.PloneOrg.git
+$ cd Products.PloneOrg
+$ cp buildout.cfg.in buildout.cfg
+</pre>
+</li>
+<li><p class="first">Edit <tt class="docutils literal">buildout.cfg</tt> to extend the <tt class="docutils literal">database.cfg</tt>:</p>
+<pre class="literal-block">
+[buildout]
+# Rename to buildout.cfg and uncomment one of the profiles below
+extends =
+
+# Plone only, unthemed
+#    conf/develop.cfg
+
+# Copy data local (with plone.org account)
+    conf/database.cfg
+
+# Production (for use on plone.org server)
+#    conf/production.cfg
+
+# Staging (for use on plone.org server)
+# and Deployment (for use by Jenkins, admins and developers),
+#   fabric can be added to any of primary configurations
+
+#    conf/staging.cfg
+#    conf/fabric.cfg
+
+# Developer Database Drop; makes developer-friendly copies
+# of plone.org's content.
+#    conf/devdrop.cfg
+</pre>
+</li>
+<li><p class="first">Bootstrap and run Buildout:</p>
+<pre class="literal-block">
+$ virtualenv-2.7 .
+$ bin/pip install zc.buildout
+$ bin/buildout
+</pre>
+</li>
+<li><p class="first">Make the appropriate configuration changes i.e. change <tt class="docutils literal">extends</tt> from 4.2 to 4.3:</p>
+<pre class="literal-block">
+[buildout]
+develop = .
+extends =
+    http://dist.plone.org/release/4.3.1/versions.cfg
+    versions.cfg
+    sources.cfg
+extensions =
+#    buildout.dumppickedversions
+    buildout.threatlevel
+    mr.developer
+
+versions = versions
+sources-dir = sources
+eggs =
+    Pillow
+    Products.PloneOrg
+    Products.PloneHotfix20130618
+
+# get us a user and group variable
+[env]
+recipe = gocept.recipe.env
+[grp]
+recipe = collective.recipe.grp
+</pre>
+</li>
+<li><p class="first">Run the upgrade locally. With plone.org data this takes about 45 minutes to an hour <a class="footnote-reference" href="#id2" id="id1">[1]</a>.</p>
+</li>
+</ol>
+<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/upgrade.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/upgrade.png" />
+<ol class="arabic simple">
+<li>If the upgrade succeeds, you are ready to launch. If it fails, fix the errors before proceeding.</li>
+</ol>
+</div>
+<div class="section" id="process">
+<h2>Process</h2>
+<p>We know from upgrading locally that the process will take about 45 minutes to an hour, so you should <strong>allocate about 2 hours to do the upgrade</strong>.</p>
+<ol class="arabic simple">
+<li>Announce the upgrade: preferably a week or two in advance. The plone-developers and plone-users lists are probably sufficient, but you can create a plone.org news item too if you are feeling extra-ambitious. I only had a small window to perform this maintenance, so I skipped this step and proceeded directly to the next one.</li>
+<li>Add a status message to plone.org to indicate a maintenance window is in progress. I chose to customize the <tt class="docutils literal">main_template</tt> to accomplish this, but ideally we'd have some functionality in Plone that allowed site administrators to easily configure status messages.</li>
+</ol>
+<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/upgrade-message.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/upgrade-message.png" />
+<ol class="arabic simple">
+<li>Disable logins. Since the upgrade takes a long time, we don't want content being edited during this process. I chose to use David Glick's technique of disabling PAS. I moved the ldap authentication plugin to the Active Plugin list, thus disabling PAS such that only ZODB users could login. But ideally we'd have some feature in Plone to allow site administrators to disable logins.</li>
+</ol>
+<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/pas.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/pas.png" />
+<ol class="arabic">
+<li><p class="first">Run the upgrade. I forgot to mention earlier something very important: <strong>On plone.org, you can't access Zope from the internet.</strong> And you can't run the upgrade without accessing Zope. Hence run the following command to access the server, then access Plone via <tt class="docutils literal"><span class="pre">http://localhost:8080</span></tt>:</p>
+<pre class="literal-block">
+$ ssh -L 8080:10.57.0.107:5011 direct.plone.org
+</pre>
+</li>
+<li><p class="first">After the upgrade finishes, click around to make sure you didn't break anything. In my case, I broke something — I normally move <tt class="docutils literal">portal_skins/custom</tt> out of the way before upgrading, but this time I forgot. And when I experienced minor JavaScript issues, I forgot to examine custom; which currently looks like this:</p>
+</li>
+</ol>
+<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/custom.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/custom.png" />
+<p>Even if I had remembered, I didn't want to spend the next few hours examining database customizations. Fortunately, before I realized I had forgotten to check custom, I emailed the plone-developers list —&nbsp;and Nathan Van Gheem to the rescue! He fixed some JavaScript in custom, then I cleared the cache(s). Ideally Plone would report on database customizations during the upgrade process: to indicate the potential for breakage and encourage the site administrator to round-trip those customizations back to the file system.</p>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion</h2>
+<p>That's it! I hope this helps folks wrap their head around the plone.org upgrade process. A few closing thoughts:</p>
+<ul class="simple">
+<li>With Cloudflare in front, we probably don't need Varnish anymore.</li>
+<li>Leaving a note in <tt class="docutils literal">portal_skins/custom</tt> to encourage folks to &quot;please keep area clean&quot; — does not work.</li>
+<li>plone.com anyone? I don't know the future of plone.org and I have mixed feelings about it: on the one hand, I'm proud to help maintain such an old and venerable system. On the other hand, I think plone.org should be retired in a way similar to old.zope.org. What do you think?</li>
+</ul>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>It shouldn't take this long. See: <a class="reference external" href="https://github.com/plone/Products.PloneOrg/commit/b04105f7c9cacf3880c12effba5ffe261d4b5163#commitcomment-3384259">https://github.com/plone/Products.PloneOrg/commit/b04105f7c9cacf3880c12effba5ffe261d4b5163#commitcomment-3384259</a> for a discussion about this issue.</td></tr>
+</tbody>
+</table>
+</div>
+
+    </div><!-- /.entry-content -->
+        <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_identifier = "2013/06/22/ploneorg-upgraded/";
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://aclark-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+    </div>
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                                                    <li><a href="http://aclark.net">ACLARK.NET, LLC</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://aclark.net/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                    <li><a href="http://aclark.net/blog/feeds/Django.atom.xml">atom feed (Django)</a></li>
+                                                    <li><a href="http://aclark.net/blog/feeds/Mozilla.atom.xml">atom feed (Mozilla)</a></li>
+                                                    <li><a href="http://aclark.net/blog/feeds/Plone.atom.xml">atom feed (Plone)</a></li>
+                                                    <li><a href="http://aclark.net/blog/feeds/Python.atom.xml">atom feed (Python)</a></li>
+                                                    <li><a href="http://twitter.com/aclark4life">aclark4life</a></li>
+                                                    <li><a href="https://www.gittip.com/aclark4life">aclark4life (Gittip)</a></li>
+                                                    <li><a href="http:///about.me/alex.clark">alex.clark (about.me)</a></li>
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34988446-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+<script type="text/javascript">
+    var disqus_shortname = 'aclark-blog';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

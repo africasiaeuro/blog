@@ -1,5 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Alex Clark - Python Web Developer</title><link href="http://aclark.net/blog/" rel="alternate"></link><link href="http://aclark.net/blog/feeds/Python.atom.xml" rel="self"></link><id>http://aclark.net/blog/</id><updated>2013-04-22T12:00:00-04:00</updated><entry><title>New Pyramid Site</title><link href="http://aclark.net/blog/2013/04/22/new-pyramid-site/" rel="alternate"></link><updated>2013-04-22T12:00:00-04:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-04-22:2013/04/22/new-pyramid-site/</id><summary type="html">&lt;img alt="https://raw.github.com/ACLARKNET/aclarknet/master/screenshot.png" src="https://raw.github.com/ACLARKNET/aclarknet/master/screenshot.png" style="width: 98%;" /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Alex Clark - Python Web Developer</title><link href="http://aclark.net/blog/" rel="alternate"></link><link href="http://aclark.net/blog/feeds/python.atom.xml" rel="self"></link><id>http://aclark.net/blog/</id><updated>2013-06-22T00:00:00-04:00</updated><entry><title>Plone.org upgraded</title><link href="http://aclark.net/blog/2013/06/22/ploneorg-upgraded/" rel="alternate"></link><updated>2013-06-22T00:00:00-04:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-06-22:2013/06/22/ploneorg-upgraded/</id><summary type="html">&lt;p&gt;Recently at the behest of Liz Leddy, I &lt;a class="reference external" href="https://github.com/plone/Products.PloneOrg/commit/b04105f7c9cacf3880c12effba5ffe261d4b5163"&gt;upgraded plone.org from Plone 4.2 to Plone 4.3&lt;/a&gt;. It's been a while since I had the pleasure, so I thought I'd make some notes: for myself, the AI Team and anyone else interested in the process.&lt;/p&gt;
+&lt;div class="section" id="background"&gt;
+&lt;h2&gt;Background&lt;/h2&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Plone.org is one of the &lt;strong&gt;oldest Plone sites in existence&lt;/strong&gt;, having been launched circa Plone 1 and upgraded in place ever since.&lt;/li&gt;
+&lt;li&gt;It functions remarkably well, given #1.&lt;/li&gt;
+&lt;li&gt;It's not without its issues, but all of them are manageable —&amp;nbsp;for some value of manageable.&lt;/li&gt;
+&lt;li&gt;It's often very time consuming to work on.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class="section" id="pre-process"&gt;
+&lt;h2&gt;Pre-Process&lt;/h2&gt;
+&lt;ol class="arabic"&gt;
+&lt;li&gt;&lt;p class="first"&gt;The first step is always to get a local copy:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ git clone git&amp;#64;github.com:plone/Products.PloneOrg.git
+$ cd Products.PloneOrg
+$ cp buildout.cfg.in buildout.cfg
+&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Edit &lt;tt class="docutils literal"&gt;buildout.cfg&lt;/tt&gt; to extend the &lt;tt class="docutils literal"&gt;database.cfg&lt;/tt&gt;:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+[buildout]
+# Rename to buildout.cfg and uncomment one of the profiles below
+extends =
+
+# Plone only, unthemed
+#    conf/develop.cfg
+
+# Copy data local (with plone.org account)
+    conf/database.cfg
+
+# Production (for use on plone.org server)
+#    conf/production.cfg
+
+# Staging (for use on plone.org server)
+# and Deployment (for use by Jenkins, admins and developers),
+#   fabric can be added to any of primary configurations
+
+#    conf/staging.cfg
+#    conf/fabric.cfg
+
+# Developer Database Drop; makes developer-friendly copies
+# of plone.org's content.
+#    conf/devdrop.cfg
+&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Bootstrap and run Buildout:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ virtualenv-2.7 .
+$ bin/pip install zc.buildout
+$ bin/buildout
+&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Make the appropriate configuration changes i.e. change &lt;tt class="docutils literal"&gt;extends&lt;/tt&gt; from 4.2 to 4.3:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+[buildout]
+develop = .
+extends =
+    http://dist.plone.org/release/4.3.1/versions.cfg
+    versions.cfg
+    sources.cfg
+extensions =
+#    buildout.dumppickedversions
+    buildout.threatlevel
+    mr.developer
+
+versions = versions
+sources-dir = sources
+eggs =
+    Pillow
+    Products.PloneOrg
+    Products.PloneHotfix20130618
+
+# get us a user and group variable
+[env]
+recipe = gocept.recipe.env
+[grp]
+recipe = collective.recipe.grp
+&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Run the upgrade locally. With plone.org data this takes about 45 minutes to an hour &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[1]&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/upgrade.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/upgrade.png" /&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;If the upgrade succeeds, you are ready to launch. If it fails, fix the errors before proceeding.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class="section" id="process"&gt;
+&lt;h2&gt;Process&lt;/h2&gt;
+&lt;p&gt;We know from upgrading locally that the process will take about 45 minutes to an hour, so you should &lt;strong&gt;allocate about 2 hours to do the upgrade&lt;/strong&gt;.&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Announce the upgrade: preferably a week or two in advance. The plone-developers and plone-users lists are probably sufficient, but you can create a plone.org news item too if you are feeling extra-ambitious. I only had a small window to perform this maintenance, so I skipped this step and proceeded directly to the next one.&lt;/li&gt;
+&lt;li&gt;Add a status message to plone.org to indicate a maintenance window is in progress. I chose to customize the &lt;tt class="docutils literal"&gt;main_template&lt;/tt&gt; to accomplish this, but ideally we'd have some functionality in Plone that allowed site administrators to easily configure status messages.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/upgrade-message.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/upgrade-message.png" /&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Disable logins. Since the upgrade takes a long time, we don't want content being edited during this process. I chose to use David Glick's technique of disabling PAS. I moved the ldap authentication plugin to the Active Plugin list, thus disabling PAS such that only ZODB users could login. But ideally we'd have some feature in Plone to allow site administrators to disable logins.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/pas.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/pas.png" /&gt;
+&lt;ol class="arabic"&gt;
+&lt;li&gt;&lt;p class="first"&gt;Run the upgrade. I forgot to mention earlier something very important: &lt;strong&gt;On plone.org, you can't access Zope from the internet.&lt;/strong&gt; And you can't run the upgrade without accessing Zope. Hence run the following command to access the server, then access Plone via &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;http://localhost:8080&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ ssh -L 8080:10.57.0.107:5011 direct.plone.org
+&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;After the upgrade finishes, click around to make sure you didn't break anything. In my case, I broke something — I normally move &lt;tt class="docutils literal"&gt;portal_skins/custom&lt;/tt&gt; out of the way before upgrading, but this time I forgot. And when I experienced minor JavaScript issues, I forgot to examine custom; which currently looks like this:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/custom.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/custom.png" /&gt;
+&lt;p&gt;Even if I had remembered, I didn't want to spend the next few hours examining database customizations. Fortunately, before I realized I had forgotten to check custom, I emailed the plone-developers list —&amp;nbsp;and Nathan Van Gheem to the rescue! He fixed some JavaScript in custom, then I cleared the cache(s). Ideally Plone would report on database customizations during the upgrade process: to indicate the potential for breakage and encourage the site administrator to round-trip those customizations back to the file system.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="conclusion"&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;That's it! I hope this helps folks wrap their head around the plone.org upgrade process. A few closing thoughts:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;With Cloudflare in front, we probably don't need Varnish anymore.&lt;/li&gt;
+&lt;li&gt;Leaving a note in &lt;tt class="docutils literal"&gt;portal_skins/custom&lt;/tt&gt; to encourage folks to &amp;quot;please keep area clean&amp;quot; — does not work.&lt;/li&gt;
+&lt;li&gt;plone.com anyone? I don't know the future of plone.org and I have mixed feelings about it: on the one hand, I'm proud to help maintain such an old and venerable system. On the other hand, I think plone.org should be retired in a way similar to old.zope.org. What do you think?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;It shouldn't take this long. See: &lt;a class="reference external" href="https://github.com/plone/Products.PloneOrg/commit/b04105f7c9cacf3880c12effba5ffe261d4b5163#commitcomment-3384259"&gt;https://github.com/plone/Products.PloneOrg/commit/b04105f7c9cacf3880c12effba5ffe261d4b5163#commitcomment-3384259&lt;/a&gt; for a discussion about this issue.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+</summary><category term="Plone"></category><category term="Python"></category></entry><entry><title>New Pyramid Site</title><link href="http://aclark.net/blog/2013/04/22/new-pyramid-site/" rel="alternate"></link><updated>2013-04-22T12:00:00-04:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-04-22:2013/04/22/new-pyramid-site/</id><summary type="html">&lt;img alt="https://raw.github.com/ACLARKNET/aclarknet/master/screenshot.png" src="https://raw.github.com/ACLARKNET/aclarknet/master/screenshot.png" style="width: 98%;" /&gt;
 &lt;p&gt;For the first time in 10 years, &lt;a class="reference external" href="http://aclark.net"&gt;aclark.net&lt;/a&gt; is not powered by Plone. Nothing against Plone: it's still one of the greatest loves of my life (inasmuch as you can love a software and community, as I do).&lt;/p&gt;
 &lt;div class="section" id="why"&gt;
 &lt;h2&gt;Why&lt;/h2&gt;
@@ -647,35 +775,4 @@ If the implementation is hard to explain, it queries the bad idea utility.
 If the implementation is easy to explain, it may query the good idea utility.
 Implicit namespace packages are one honking great idea -- let's do more of those!
 &lt;/pre&gt;
-</summary><category term="Plone"></category><category term="Python"></category></entry><entry><title>Plone Guide</title><link href="http://aclark.net/blog/2012/11/23/plone-guide/" rel="alternate"></link><updated>2012-11-23T08:30:00-05:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2012-11-23:2012/11/23/plone-guide/</id><summary type="html">&lt;div class="section" id="who"&gt;
-&lt;h2&gt;Who&lt;/h2&gt;
-&lt;p&gt;For anyone new to my blog, welcome. I am Alex Clark: Python Web Developer.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="what"&gt;
-&lt;h2&gt;What&lt;/h2&gt;
-&lt;p&gt;Recently with a tweet, I announced the start of a new personal project:&lt;/p&gt;
-&lt;img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/tweet.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/tweet.png" /&gt;
-&lt;/div&gt;
-&lt;div class="section" id="when"&gt;
-&lt;h2&gt;When&lt;/h2&gt;
-&lt;p&gt;I have tentatively scheduled this project to be completed by the end of 2013, because it's important to set a deadline.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="where"&gt;
-&lt;h2&gt;Where&lt;/h2&gt;
-&lt;p&gt;This project will be hosted on one of my current favorite websites: &lt;a class="reference external" href="http://readthedocs.org"&gt;http://readthedocs.org&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="why"&gt;
-&lt;h2&gt;Why&lt;/h2&gt;
-&lt;p&gt;I think about Plone a lot as it relates to my current professional work. And I have more thoughts than I can currently keep track of in blogs, tweets, etc. So I decided to make an effort to write them all down.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="how"&gt;
-&lt;h2&gt;How&lt;/h2&gt;
-&lt;p&gt;I think a lot about what other people think about Plone, so I decided this book will feature comments from the general public in it. E.g.:&lt;/p&gt;
-&lt;img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/comments.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/comments.png" /&gt;
-&lt;/div&gt;
-&lt;div class="section" id="how-much"&gt;
-&lt;h2&gt;How much?&lt;/h2&gt;
-&lt;p&gt;This book will be free. But if you'd like to support its development, please &lt;a class="reference external" href="http://gittip.com/aclark4life"&gt;gittip me&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;There's not much to it yet, but feel free to head over and add some comments: &lt;a class="reference external" href="https://plone-guide.readthedocs.org/en/latest/"&gt;https://plone-guide.readthedocs.org/en/latest/&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
 </summary><category term="Plone"></category><category term="Python"></category></entry></feed>

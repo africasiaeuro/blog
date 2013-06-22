@@ -3,18 +3,18 @@
 <head>
         <title>Alex Clark - Python Web Developer</title>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+        <link rel="stylesheet" href="http://aclark.net/blog/theme/css/main.css" type="text/css" />
                 <link href="http://aclark.net/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Alex Clark - Python Web Developer Atom Feed" />
                 
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
         <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="./css/ie.css"/>
-                <script src="./js/IE8.js" type="text/javascript"></script><![endif]-->
+                <link rel="stylesheet" type="text/css" media="all" href="http://aclark.net/blog/css/ie.css"/>
+                <script src="http://aclark.net/blog/js/IE8.js" type="text/javascript"></script><![endif]-->
 
         <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="./css/ie6.css"/><![endif]-->
+                <link rel="stylesheet" type="text/css" media="all" href="http://aclark.net/blog/css/ie6.css"/><![endif]-->
 
 </head>
 
@@ -23,9 +23,9 @@
 <img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
 </a>
         <header id="banner" class="body">
-                <h1><a href=".">Alex Clark - Python Web Developer </a></h1>
+                <h1><a href="http://aclark.net/blog">Alex Clark - Python Web Developer </a></h1>
                 <nav><ul>
-                                                                                                    <li ><a href="./category/blog.html">Blog</a></li>
+                                                                                                    <li ><a href="http://aclark.net/blog/category/blog.html">Blog</a></li>
                                 </ul></nav>
         </header><!-- /#banner -->
                 
@@ -33,222 +33,145 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./2013/04/22/new-pyramid-site/">New Pyramid Site</a></h1> 
+                    <h1 class="entry-title"><a href="http://aclark.net/blog/2013/06/22/ploneorg-upgraded/">Plone.org upgraded</a></h1> 
                     <footer class="post-info">
-        <abbr class="published" title="2013-04-22T12:00:00">
-                Mon 22 April 2013
+        <abbr class="published" title="2013-06-22T00:00:00">
+                Sat 22 June 2013
         </abbr>
 
                 <address class="vcard author">
-                By <a class="url fn" href="./author/aclark.html">aclark</a>
+                By <a class="url fn" href="http://aclark.net/blog/author/aclark.html">aclark</a>
         </address>
-        <p>In <a href="./category/blog.html">Blog</a>. </p>
-<p>tags: <a href="./tag/django.html">Django</a><a href="./tag/mozilla.html">Mozilla</a><a href="./tag/plone.html">Plone</a><a href="./tag/python.html">Python</a></p></footer><!-- /.post-info --><img alt="https://raw.github.com/ACLARKNET/aclarknet/master/screenshot.png" src="https://raw.github.com/ACLARKNET/aclarknet/master/screenshot.png" style="width: 98%;" />
-<p>For the first time in 10 years, <a class="reference external" href="http://aclark.net">aclark.net</a> is not powered by Plone. Nothing against Plone: it's still one of the greatest loves of my life (inasmuch as you can love a software and community, as I do).</p>
-<div class="section" id="why">
-<h2>Why</h2>
-<p>This was not the result of a revolutionary plan, rather more of an evolution. It happened like this:</p>
-<ul class="simple">
-<li>As soon as Plone 4.3a1 was released (a year ago?) I deployed a new Plone site to aclark.net with it, featuring a <strong>Diazo</strong> (new Plone theming engine) theme.</li>
-<li>Around the same time I became obsessed with deploying to Heroku, and also gained an interest in <strong>Python 3</strong>.</li>
-<li>A few months ago, I got tired of paying $11/month to host my Plone site so I converted the site to <strong>static HTML</strong> and moved it to <strong>GitHub pages</strong>. But the result was flawed because maintenance involved editing duplicate copies of the website content (e.g. both clients.html and clients/foo.html contained the same text describing &quot;foo&quot;).</li>
-</ul>
-<p>So when it came time to do more than a few casual edits, I knew I had to find a new approach. That's when various elements of the Universe conspired to lead me in a new direction.</p>
+        <p>In <a href="http://aclark.net/blog/category/blog.html">Blog</a>. </p>
+<p>tags: <a href="http://aclark.net/blog/tag/plone.html">Plone</a><a href="http://aclark.net/blog/tag/python.html">Python</a></p></footer><!-- /.post-info --><p>Recently at the behest of Liz Leddy, I <a class="reference external" href="https://github.com/plone/Products.PloneOrg/commit/b04105f7c9cacf3880c12effba5ffe261d4b5163">upgraded plone.org from Plone 4.2 to Plone 4.3</a>. It's been a while since I had the pleasure, so I thought I'd make some notes: for myself, the AI Team and anyone else interested in the process.</p>
+<div class="section" id="background">
+<h2>Background</h2>
+<ol class="arabic simple">
+<li>Plone.org is one of the <strong>oldest Plone sites in existence</strong>, having been launched circa Plone 1 and upgraded in place ever since.</li>
+<li>It functions remarkably well, given #1.</li>
+<li>It's not without its issues, but all of them are manageable —&nbsp;for some value of manageable.</li>
+<li>It's often very time consuming to work on.</li>
+</ol>
 </div>
-<div class="section" id="how">
-<h2>How</h2>
-<div class="section" id="pyramid">
-<h3>Pyramid</h3>
-<p>I spent a lot of time (~ 1 year) developing <a class="reference external" href="http://pythonpackages.com">pythonpackages.com</a> in Pyramid, but the result was a mess (code-wise). I'm in the process of rewriting and open sourcing it, but it's slow going. So what better way to get started than to do a small-ish site in Pyramid for fun?</p>
-</div>
-<div class="section" id="about-me">
-<h3>about.me</h3>
-<p>I also recently gave in and created an <a class="reference external" href="http://about.me/alex.clark">about.me site</a>. I was impressed by their content editing features, and my ability to create a page that looked OK using them.</p>
-<p>In my about.me profile, I used a picture of me and a picture of DC I took in early 2012. When it came time to redo aclark.net I felt like I really wanted to capture the simplicity of the about.me site, so I used the same photo in the background.</p>
-</div>
-<div class="section" id="bootstrap">
-<h3>Bootstrap</h3>
-<p>Bootstrap is old news at this point, but I really enjoy using it and I particularly like that they have added more example templates. So I combined my background photo with one of <a class="reference external" href="http://twitter.github.io/bootstrap/getting-started.html#examples">their example templates</a> and a new site idea was born. As I'm not a particularly talented visual artist, my ability to produce something that looked OK (with code this time) was exciting.</p>
-</div>
-</div>
-<div class="section" id="what">
-<h2>What</h2>
-<p>Until I added a contact form, the site was entirely unremarkable. There are views and routes and templates, typical fare for a web framework. Here is the entire &quot;main routine&quot;:</p>
+<div class="section" id="pre-process">
+<h2>Pre-Process</h2>
+<ol class="arabic">
+<li><p class="first">The first step is always to get a local copy:</p>
 <pre class="literal-block">
-from pyramid.session import UnencryptedCookieSessionFactoryConfig
-from pyramid.config import Configurator
-from .redir import blog
-from .redir import blog_entry
-from .redir import blog_slash
-from .views import contact
-from .views import default
-import deform_bootstrap
-
-
-def main(global_config, **settings):
-    &quot;&quot;&quot;
-    Oppan wsgi style! Configure and return WSGI application.
-    &quot;&quot;&quot;
-    my_session_factory = UnencryptedCookieSessionFactoryConfig('itsaseekreet')
-    config = Configurator(session_factory=my_session_factory)
-    config.add_route('blog', '/blog')
-    config.add_route('blog_entry', '/blog/{entry:.*}')
-    config.add_route('blog_slash', '/blog/')
-    config.add_route('contact', '/contact')
-    config.add_route('clients', '/clients')
-    config.add_route('projects', '/projects')
-    config.add_route('services', '/services')
-    config.add_route('team', '/team')
-    config.add_route('testimonials', '/testimonials')
-    config.add_route('root', '/')
-    config.add_static_view(
-        'static', 'aclarknet:static', cache_max_age=3600)
-    config.add_view(blog, route_name='blog')
-    config.add_view(blog_entry, route_name='blog_entry')
-    config.add_view(blog_slash, route_name='blog_slash')
-    config.add_view(
-        default,
-        renderer='aclarknet:templates/clients.mak',
-        route_name='clients')
-    config.add_view(
-        contact,
-        renderer='aclarknet:templates/contact.mak',
-        route_name='contact')
-    config.add_view(
-        default,
-        renderer='aclarknet:templates/projects.mak',
-        route_name='projects')
-    config.add_view(
-        default,
-        renderer='aclarknet:templates/root.mak',
-        route_name='root')
-    config.add_view(
-        default,
-        renderer='aclarknet:templates/services.mak',
-        route_name='services')
-    config.add_view(
-        default,
-        renderer='aclarknet:templates/testimonials.mak',
-        route_name='testimonials')
-    config.add_view(
-        default,
-        renderer='aclarknet:templates/team.mak',
-        route_name='team')
-    config.include(deform_bootstrap)
-    return config.make_wsgi_app()
+$ git clone git&#64;github.com:plone/Products.PloneOrg.git
+$ cd Products.PloneOrg
+$ cp buildout.cfg.in buildout.cfg
 </pre>
-<div class="section" id="contact-form">
-<h3>Contact form</h3>
-<p>But then I wanted a contact form. Which lead me to wanting an elegant way to send mail via Heroku. Which lead me to discover <a class="reference external" href="http://sendgrid.com/">SendGrid</a>. Which lead me create some primitive marketing features I am quite proud of and excited about.</p>
-<p>I still ended up sending mail &quot;the old way&quot; via GMail. But now I send two mails: one to <a class="reference external" href="mailto:info&#64;aclark.net">info&#64;aclark.net</a> to alert our staff about the lead (using GMail). And one to the lead acknowledging their submission (using SendGrid). SendGrid keeps a record of all the leads we've contacted, amongst other &quot;fancy marketing features&quot;. Here's the relevant view code:</p>
+</li>
+<li><p class="first">Edit <tt class="docutils literal">buildout.cfg</tt> to extend the <tt class="docutils literal">database.cfg</tt>:</p>
 <pre class="literal-block">
-import deform
-import smtplib
+[buildout]
+# Rename to buildout.cfg and uncomment one of the profiles below
+extends =
 
-from email.mime.text import MIMEText
+# Plone only, unthemed
+#    conf/develop.cfg
 
-from .config import FORM_ERROR
-from .config import FORM_SUCCESS
+# Copy data local (with plone.org account)
+    conf/database.cfg
 
-from .config import MIME_ONE_RECIPIENT
-from .config import MIME_ONE_SUBJECT
-from .config import MIME_TWO_MESSAGE
-from .config import MIME_TWO_SUBJECT
+# Production (for use on plone.org server)
+#    conf/production.cfg
 
-from .config import GMAIL_HOSTNAME
-from .config import GMAIL_PASSWORD
-from .config import GMAIL_USERNAME
+# Staging (for use on plone.org server)
+# and Deployment (for use by Jenkins, admins and developers),
+#   fabric can be added to any of primary configurations
 
-from .config import SENDGRID_HOSTNAME
-from .config import SENDGRID_PASSWORD
-from .config import SENDGRID_USERNAME
+#    conf/staging.cfg
+#    conf/fabric.cfg
 
-from .forms import ContactFormSchema
-
-
-def contact(request):
-    &quot;&quot;&quot;
-    Create and render deform form containing colander schema. Provide
-    sendgrid integration for marketing.
-    &quot;&quot;&quot;
-    button = deform.Button('Send', css_class='span9 btn-block btn-large')
-    schema = ContactFormSchema().bind(request=request)
-    form = deform.Form(schema, buttons=(button, ))
-    if 'Send' in request.POST:
-        items = request.POST.items()
-        try:
-            appstruct = form.validate(items)
-        except deform.ValidationFailure:
-            return {
-                'form': form.render(),
-                'request': request,
-            }
-        # This is the form contents
-        email = appstruct['email']
-        message = appstruct['message']
-
-        # This is the mail to info&#64;aclark.net
-        mime_document_one = MIMEText(message)
-        mime_document_one['Subject'] = MIME_ONE_SUBJECT
-        mime_document_one['To'] = MIME_ONE_RECIPIENT
-        mime_document_one['From'] = email
-        mime_document_one = mime_document_one.as_string()
-
-        # This is the mail to the new lead
-        mime_document_two = MIMEText(MIME_TWO_MESSAGE)
-        mime_document_two['Subject'] = MIME_TWO_SUBJECT
-        mime_document_two['To'] = email
-        mime_document_two['From'] = MIME_ONE_RECIPIENT
-        mime_document_two = mime_document_two.as_string()
-
-        try:
-            # This is the mail to info&#64;aclark.net
-            smtp_server = smtplib.SMTP(GMAIL_HOSTNAME)
-            smtp_server.starttls()
-            smtp_server.login(GMAIL_USERNAME, GMAIL_PASSWORD)
-            smtp_server.sendmail(email, MIME_ONE_RECIPIENT, mime_document_one)
-            smtp_server.quit()
-
-            # This is the mail to the new lead
-            smtp_server = smtplib.SMTP(SENDGRID_HOSTNAME)
-            smtp_server.starttls()
-            smtp_server.login(SENDGRID_USERNAME, SENDGRID_PASSWORD)
-            smtp_server.sendmail(MIME_ONE_RECIPIENT, email, mime_document_two)
-            smtp_server.quit()
-            request.session.flash(FORM_SUCCESS)
-        except:
-            request.session.flash(FORM_ERROR, 'errors')
-        return {
-            'form': form.render(appstruct={}),
-            'request': request,
-        }
-    return {
-        'form': form.render(),
-        'request': request,
-    }
-
-
-def default(request):
-    &quot;&quot;&quot;
-    This is the default view, to be used with most routes since we do not
-    provide any content editing ability yet. Even then, maybe a default view
-    would still be helpful.
-    &quot;&quot;&quot;
-    return {}
+# Developer Database Drop; makes developer-friendly copies
+# of plone.org's content.
+#    conf/devdrop.cfg
 </pre>
+</li>
+<li><p class="first">Bootstrap and run Buildout:</p>
+<pre class="literal-block">
+$ virtualenv-2.7 .
+$ bin/pip install zc.buildout
+$ bin/buildout
+</pre>
+</li>
+<li><p class="first">Make the appropriate configuration changes i.e. change <tt class="docutils literal">extends</tt> from 4.2 to 4.3:</p>
+<pre class="literal-block">
+[buildout]
+develop = .
+extends =
+    http://dist.plone.org/release/4.3.1/versions.cfg
+    versions.cfg
+    sources.cfg
+extensions =
+#    buildout.dumppickedversions
+    buildout.threatlevel
+    mr.developer
+
+versions = versions
+sources-dir = sources
+eggs =
+    Pillow
+    Products.PloneOrg
+    Products.PloneHotfix20130618
+
+# get us a user and group variable
+[env]
+recipe = gocept.recipe.env
+[grp]
+recipe = collective.recipe.grp
+</pre>
+</li>
+<li><p class="first">Run the upgrade locally. With plone.org data this takes about 45 minutes to an hour <a class="footnote-reference" href="#id2" id="id1">[1]</a>.</p>
+</li>
+</ol>
+<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/upgrade.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/upgrade.png" />
+<ol class="arabic simple">
+<li>If the upgrade succeeds, you are ready to launch. If it fails, fix the errors before proceeding.</li>
+</ol>
 </div>
+<div class="section" id="process">
+<h2>Process</h2>
+<p>We know from upgrading locally that the process will take about 45 minutes to an hour, so you should <strong>allocate about 2 hours to do the upgrade</strong>.</p>
+<ol class="arabic simple">
+<li>Announce the upgrade: preferably a week or two in advance. The plone-developers and plone-users lists are probably sufficient, but you can create a plone.org news item too if you are feeling extra-ambitious. I only had a small window to perform this maintenance, so I skipped this step and proceeded directly to the next one.</li>
+<li>Add a status message to plone.org to indicate a maintenance window is in progress. I chose to customize the <tt class="docutils literal">main_template</tt> to accomplish this, but ideally we'd have some functionality in Plone that allowed site administrators to easily configure status messages.</li>
+</ol>
+<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/upgrade-message.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/upgrade-message.png" />
+<ol class="arabic simple">
+<li>Disable logins. Since the upgrade takes a long time, we don't want content being edited during this process. I chose to use David Glick's technique of disabling PAS. I moved the ldap authentication plugin to the Active Plugin list, thus disabling PAS such that only ZODB users could login. But ideally we'd have some feature in Plone to allow site administrators to disable logins.</li>
+</ol>
+<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/pas.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/pas.png" />
+<ol class="arabic">
+<li><p class="first">Run the upgrade. I forgot to mention earlier something very important: <strong>On plone.org, you can't access Zope from the internet.</strong> And you can't run the upgrade without accessing Zope. Hence run the following command to access the server, then access Plone via <tt class="docutils literal"><span class="pre">http://localhost:8080</span></tt>:</p>
+<pre class="literal-block">
+$ ssh -L 8080:10.57.0.107:5011 direct.plone.org
+</pre>
+</li>
+<li><p class="first">After the upgrade finishes, click around to make sure you didn't break anything. In my case, I broke something — I normally move <tt class="docutils literal">portal_skins/custom</tt> out of the way before upgrading, but this time I forgot. And when I experienced minor JavaScript issues, I forgot to examine custom; which currently looks like this:</p>
+</li>
+</ol>
+<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/custom.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/custom.png" />
+<p>Even if I had remembered, I didn't want to spend the next few hours examining database customizations. Fortunately, before I realized I had forgotten to check custom, I emailed the plone-developers list —&nbsp;and Nathan Van Gheem to the rescue! He fixed some JavaScript in custom, then I cleared the cache(s). Ideally Plone would report on database customizations during the upgrade process: to indicate the potential for breakage and encourage the site administrator to round-trip those customizations back to the file system.</p>
 </div>
-<div class="section" id="who-cares">
-<h2>Who cares</h2>
-<p>The best thing about all of this being able to run the site <strong>100% for free on Heroku</strong>. Also:</p>
+<div class="section" id="conclusion">
+<h2>Conclusion</h2>
+<p>That's it! I hope this helps folks wrap their head around the plone.org upgrade process. A few closing thoughts:</p>
 <ul class="simple">
-<li>Python 3 compat!</li>
-<li>Free caching via CloudFlare</li>
-<li>Free ping service from Pingdom keeps the site from &quot;going to sleep&quot; (HT: natea).</li>
-<li>Updating the site fits my workflow. If I'm the content editor, I don't necessarily need or want to use Plone to edit my content. I can save Plone for my clients, and focus on <strong>what makes them happy</strong> with their CMS system.</li>
+<li>With Cloudflare in front, we probably don't need Varnish anymore.</li>
+<li>Leaving a note in <tt class="docutils literal">portal_skins/custom</tt> to encourage folks to &quot;please keep area clean&quot; — does not work.</li>
+<li>plone.com anyone? I don't know the future of plone.org and I have mixed feelings about it: on the one hand, I'm proud to help maintain such an old and venerable system. On the other hand, I think plone.org should be retired in a way similar to old.zope.org. What do you think?</li>
 </ul>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>It shouldn't take this long. See: <a class="reference external" href="https://github.com/plone/Products.PloneOrg/commit/b04105f7c9cacf3880c12effba5ffe261d4b5163#commitcomment-3384259">https://github.com/plone/Products.PloneOrg/commit/b04105f7c9cacf3880c12effba5ffe261d4b5163#commitcomment-3384259</a> for a discussion about this issue.</td></tr>
+</tbody>
+</table>
 </div>
-<p>There are <a href="./2013/04/22/new-pyramid-site/#disqus_thread">comments</a>.</p>                </article>
+<p>There are <a href="http://aclark.net/blog/2013/06/22/ploneorg-upgraded/#disqus_thread">comments</a>.</p>                </article>
                             </aside><!-- /#featured -->
                             <section id="content" class="body">
                     <h1>Other articles</h1>
@@ -259,7 +182,34 @@ def default(request):
                  
                         <li><article class="hentry">    
                 <header>
-                    <h1><a href="./2013/03/15/the-story-of-pillow/" rel="bookmark"
+                    <h1><a href="http://aclark.net/blog/2013/04/22/new-pyramid-site/" rel="bookmark"
+                           title="Permalink to New Pyramid Site">New Pyramid Site</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2013-04-22T12:00:00">
+                Mon 22 April 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://aclark.net/blog/author/aclark.html">aclark</a>
+        </address>
+        <p>In <a href="http://aclark.net/blog/category/blog.html">Blog</a>. </p>
+<p>tags: <a href="http://aclark.net/blog/tag/django.html">Django</a><a href="http://aclark.net/blog/tag/mozilla.html">Mozilla</a><a href="http://aclark.net/blog/tag/plone.html">Plone</a><a href="http://aclark.net/blog/tag/python.html">Python</a></p></footer><!-- /.post-info -->                <img alt="https://raw.github.com/ACLARKNET/aclarknet/master/screenshot.png" src="https://raw.github.com/ACLARKNET/aclarknet/master/screenshot.png" style="width: 98%;" />
+<p>For the first time in 10 years, <a class="reference external" href="http://aclark.net">aclark.net</a> is not powered by Plone. Nothing against Plone: it's still one of the greatest loves of my life (inasmuch as you can love a software and community, as I do).</p>
+<div class="section" id="why">
+<h2>Why</h2>
+<p>This was not the result of a revolutionary plan ...</p></div>
+                <a class="readmore" href="http://aclark.net/blog/2013/04/22/new-pyramid-site/">read more</a>
+                <p>There are <a href="http://aclark.net/blog/2013/04/22/new-pyramid-site/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://aclark.net/blog/2013/03/15/the-story-of-pillow/" rel="bookmark"
                            title="Permalink to The Story of Pillow">The Story of Pillow</a></h1>
                 </header>
                 
@@ -270,21 +220,21 @@ def default(request):
         </abbr>
 
                 <address class="vcard author">
-                By <a class="url fn" href="./author/aclark.html">aclark</a>
+                By <a class="url fn" href="http://aclark.net/blog/author/aclark.html">aclark</a>
         </address>
-        <p>In <a href="./category/blog.html">Blog</a>. </p>
-<p>tags: <a href="./tag/django.html">Django</a><a href="./tag/plone.html">Plone</a><a href="./tag/python.html">Python</a></p></footer><!-- /.post-info -->                <p>On March 4, 2013 I got an email from the Python Software Foundation (PSF):</p>
+        <p>In <a href="http://aclark.net/blog/category/blog.html">Blog</a>. </p>
+<p>tags: <a href="http://aclark.net/blog/tag/django.html">Django</a><a href="http://aclark.net/blog/tag/plone.html">Plone</a><a href="http://aclark.net/blog/tag/python.html">Python</a></p></footer><!-- /.post-info -->                <p>On March 4, 2013 I got an email from the Python Software Foundation (PSF):</p>
 <blockquote>
 This email notification is being sent to you to inform you of the PSF Board’s decision to fund the facilitation of a Python 3 compatible release of the Python Imaging Library for the amount of ...</blockquote>
-                <a class="readmore" href="./2013/03/15/the-story-of-pillow/">read more</a>
-                <p>There are <a href="./2013/03/15/the-story-of-pillow/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+                <a class="readmore" href="http://aclark.net/blog/2013/03/15/the-story-of-pillow/">read more</a>
+                <p>There are <a href="http://aclark.net/blog/2013/03/15/the-story-of-pillow/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                             
 
                  
                         <li><article class="hentry">    
                 <header>
-                    <h1><a href="./2013/02/23/trading-places-trading-scene-explained/" rel="bookmark"
+                    <h1><a href="http://aclark.net/blog/2013/02/23/trading-places-trading-scene-explained/" rel="bookmark"
                            title="Permalink to Trading Places Trading Scene Explained">Trading Places Trading Scene Explained</a></h1>
                 </header>
                 
@@ -295,19 +245,19 @@ This email notification is being sent to you to inform you of the PSF Board’s 
         </abbr>
 
                 <address class="vcard author">
-                By <a class="url fn" href="./author/aclark.html">aclark</a>
+                By <a class="url fn" href="http://aclark.net/blog/author/aclark.html">aclark</a>
         </address>
-        <p>In <a href="./category/blog.html">Blog</a>. </p>
+        <p>In <a href="http://aclark.net/blog/category/blog.html">Blog</a>. </p>
 </footer><!-- /.post-info -->                <p>Every time I watch the movie <a class="reference external" href="http://www.imdb.com/title/tt0086465">Trading Places</a>, I have to search the internet for an explanation of the climactic commodities trading scene. It usually takes me about 20 minutes to (re-)understand it, then another 10 minutes to explain it to my wife. Although there are <a class="reference external" href="http://www.wisebread.com/explaining-the-climax-scene-of-trading-places">plenty</a> <a class="reference external" href="http://www.popmodal.com/video/1277/Trading-Places-Final-Exchange-Scene-amp-Explanation">of</a> <a class="reference external" href="http://www.dangerouslogic.com/trading_places.html">great ...</a></p>
-                <a class="readmore" href="./2013/02/23/trading-places-trading-scene-explained/">read more</a>
-                <p>There are <a href="./2013/02/23/trading-places-trading-scene-explained/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+                <a class="readmore" href="http://aclark.net/blog/2013/02/23/trading-places-trading-scene-explained/">read more</a>
+                <p>There are <a href="http://aclark.net/blog/2013/02/23/trading-places-trading-scene-explained/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                             
 
                  
                         <li><article class="hentry">    
                 <header>
-                    <h1><a href="./2013/02/23/built-with-plone-powered-by-github-pages/" rel="bookmark"
+                    <h1><a href="http://aclark.net/blog/2013/02/23/built-with-plone-powered-by-github-pages/" rel="bookmark"
                            title="Permalink to Built with Plone, Powered by GitHub Pages">Built with Plone, Powered by GitHub Pages</a></h1>
                 </header>
                 
@@ -318,22 +268,22 @@ This email notification is being sent to you to inform you of the PSF Board’s 
         </abbr>
 
                 <address class="vcard author">
-                By <a class="url fn" href="./author/aclark.html">aclark</a>
+                By <a class="url fn" href="http://aclark.net/blog/author/aclark.html">aclark</a>
         </address>
-        <p>In <a href="./category/blog.html">Blog</a>. </p>
-<p>tags: <a href="./tag/plone.html">Plone</a></p></footer><!-- /.post-info -->                <p>Is Plone the next great static website generator? Probably not, but it definitely could be</p>
+        <p>In <a href="http://aclark.net/blog/category/blog.html">Blog</a>. </p>
+<p>tags: <a href="http://aclark.net/blog/tag/plone.html">Plone</a></p></footer><!-- /.post-info -->                <p>Is Plone the next great static website generator? Probably not, but it definitely could be</p>
 <p>I am always looking for ways to improve, streamline and otherwise hack my e-life. And this post is about all of the above.
 <a class="reference external" href="https://raw.github.com/ACLARKNET/blog/gh-pages/images/httrack.png">https://raw.github.com/ACLARKNET/blog/gh-pages/images/httrack.png</a>
 Plone in ...</p>
-                <a class="readmore" href="./2013/02/23/built-with-plone-powered-by-github-pages/">read more</a>
-                <p>There are <a href="./2013/02/23/built-with-plone-powered-by-github-pages/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+                <a class="readmore" href="http://aclark.net/blog/2013/02/23/built-with-plone-powered-by-github-pages/">read more</a>
+                <p>There are <a href="http://aclark.net/blog/2013/02/23/built-with-plone-powered-by-github-pages/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                             
 
                  
                         <li><article class="hentry">    
                 <header>
-                    <h1><a href="./2013/02/08/i-love-checkoutmanager-and-dotfiles/" rel="bookmark"
+                    <h1><a href="http://aclark.net/blog/2013/02/08/i-love-checkoutmanager-and-dotfiles/" rel="bookmark"
                            title="Permalink to I love checkoutmanager and dotfiles">I love checkoutmanager and dotfiles</a></h1>
                 </header>
                 
@@ -344,23 +294,23 @@ Plone in ...</p>
         </abbr>
 
                 <address class="vcard author">
-                By <a class="url fn" href="./author/aclark.html">aclark</a>
+                By <a class="url fn" href="http://aclark.net/blog/author/aclark.html">aclark</a>
         </address>
-        <p>In <a href="./category/blog.html">Blog</a>. </p>
-<p>tags: <a href="./tag/django.html">Django</a><a href="./tag/mozilla.html">Mozilla</a><a href="./tag/plone.html">Plone</a><a href="./tag/python.html">Python</a></p></footer><!-- /.post-info -->                <p><em>An ode to my OS X development workstation setup</em> <a class="footnote-reference" href="#id11" id="id1">[1]</a></p>
+        <p>In <a href="http://aclark.net/blog/category/blog.html">Blog</a>. </p>
+<p>tags: <a href="http://aclark.net/blog/tag/django.html">Django</a><a href="http://aclark.net/blog/tag/mozilla.html">Mozilla</a><a href="http://aclark.net/blog/tag/plone.html">Plone</a><a href="http://aclark.net/blog/tag/python.html">Python</a></p></footer><!-- /.post-info -->                <p><em>An ode to my OS X development workstation setup</em> <a class="footnote-reference" href="#id11" id="id1">[1]</a></p>
 <p>I am big on setting up my development environment, and enjoying the environment I work in. And I'm very thankful to the folks who make my life easier, including the authors of:</p>
 <ul class="simple">
 <li><a class="reference external" href="http://www.ohloh.net/p/python/contributors/summary">Python</a>: Python Core Developers</li>
 <li><a class="reference external" href="http://pypi.python.org/pypi/dotfiles">dotfiles</a>: Jon Bernard ...</li></ul>
-                <a class="readmore" href="./2013/02/08/i-love-checkoutmanager-and-dotfiles/">read more</a>
-                <p>There are <a href="./2013/02/08/i-love-checkoutmanager-and-dotfiles/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+                <a class="readmore" href="http://aclark.net/blog/2013/02/08/i-love-checkoutmanager-and-dotfiles/">read more</a>
+                <p>There are <a href="http://aclark.net/blog/2013/02/08/i-love-checkoutmanager-and-dotfiles/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                             
 
                  
                         <li><article class="hentry">    
                 <header>
-                    <h1><a href="./2013/01/31/please-help-me-do-open-source-work/" rel="bookmark"
+                    <h1><a href="http://aclark.net/blog/2013/01/31/please-help-me-do-open-source-work/" rel="bookmark"
                            title="Permalink to Please Help Me Do Open Source Work">Please Help Me Do Open Source Work</a></h1>
                 </header>
                 
@@ -371,23 +321,23 @@ Plone in ...</p>
         </abbr>
 
                 <address class="vcard author">
-                By <a class="url fn" href="./author/aclark.html">aclark</a>
+                By <a class="url fn" href="http://aclark.net/blog/author/aclark.html">aclark</a>
         </address>
-        <p>In <a href="./category/blog.html">Blog</a>. </p>
-<p>tags: <a href="./tag/django.html">Django</a><a href="./tag/mozilla.html">Mozilla</a><a href="./tag/plone.html">Plone</a><a href="./tag/python.html">Python</a></p></footer><!-- /.post-info -->                <p><em>From my 'mid-life-crisis' series of blog entries :-)</em></p>
+        <p>In <a href="http://aclark.net/blog/category/blog.html">Blog</a>. </p>
+<p>tags: <a href="http://aclark.net/blog/tag/django.html">Django</a><a href="http://aclark.net/blog/tag/mozilla.html">Mozilla</a><a href="http://aclark.net/blog/tag/plone.html">Plone</a><a href="http://aclark.net/blog/tag/python.html">Python</a></p></footer><!-- /.post-info -->                <p><em>From my 'mid-life-crisis' series of blog entries :-)</em></p>
 <img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/open-source-work.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/open-source-work.png" />
 <div class="section" id="open-source-work">
 <h2>Open Source Work</h2>
 <p><strong>Open Source Work</strong> has paid my bills for a long time. Starting with <a class="reference external" href="http://plone.org">Plone</a> in the early 2000s, to <a class="reference external" href="http://djangoproject.com">Django</a> in the early 2010s, to now. And for this, I am very grateful. To be clear: it's not exactly ...</p></div>
-                <a class="readmore" href="./2013/01/31/please-help-me-do-open-source-work/">read more</a>
-                <p>There are <a href="./2013/01/31/please-help-me-do-open-source-work/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+                <a class="readmore" href="http://aclark.net/blog/2013/01/31/please-help-me-do-open-source-work/">read more</a>
+                <p>There are <a href="http://aclark.net/blog/2013/01/31/please-help-me-do-open-source-work/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                             
 
                  
                         <li><article class="hentry">    
                 <header>
-                    <h1><a href="./2013/01/10/python-3-porting/" rel="bookmark"
+                    <h1><a href="http://aclark.net/blog/2013/01/10/python-3-porting/" rel="bookmark"
                            title="Permalink to Python 3 Porting">Python 3 Porting</a></h1>
                 </header>
                 
@@ -398,25 +348,25 @@ Plone in ...</p>
         </abbr>
 
                 <address class="vcard author">
-                By <a class="url fn" href="./author/aclark.html">aclark</a>
+                By <a class="url fn" href="http://aclark.net/blog/author/aclark.html">aclark</a>
         </address>
-        <p>In <a href="./category/blog.html">Blog</a>. </p>
-<p>tags: <a href="./tag/django.html">Django</a><a href="./tag/mozilla.html">Mozilla</a><a href="./tag/plone.html">Plone</a><a href="./tag/python.html">Python</a></p></footer><!-- /.post-info -->                <p><em>The 3 in 2013 is for Python 3</em></p>
+        <p>In <a href="http://aclark.net/blog/category/blog.html">Blog</a>. </p>
+<p>tags: <a href="http://aclark.net/blog/tag/django.html">Django</a><a href="http://aclark.net/blog/tag/mozilla.html">Mozilla</a><a href="http://aclark.net/blog/tag/plone.html">Plone</a><a href="http://aclark.net/blog/tag/python.html">Python</a></p></footer><!-- /.post-info -->                <p><em>The 3 in 2013 is for Python 3</em></p>
 <img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/python-3-port.jpg" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/python-3-port.jpg" />
 <p>I tend to like projects that everyone else <strong>hates</strong>, e.g.:</p>
 <ul class="simple">
 <li>Removing persistent Python objects associated with missing classes in ZODB.</li>
 <li>Making new releases for old software that is still useful but unmaintained.</li>
 <li>Running flake8 on 10s or 100s of source files ...</li></ul>
-                <a class="readmore" href="./2013/01/10/python-3-porting/">read more</a>
-                <p>There are <a href="./2013/01/10/python-3-porting/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+                <a class="readmore" href="http://aclark.net/blog/2013/01/10/python-3-porting/">read more</a>
+                <p>There are <a href="http://aclark.net/blog/2013/01/10/python-3-porting/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                             
 
                  
                         <li><article class="hentry">    
                 <header>
-                    <h1><a href="./2013/01/10/pillow-python-3/" rel="bookmark"
+                    <h1><a href="http://aclark.net/blog/2013/01/10/pillow-python-3/" rel="bookmark"
                            title="Permalink to Pillow Python 3">Pillow Python 3</a></h1>
                 </header>
                 
@@ -427,25 +377,25 @@ Plone in ...</p>
         </abbr>
 
                 <address class="vcard author">
-                By <a class="url fn" href="./author/aclark.html">aclark</a>
+                By <a class="url fn" href="http://aclark.net/blog/author/aclark.html">aclark</a>
         </address>
-        <p>In <a href="./category/blog.html">Blog</a>. </p>
-<p>tags: <a href="./tag/python.html">Python</a></p></footer><!-- /.post-info -->                <p>PIL is on its way to <strong>Python 3</strong> via Pillow. Support from Brian Crowell and others has been merged into master here:</p>
+        <p>In <a href="http://aclark.net/blog/category/blog.html">Blog</a>. </p>
+<p>tags: <a href="http://aclark.net/blog/tag/python.html">Python</a></p></footer><!-- /.post-info -->                <p>PIL is on its way to <strong>Python 3</strong> via Pillow. Support from Brian Crowell and others has been merged into master here:</p>
 <ul class="simple">
 <li><a class="reference external" href="https://github.com/python-imaging/Pillow/pull/35">https://github.com/python-imaging/Pillow/pull/35</a></li>
 </ul>
 <p>And work continues toward a pre <strong>PyCon 2013</strong> release! Please help if you can:</p>
 <ul class="simple">
 <li>Ubuntu users, read through <a class="reference external" href="https://github.com/python-imaging/Pillow/issues/18">https://github.com ...</a></li></ul>
-                <a class="readmore" href="./2013/01/10/pillow-python-3/">read more</a>
-                <p>There are <a href="./2013/01/10/pillow-python-3/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+                <a class="readmore" href="http://aclark.net/blog/2013/01/10/pillow-python-3/">read more</a>
+                <p>There are <a href="http://aclark.net/blog/2013/01/10/pillow-python-3/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                             
 
                  
                         <li><article class="hentry">    
                 <header>
-                    <h1><a href="./2013/01/10/about-my-work/" rel="bookmark"
+                    <h1><a href="http://aclark.net/blog/2013/01/10/about-my-work/" rel="bookmark"
                            title="Permalink to About My Work">About My Work</a></h1>
                 </header>
                 
@@ -456,45 +406,20 @@ Plone in ...</p>
         </abbr>
 
                 <address class="vcard author">
-                By <a class="url fn" href="./author/aclark.html">aclark</a>
+                By <a class="url fn" href="http://aclark.net/blog/author/aclark.html">aclark</a>
         </address>
-        <p>In <a href="./category/blog.html">Blog</a>. </p>
-<p>tags: <a href="./tag/plone.html">Plone</a></p></footer><!-- /.post-info -->                <p>Regarding some of the criticism or objection to some of the content of my blog entries, etc., here are my thoughts:</p>
+        <p>In <a href="http://aclark.net/blog/category/blog.html">Blog</a>. </p>
+<p>tags: <a href="http://aclark.net/blog/tag/plone.html">Plone</a></p></footer><!-- /.post-info -->                <p>Regarding some of the criticism or objection to some of the content of my blog entries, etc., here are my thoughts:</p>
 <div class="section" id="i-hear-you">
 <h2>I hear you</h2>
 <p>No one is more critical of my work than me. If you have feedback, criticism, etc. then please do let me know. I consider very carefully ...</p></div>
-                <a class="readmore" href="./2013/01/10/about-my-work/">read more</a>
-                <p>There are <a href="./2013/01/10/about-my-work/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="./2013/01/09/hello-plone-again/" rel="bookmark"
-                           title="Permalink to Hello Plone Again">Hello Plone Again</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-01-09T15:30:00">
-                Wed 09 January 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="./author/aclark.html">aclark</a>
-        </address>
-        <p>In <a href="./category/blog.html">Blog</a>. </p>
-<p>tags: <a href="./tag/plone.html">Plone</a></p></footer><!-- /.post-info -->                <p>Regarding my recent &quot;Goodbye Plone&quot; post:</p>
-<ul class="simple">
-<li>It's come to my attention that the style of my departure post, and associated actions, may be perceived poorly. I'm sorry. This was not my intention, and I apologize if I've upset anyone. The Plone Community deserves the best, so let ...</li></ul>
-                <a class="readmore" href="./2013/01/09/hello-plone-again/">read more</a>
-                <p>There are <a href="./2013/01/09/hello-plone-again/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+                <a class="readmore" href="http://aclark.net/blog/2013/01/10/about-my-work/">read more</a>
+                <p>There are <a href="http://aclark.net/blog/2013/01/10/about-my-work/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->
                             <p class="paginator">
-        Page 1 / 12
-            <a href="./index2.html">&raquo;</a>
+        Page 1 / 13
+            <a href="http://aclark.net/blog/index2.html">&raquo;</a>
     </p>
                         </section><!-- /#content -->
                     <section id="extras" class="body">
