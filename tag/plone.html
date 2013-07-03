@@ -33,8 +33,55 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://aclark.net/blog/2013/06/22/ploneorg-upgraded/">Plone.org upgraded</a></h1> 
+                    <h1 class="entry-title"><a href="http://aclark.net/blog/2013/07/02/pillow-2-1-0-is-out/">Pillow 2-1-0 is out!</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2013-07-02T00:00:00">
+                Tue 02 July 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://aclark.net/blog/author/aclark.html">aclark</a>
+        </address>
+        <p>In <a href="http://aclark.net/blog/category/blog.html">Blog</a>. </p>
+<p>tags: <a href="http://aclark.net/blog/tag/django.html">Django</a><a href="http://aclark.net/blog/tag/plone.html">Plone</a><a href="http://aclark.net/blog/tag/python.html">Python</a></p></footer><!-- /.post-info --><p><em>Pillow is a popular fork of the PIL by Alex Clark and Contributors. PIL is the Python Imaging Library by Fredrik Lundh and Contributors</em></p>
+<p>Pillow 2.1.0 is out! With this release, the Pillow team has <em>finally</em> removed support for &quot;import _imaging&quot;, thus completing the move of PIL modules into the PIL namespace <a class="footnote-reference" href="#id2" id="id1">[1]</a>. Many thanks to Eric Soroos (AKA wiredfool) who completed the majority of this work. Also a big thanks to Christopher Gohlke and <a class="reference external" href="https://github.com/Arfrever">Arfrever</a> both of whom rallied around a push to get the 2.1.0 release out on schedule. And I want to thank everyone else who reported an issue and/or sent a pull request to help make this release the best it could be.</p>
+<div class="section" id="quarterly-release-cycle">
+<h2>Quarterly release cycle</h2>
+<p>After the March 15, 2013 release of Pillow 2.0.0 we decided to adopt a quarterly release cycle. So every three months, as long as the patches keep coming you will see a new Pillow release.</p>
+</div>
+<div class="section" id="look-ma-no-official-funding">
+<h2>Look ma no official funding</h2>
+<p>Pillow 2.0.0 was an enormous effort, made possible by a generous grant from the Python Software Foundation. But things have stablized quite a bit since then. So much so, that with help from many others I was able to squeeze this release into my normal schedule. However you are always welcome to financially help support Pillow, especially if you are using it in a commercial environment. Committers are encouraged to add their name here if they'd like to receive donations:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/python-imaging/Pillow/blob/master/README.rst#support">https://github.com/python-imaging/Pillow/blob/master/README.rst#support</a></li>
+</ul>
+<p>And I have personally steered my gittip profile entirely towards Pillow production.</p>
+<script data-gittip-username="aclark4life"
+src="https://www.gittip.com/assets/widgets/0002.js">
+</script><table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Which began with the first release of Pillow 1.0 on 2010-07-31 in which support for &quot;import Image&quot; was removed.</td></tr>
+</tbody>
+</table>
+</div>
+<p>There are <a href="http://aclark.net/blog/2013/07/02/pillow-2-1-0-is-out/#disqus_thread">comments</a>.</p>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://aclark.net/blog/2013/06/22/ploneorg-upgraded/" rel="bookmark"
+                           title="Permalink to Plone.org upgraded">Plone.org upgraded</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2013-06-22T00:00:00">
                 Sat 22 June 2013
         </abbr>
@@ -43,141 +90,13 @@
                 By <a class="url fn" href="http://aclark.net/blog/author/aclark.html">aclark</a>
         </address>
         <p>In <a href="http://aclark.net/blog/category/blog.html">Blog</a>. </p>
-<p>tags: <a href="http://aclark.net/blog/tag/plone.html">Plone</a><a href="http://aclark.net/blog/tag/python.html">Python</a></p></footer><!-- /.post-info --><p>Recently at the behest of Liz Leddy, I <a class="reference external" href="https://github.com/plone/Products.PloneOrg/commit/b04105f7c9cacf3880c12effba5ffe261d4b5163">upgraded plone.org from Plone 4.2 to Plone 4.3</a>. It's been a while since I had the pleasure, so I thought I'd make some notes: for myself, the AI Team and anyone else interested in the process.</p>
+<p>tags: <a href="http://aclark.net/blog/tag/plone.html">Plone</a><a href="http://aclark.net/blog/tag/python.html">Python</a></p></footer><!-- /.post-info -->                <p>Recently at the behest of Liz Leddy, I <a class="reference external" href="https://github.com/plone/Products.PloneOrg/commit/b04105f7c9cacf3880c12effba5ffe261d4b5163">upgraded plone.org from Plone 4.2 to Plone 4.3</a>. It's been a while since I had the pleasure, so I thought I'd make some notes: for myself, the AI Team and anyone else interested in the process.</p>
 <div class="section" id="background">
-<h2>Background</h2>
-<ol class="arabic simple">
-<li>Plone.org is one of the <strong>oldest Plone sites in existence</strong>, having been launched circa Plone 1 and upgraded in place ever since.</li>
-<li>It functions remarkably well, given #1.</li>
-<li>It's not without its issues, but all of them are manageable —&nbsp;for some value of manageable.</li>
-<li>It's often very time consuming to work on.</li>
-</ol>
-</div>
-<div class="section" id="pre-process">
-<h2>Pre-Process</h2>
-<ol class="arabic">
-<li><p class="first">The first step is always to get a local copy:</p>
-<pre class="literal-block">
-$ git clone git&#64;github.com:plone/Products.PloneOrg.git
-$ cd Products.PloneOrg
-$ cp buildout.cfg.in buildout.cfg
-</pre>
-</li>
-<li><p class="first">Edit <tt class="docutils literal">buildout.cfg</tt> to extend the <tt class="docutils literal">database.cfg</tt>:</p>
-<pre class="literal-block">
-[buildout]
-# Rename to buildout.cfg and uncomment one of the profiles below
-extends =
-
-# Plone only, unthemed
-#    conf/develop.cfg
-
-# Copy data local (with plone.org account)
-    conf/database.cfg
-
-# Production (for use on plone.org server)
-#    conf/production.cfg
-
-# Staging (for use on plone.org server)
-# and Deployment (for use by Jenkins, admins and developers),
-#   fabric can be added to any of primary configurations
-
-#    conf/staging.cfg
-#    conf/fabric.cfg
-
-# Developer Database Drop; makes developer-friendly copies
-# of plone.org's content.
-#    conf/devdrop.cfg
-</pre>
-</li>
-<li><p class="first">Bootstrap and run Buildout:</p>
-<pre class="literal-block">
-$ virtualenv-2.7 .
-$ bin/pip install zc.buildout
-$ bin/buildout
-</pre>
-</li>
-<li><p class="first">Make the appropriate configuration changes i.e. change <tt class="docutils literal">extends</tt> from 4.2 to 4.3:</p>
-<pre class="literal-block">
-[buildout]
-develop = .
-extends =
-    http://dist.plone.org/release/4.3.1/versions.cfg
-    versions.cfg
-    sources.cfg
-extensions =
-#    buildout.dumppickedversions
-    buildout.threatlevel
-    mr.developer
-
-versions = versions
-sources-dir = sources
-eggs =
-    Pillow
-    Products.PloneOrg
-    Products.PloneHotfix20130618
-
-# get us a user and group variable
-[env]
-recipe = gocept.recipe.env
-[grp]
-recipe = collective.recipe.grp
-</pre>
-</li>
-<li><p class="first">Run the upgrade locally. With plone.org data this takes about 45 minutes to an hour <a class="footnote-reference" href="#id2" id="id1">[1]</a>.</p>
-</li>
-</ol>
-<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/upgrade.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/upgrade.png" />
-<ol class="arabic simple">
-<li>If the upgrade succeeds, you are ready to launch. If it fails, fix the errors before proceeding.</li>
-</ol>
-</div>
-<div class="section" id="process">
-<h2>Process</h2>
-<p>We know from upgrading locally that the process will take about 45 minutes to an hour, so you should <strong>allocate about 2 hours to do the upgrade</strong>.</p>
-<ol class="arabic simple">
-<li>Announce the upgrade: preferably a week or two in advance. The plone-developers and plone-users lists are probably sufficient, but you can create a plone.org news item too if you are feeling extra-ambitious. I only had a small window to perform this maintenance, so I skipped this step and proceeded directly to the next one.</li>
-<li>Add a status message to plone.org to indicate a maintenance window is in progress. I chose to customize the <tt class="docutils literal">main_template</tt> to accomplish this, but ideally we'd have some functionality in Plone that allowed site administrators to easily configure status messages.</li>
-</ol>
-<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/upgrade-message.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/upgrade-message.png" />
-<ol class="arabic simple">
-<li>Disable logins. Since the upgrade takes a long time, we don't want content being edited during this process. I chose to use David Glick's technique of disabling PAS. I moved the ldap authentication plugin to the Active Plugin list, thus disabling PAS such that only ZODB users could login. But ideally we'd have some feature in Plone to allow site administrators to disable logins.</li>
-</ol>
-<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/pas.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/pas.png" />
-<ol class="arabic">
-<li><p class="first">Run the upgrade. I forgot to mention earlier something very important: <strong>On plone.org, you can't access Zope from the internet.</strong> And you can't run the upgrade without accessing Zope. Hence run the following command to access the server, then access Plone via <tt class="docutils literal"><span class="pre">http://localhost:8080</span></tt>:</p>
-<pre class="literal-block">
-$ ssh -L 8080:10.57.0.107:5011 direct.plone.org
-</pre>
-</li>
-<li><p class="first">After the upgrade finishes, click around to make sure you didn't break anything. In my case, I broke something — I normally move <tt class="docutils literal">portal_skins/custom</tt> out of the way before upgrading, but this time I forgot. And when I experienced minor JavaScript issues, I forgot to examine custom; which currently looks like this:</p>
-</li>
-</ol>
-<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/custom.png" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/custom.png" />
-<p>Even if I had remembered, I didn't want to spend the next few hours examining database customizations. Fortunately, before I realized I had forgotten to check custom, I emailed the plone-developers list —&nbsp;and Nathan Van Gheem to the rescue! He fixed some JavaScript in custom, then I cleared the cache(s). Ideally Plone would report on database customizations during the upgrade process: to indicate the potential for breakage and encourage the site administrator to round-trip those customizations back to the file system.</p>
-</div>
-<div class="section" id="conclusion">
-<h2>Conclusion</h2>
-<p>That's it! I hope this helps folks wrap their head around the plone.org upgrade process. A few closing thoughts:</p>
-<ul class="simple">
-<li>With Cloudflare in front, we probably don't need Varnish anymore.</li>
-<li>Leaving a note in <tt class="docutils literal">portal_skins/custom</tt> to encourage folks to &quot;please keep this area clean&quot; — does not work.</li>
-<li>plone.com anyone? I don't know the future of plone.org and I have mixed feelings about it: on the one hand, I'm proud to help maintain such an old and venerable system. On the other hand, I think plone.org should be retired in a way similar to old.zope.org. What do you think?</li>
-</ul>
-<table class="docutils footnote" frame="void" id="id2" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>It shouldn't take this long. See: <a class="reference external" href="https://github.com/plone/Products.PloneOrg/commit/b04105f7c9cacf3880c12effba5ffe261d4b5163#commitcomment-3384259">https://github.com/plone/Products.PloneOrg/commit/b04105f7c9cacf3880c12effba5ffe261d4b5163#commitcomment-3384259</a> for a discussion about this issue.</td></tr>
-</tbody>
-</table>
-</div>
-<p>There are <a href="http://aclark.net/blog/2013/06/22/ploneorg-upgraded/#disqus_thread">comments</a>.</p>                </article>
-                            </aside><!-- /#featured -->
-                            <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-                                                
+<h2>Background ...</h2></div>
+                <a class="readmore" href="http://aclark.net/blog/2013/06/22/ploneorg-upgraded/">read more</a>
+                <p>There are <a href="http://aclark.net/blog/2013/06/22/ploneorg-upgraded/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
 
                  
                         <li><article class="hentry">    
@@ -388,30 +307,6 @@ Plone in ...</p>
 <li>It's come to my attention that the style of my departure post, and associated actions, may be perceived poorly. I'm sorry. This was not my intention, and I apologize if I've upset anyone. The Plone Community deserves the best, so let ...</li></ul>
                 <a class="readmore" href="http://aclark.net/blog/2013/01/09/hello-plone-again/">read more</a>
                 <p>There are <a href="http://aclark.net/blog/2013/01/09/hello-plone-again/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://aclark.net/blog/2013/01/09/goodbye-plone/" rel="bookmark"
-                           title="Permalink to Goodbye Plone">Goodbye Plone</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-01-09T13:30:00">
-                Wed 09 January 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="http://aclark.net/blog/author/aclark.html">aclark</a>
-        </address>
-        <p>In <a href="http://aclark.net/blog/category/blog.html">Blog</a>. </p>
-<p>tags: <a href="http://aclark.net/blog/tag/plone.html">Plone</a></p></footer><!-- /.post-info -->                <p>After experiencing an unexpectedly negative reaction in #plone to my most recent post &quot;Introducing The Plone Kitty&quot; (which was intended to be light-hearted and fun), I have decided to leave the Plone community for good. I wish you all the best! It's been fun.</p>
-<p>To be clear: I'll ...</p>
-                <a class="readmore" href="http://aclark.net/blog/2013/01/09/goodbye-plone/">read more</a>
-                <p>There are <a href="http://aclark.net/blog/2013/01/09/goodbye-plone/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->
                             <p class="paginator">

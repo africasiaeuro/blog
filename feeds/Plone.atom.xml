@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Alex Clark - Python Web Developer</title><link href="http://aclark.net/blog/" rel="alternate"></link><link href="http://aclark.net/blog/feeds/plone.atom.xml" rel="self"></link><id>http://aclark.net/blog/</id><updated>2013-06-22T00:00:00-04:00</updated><entry><title>Plone.org upgraded</title><link href="http://aclark.net/blog/2013/06/22/ploneorg-upgraded/" rel="alternate"></link><updated>2013-06-22T00:00:00-04:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-06-22:2013/06/22/ploneorg-upgraded/</id><summary type="html">&lt;p&gt;Recently at the behest of Liz Leddy, I &lt;a class="reference external" href="https://github.com/plone/Products.PloneOrg/commit/b04105f7c9cacf3880c12effba5ffe261d4b5163"&gt;upgraded plone.org from Plone 4.2 to Plone 4.3&lt;/a&gt;. It's been a while since I had the pleasure, so I thought I'd make some notes: for myself, the AI Team and anyone else interested in the process.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Alex Clark - Python Web Developer</title><link href="http://aclark.net/blog/" rel="alternate"></link><link href="http://aclark.net/blog/feeds/plone.atom.xml" rel="self"></link><id>http://aclark.net/blog/</id><updated>2013-07-02T00:00:00-04:00</updated><entry><title>Pillow 2-1-0 is out!</title><link href="http://aclark.net/blog/2013/07/02/pillow-2-1-0-is-out/" rel="alternate"></link><updated>2013-07-02T00:00:00-04:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-07-02:2013/07/02/pillow-2-1-0-is-out/</id><summary type="html">&lt;p&gt;&lt;em&gt;Pillow is a popular fork of the PIL by Alex Clark and Contributors. PIL is the Python Imaging Library by Fredrik Lundh and Contributors&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Pillow 2.1.0 is out! With this release, the Pillow team has &lt;em&gt;finally&lt;/em&gt; removed support for &amp;quot;import _imaging&amp;quot;, thus completing the move of PIL modules into the PIL namespace &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[1]&lt;/a&gt;. Many thanks to Eric Soroos (AKA wiredfool) who completed the majority of this work. Also a big thanks to Christopher Gohlke and &lt;a class="reference external" href="https://github.com/Arfrever"&gt;Arfrever&lt;/a&gt; both of whom rallied around a push to get the 2.1.0 release out on schedule. And I want to thank everyone else who reported an issue and/or sent a pull request to help make this release the best it could be.&lt;/p&gt;
+&lt;div class="section" id="quarterly-release-cycle"&gt;
+&lt;h2&gt;Quarterly release cycle&lt;/h2&gt;
+&lt;p&gt;After the March 15, 2013 release of Pillow 2.0.0 we decided to adopt a quarterly release cycle. So every three months, as long as the patches keep coming you will see a new Pillow release.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="look-ma-no-official-funding"&gt;
+&lt;h2&gt;Look ma no official funding&lt;/h2&gt;
+&lt;p&gt;Pillow 2.0.0 was an enormous effort, made possible by a generous grant from the Python Software Foundation. But things have stablized quite a bit since then. So much so, that with help from many others I was able to squeeze this release into my normal schedule. However you are always welcome to financially help support Pillow, especially if you are using it in a commercial environment. Committers are encouraged to add their name here if they'd like to receive donations:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/python-imaging/Pillow/blob/master/README.rst#support"&gt;https://github.com/python-imaging/Pillow/blob/master/README.rst#support&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And I have personally steered my gittip profile entirely towards Pillow production.&lt;/p&gt;
+&lt;script data-gittip-username="aclark4life"
+src="https://www.gittip.com/assets/widgets/0002.js"&gt;
+&lt;/script&gt;&lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Which began with the first release of Pillow 1.0 on 2010-07-31 in which support for &amp;quot;import Image&amp;quot; was removed.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+</summary><category term="Django"></category><category term="Plone"></category><category term="Python"></category></entry><entry><title>Plone.org upgraded</title><link href="http://aclark.net/blog/2013/06/22/ploneorg-upgraded/" rel="alternate"></link><updated>2013-06-22T00:00:00-04:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-06-22:2013/06/22/ploneorg-upgraded/</id><summary type="html">&lt;p&gt;Recently at the behest of Liz Leddy, I &lt;a class="reference external" href="https://github.com/plone/Products.PloneOrg/commit/b04105f7c9cacf3880c12effba5ffe261d4b5163"&gt;upgraded plone.org from Plone 4.2 to Plone 4.3&lt;/a&gt;. It's been a while since I had the pleasure, so I thought I'd make some notes: for myself, the AI Team and anyone else interested in the process.&lt;/p&gt;
 &lt;div class="section" id="background"&gt;
 &lt;h2&gt;Background&lt;/h2&gt;
 &lt;ol class="arabic simple"&gt;
@@ -768,6 +790,4 @@ src="https://www.gittip.com/assets/widgets/0002.js"&gt;
 &lt;/ul&gt;
 &lt;p&gt;So, let me say this: I'm thinking about what happened today, and I'm going to comment about it in the future. I.e. after 24 hours or so. Regardless of future updates, please consider me: &amp;quot;around in some capacity, but not as fully engaged for personal reasons&amp;quot; :-). This is an attempt to revert my abrubt departure, while at the same time not fully re-engaging until such time as I can determine the best course of action. Note that above all, and aside from my personal and professional goals, I don't want to be disruptive to the community if I can help it.&lt;/p&gt;
 &lt;p&gt;Thanks for reading.&lt;/p&gt;
-</summary><category term="Plone"></category></entry><entry><title>Goodbye Plone</title><link href="http://aclark.net/blog/2013/01/09/goodbye-plone/" rel="alternate"></link><updated>2013-01-09T13:30:00-05:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-01-09:2013/01/09/goodbye-plone/</id><summary type="html">&lt;p&gt;After experiencing an unexpectedly negative reaction in #plone to my most recent post &amp;quot;Introducing The Plone Kitty&amp;quot; (which was intended to be light-hearted and fun), I have decided to leave the Plone community for good. I wish you all the best! It's been fun.&lt;/p&gt;
-&lt;p&gt;To be clear: I'll still be doing some Plone consulting as part of my &amp;quot;day job&amp;quot; at ACLARK.NET, LLC. But I won't be participating in any community events because it has become clear to me that my vision for Plone, and the Plone Community, may be inconsistent with the vision held by other members of the core team.&lt;/p&gt;
 </summary><category term="Plone"></category></entry></feed>

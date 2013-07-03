@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Alex Clark - Python Web Developer</title><link href="http://aclark.net/blog/" rel="alternate"></link><link href="http://aclark.net/blog/feeds/python.atom.xml" rel="self"></link><id>http://aclark.net/blog/</id><updated>2013-06-22T00:00:00-04:00</updated><entry><title>Plone.org upgraded</title><link href="http://aclark.net/blog/2013/06/22/ploneorg-upgraded/" rel="alternate"></link><updated>2013-06-22T00:00:00-04:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-06-22:2013/06/22/ploneorg-upgraded/</id><summary type="html">&lt;p&gt;Recently at the behest of Liz Leddy, I &lt;a class="reference external" href="https://github.com/plone/Products.PloneOrg/commit/b04105f7c9cacf3880c12effba5ffe261d4b5163"&gt;upgraded plone.org from Plone 4.2 to Plone 4.3&lt;/a&gt;. It's been a while since I had the pleasure, so I thought I'd make some notes: for myself, the AI Team and anyone else interested in the process.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Alex Clark - Python Web Developer</title><link href="http://aclark.net/blog/" rel="alternate"></link><link href="http://aclark.net/blog/feeds/python.atom.xml" rel="self"></link><id>http://aclark.net/blog/</id><updated>2013-07-02T00:00:00-04:00</updated><entry><title>Pillow 2-1-0 is out!</title><link href="http://aclark.net/blog/2013/07/02/pillow-2-1-0-is-out/" rel="alternate"></link><updated>2013-07-02T00:00:00-04:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-07-02:2013/07/02/pillow-2-1-0-is-out/</id><summary type="html">&lt;p&gt;&lt;em&gt;Pillow is a popular fork of the PIL by Alex Clark and Contributors. PIL is the Python Imaging Library by Fredrik Lundh and Contributors&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Pillow 2.1.0 is out! With this release, the Pillow team has &lt;em&gt;finally&lt;/em&gt; removed support for &amp;quot;import _imaging&amp;quot;, thus completing the move of PIL modules into the PIL namespace &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[1]&lt;/a&gt;. Many thanks to Eric Soroos (AKA wiredfool) who completed the majority of this work. Also a big thanks to Christopher Gohlke and &lt;a class="reference external" href="https://github.com/Arfrever"&gt;Arfrever&lt;/a&gt; both of whom rallied around a push to get the 2.1.0 release out on schedule. And I want to thank everyone else who reported an issue and/or sent a pull request to help make this release the best it could be.&lt;/p&gt;
+&lt;div class="section" id="quarterly-release-cycle"&gt;
+&lt;h2&gt;Quarterly release cycle&lt;/h2&gt;
+&lt;p&gt;After the March 15, 2013 release of Pillow 2.0.0 we decided to adopt a quarterly release cycle. So every three months, as long as the patches keep coming you will see a new Pillow release.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="look-ma-no-official-funding"&gt;
+&lt;h2&gt;Look ma no official funding&lt;/h2&gt;
+&lt;p&gt;Pillow 2.0.0 was an enormous effort, made possible by a generous grant from the Python Software Foundation. But things have stablized quite a bit since then. So much so, that with help from many others I was able to squeeze this release into my normal schedule. However you are always welcome to financially help support Pillow, especially if you are using it in a commercial environment. Committers are encouraged to add their name here if they'd like to receive donations:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/python-imaging/Pillow/blob/master/README.rst#support"&gt;https://github.com/python-imaging/Pillow/blob/master/README.rst#support&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And I have personally steered my gittip profile entirely towards Pillow production.&lt;/p&gt;
+&lt;script data-gittip-username="aclark4life"
+src="https://www.gittip.com/assets/widgets/0002.js"&gt;
+&lt;/script&gt;&lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[1]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;Which began with the first release of Pillow 1.0 on 2010-07-31 in which support for &amp;quot;import Image&amp;quot; was removed.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+</summary><category term="Django"></category><category term="Plone"></category><category term="Python"></category></entry><entry><title>Plone.org upgraded</title><link href="http://aclark.net/blog/2013/06/22/ploneorg-upgraded/" rel="alternate"></link><updated>2013-06-22T00:00:00-04:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-06-22:2013/06/22/ploneorg-upgraded/</id><summary type="html">&lt;p&gt;Recently at the behest of Liz Leddy, I &lt;a class="reference external" href="https://github.com/plone/Products.PloneOrg/commit/b04105f7c9cacf3880c12effba5ffe261d4b5163"&gt;upgraded plone.org from Plone 4.2 to Plone 4.3&lt;/a&gt;. It's been a while since I had the pleasure, so I thought I'd make some notes: for myself, the AI Team and anyone else interested in the process.&lt;/p&gt;
 &lt;div class="section" id="background"&gt;
 &lt;h2&gt;Background&lt;/h2&gt;
 &lt;ol class="arabic simple"&gt;
@@ -750,29 +772,4 @@ If you used Plone &amp;quot;back in the day&amp;quot; (early 2000s), please add 
 &lt;li&gt;Copy-paste the questions and answer to them in your blog&lt;/li&gt;
 &lt;li&gt;Tweet it with the &lt;a class="reference external" href="https://twitter.com/search/realtime?q=%232012pythonmeme&amp;amp;src=typd"&gt;#2012pythonmeme&lt;/a&gt; hashtag&lt;/li&gt;
 &lt;/ul&gt;
-</summary><category term="Django"></category><category term="Mozilla"></category><category term="Plone"></category><category term="Python"></category></entry><entry><title>The Zen of Zope, by Alex Clark</title><link href="http://aclark.net/blog/2012/12/09/the-zen-of-zope-by-alex-clark/" rel="alternate"></link><updated>2012-12-09T18:00:00-05:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2012-12-09:2012/12/09/the-zen-of-zope-by-alex-clark/</id><summary type="html">&lt;pre class="literal-block"&gt;
-&amp;gt;&amp;gt;&amp;gt; import other
-The Zen of Zope, by Alex Clark
-
-
-Beautiful is an attribute of ugly.
-Explicit is implemented by implicit.
-Simple is provided by complex.
-Complex is directly provided by complicated.
-Flat only implements nested.
-Sparse has tagged value dense.
-Readability count is not in range.
-Special cases could not adapt the rules.
-Practicality implements purity.
-Errors should never require a specification that doesn’t extend the specification of silence.
-Unless explicit is a multi-adapter.
-In subscribing to ambiguity, return all the objects that refuse the temptation to guess.
-There should be none-- and preferably only zero --output from a handler.
-Although that way may not be obvious at first unless you've registered an adapter hook
-Now is verified by never.
-Although never is not implemented by *right* now.
-If the implementation is hard to explain, it queries the bad idea utility.
-If the implementation is easy to explain, it may query the good idea utility.
-Implicit namespace packages are one honking great idea -- let's do more of those!
-&lt;/pre&gt;
-</summary><category term="Plone"></category><category term="Python"></category></entry></feed>
+</summary><category term="Django"></category><category term="Mozilla"></category><category term="Plone"></category><category term="Python"></category></entry></feed>
