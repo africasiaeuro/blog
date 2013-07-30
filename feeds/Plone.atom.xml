@@ -1,5 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Alex Clark - Python Web Developer</title><link href="http://aclark.net/blog/" rel="alternate"></link><link href="http://aclark.net/blog/feeds/plone.atom.xml" rel="self"></link><id>http://aclark.net/blog/</id><updated>2013-07-19T00:00:00-04:00</updated><entry><title>Introducing Plock</title><link href="http://aclark.net/blog/2013/07/19/introducing-plock/" rel="alternate"></link><updated>2013-07-19T00:00:00-04:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-07-19:2013/07/19/introducing-plock/</id><summary type="html">&lt;p&gt;&lt;em&gt;Plock is a Plone Installer for the Pip-Loving Crowd. Plone is a Python-based CMS.&lt;/em&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Alex Clark - Python Web Developer</title><link href="http://aclark.net/blog/" rel="alternate"></link><link href="http://aclark.net/blog/feeds/plone.atom.xml" rel="self"></link><id>http://aclark.net/blog/</id><updated>2013-07-29T22:00:00-04:00</updated><entry><title>What's new as of Plock 0-1-2?</title><link href="http://aclark.net/blog/2013/07/29/whats-new-as-of-plock-0-1-2/" rel="alternate"></link><updated>2013-07-29T22:00:00-04:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-07-29:2013/07/29/whats-new-as-of-plock-0-1-2/</id><summary type="html">&lt;p&gt;&lt;em&gt;Plock is a Plone Installer for the Pip-Loving Crowd&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;I blogged about Plock after 0.0.1 was released and a lot of progress has been made since then, so I thought I'd give an update. But rather than a traditional list-the-changelog-style-blog-entry, I thought I'd walk you through what you can do with Plock as of version 0.1.2.&lt;/p&gt;
+&lt;div class="section" id="install-plone"&gt;
+&lt;h2&gt;Install Plone&lt;/h2&gt;
+&lt;p&gt;Plock exists to the eliminate cognitive dissonance experienced by Python programmers who want to install Plone but don't want to think about installing Plone. Such folks can now type the following to install Plone 4.3 (inside an activated virtualenv of course):&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ pip install plock
+$ plock
+Installing Plone. This may take a while.......(3)....(4)....(4)....(4)....(5)....(5)....(9)....(14)....(21)....(24)....(29)....(33)....(38)....(43)....(48)....(54)....(58)....(62)....(66)....(71)....(74)....(78)....(78)....(83)....(87)....(89)....(92)....(97)....(98)....(98)....(98)....(98)....(98)....(100)....(102)....(103)....(108)....(110)....(113)....(115)....(120)....(123)....(128)....(133)....(138)....(142)....(148)....(153)....(158)....(161)....(163)....(168)....(171)....(175)....(179)....(181)....(184)....(189)....(193)....(195)....(198)....(203)....(205)....(210)....(214)....(221)....(224)....(228)....(234). done.
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="run-plone"&gt;
+&lt;h2&gt;Run Plone&lt;/h2&gt;
+&lt;p&gt;With Plock, you can &lt;strong&gt;truly&lt;/strong&gt; run Plone because you are not running scripts with any of the following not-plone names: client, instance, zope.&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ plone fg
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="list-add-ons"&gt;
+&lt;h2&gt;List add-ons&lt;/h2&gt;
+&lt;p&gt;One of the biggest attractions to using Plone is all the work on your new web project that has already been done for you. There are over 1,200 packages on PyPI with &amp;quot;plone&amp;quot; in either the description, keywords list, or summary. Some of these are part of the core, and some don't work with the latest release, but there are still a lot of add-ons available (I'm currently working on an accurate count.)&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ plock -l
+&lt;/pre&gt;
+&lt;img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/plock-list-addons.png" class="align-center" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/plock-list-addons.png" style="width: 95%;" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="install-add-ons"&gt;
+&lt;h2&gt;Install add-ons&lt;/h2&gt;
+&lt;p&gt;With Plock, installing add-ons is done from the command line. Pick a Python package name and install-away:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ plock -i Products.PloneFormGen
+Installing Plone. This may take a while... done.
+&lt;/pre&gt;
+&lt;p&gt;Or pick two or more:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ plock -i Products.PloneFormGen collective.cover
+Installing Plone. This may take a while... done.
+&lt;/pre&gt;
+&lt;p&gt;(If you have already installed an add-on with Plock, you can preserve the currently installed list with &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-p&lt;/span&gt;&lt;/tt&gt;. Otherwise, the add-ons installed are replaced with each new call to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-i&lt;/span&gt;&lt;/tt&gt;.)&lt;/p&gt;
+&lt;p&gt;If you pick a bad one, Plock has your back:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ plock -i foo
+Installing Plone. This may take a while... error!
+&lt;/pre&gt;
+&lt;p&gt;In the above scenario, Plock restored your previous configuration before reporting the error and exiting.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="all-the-rest"&gt;
+&lt;h2&gt;All the rest&lt;/h2&gt;
+&lt;p&gt;For more details, please see:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/aclark4life/plock/blob/master/CHANGES.rst#changelog"&gt;https://github.com/aclark4life/plock/blob/master/CHANGES.rst#changelog&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="issues"&gt;
+&lt;h2&gt;Issues&lt;/h2&gt;
+&lt;p&gt;If you use Plock and have an issue, please report it here:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/aclark4life/plock/issues"&gt;https://github.com/aclark4life/plock/issues&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</summary><category term="Plone"></category><category term="Python"></category></entry><entry><title>Introducing Plock</title><link href="http://aclark.net/blog/2013/07/19/introducing-plock/" rel="alternate"></link><updated>2013-07-19T00:00:00-04:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-07-19:2013/07/19/introducing-plock/</id><summary type="html">&lt;p&gt;&lt;em&gt;Plock is a Plone Installer for the Pip-Loving Crowd. Plone is a Python-based CMS.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Installing Plone with &lt;a class="reference external" href="https://github.com/aclark4life/plock"&gt;Plock&lt;/a&gt; looks like this:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 $ pip install plock
@@ -801,32 +861,4 @@ src="https://www.gittip.com/assets/widgets/0002.js"&gt;
 &lt;/ul&gt;
 &lt;p&gt;So, there is no time like the present to &lt;strong&gt;take a serious look at Python 3&lt;/strong&gt;.&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="Django"></category><category term="Mozilla"></category><category term="Plone"></category><category term="Python"></category></entry><entry><title>About My Work</title><link href="http://aclark.net/blog/2013/01/10/about-my-work/" rel="alternate"></link><updated>2013-01-10T11:45:00-05:00</updated><author><name>aclark</name></author><id>tag:aclark.net/blog,2013-01-10:2013/01/10/about-my-work/</id><summary type="html">&lt;p&gt;Regarding some of the criticism or objection to some of the content of my blog entries, etc., here are my thoughts:&lt;/p&gt;
-&lt;div class="section" id="i-hear-you"&gt;
-&lt;h2&gt;I hear you&lt;/h2&gt;
-&lt;p&gt;No one is more critical of my work than me. If you have feedback, criticism, etc. then please do let me know. I consider very carefully every request I receive, and I make every attempt to be cordial and accommodating. The place to do that for &lt;strong&gt;this blog&lt;/strong&gt; is currently:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://github.com/ACLARKNET/aclarknet.github.com/issues"&gt;https://github.com/ACLARKNET/aclarknet.github.com/issues&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Or for folks without a GitHub account (i.e. anonymous):&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://bitbucket.org/aclarknet/blog/issues"&gt;https://bitbucket.org/aclarknet/blog/issues&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Or just email me:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="mailto:aclark&amp;#64;aclark.net"&gt;aclark&amp;#64;aclark.net&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Or add a comment below.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="controversial-entries-explained"&gt;
-&lt;h2&gt;Controversial Entries Explained&lt;/h2&gt;
-&lt;p&gt;I'd also like to clarify my intentions with regard to two of my most recent and somewhat controversial entries:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Zen of Zope&lt;/li&gt;
-&lt;li&gt;Plone Kitty&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;They are intended to be &lt;em&gt;pro&lt;/em&gt; Zope and &lt;em&gt;pro&lt;/em&gt; Plone. Yes, Zope can be complex. But it's also useful. And full of &amp;quot;been there, done that&amp;quot; wisdom. Yes, the simple days of Plone Kitty are gone, but there are many great things ahead. Let's carry the best of the past forward into the future.&lt;/p&gt;
-&lt;p&gt;I don't always state my intentions this explicitly: because that is no where near as fun for me. But I don't want folks to get the wrong impression either, so please help me get the message right if you can.&lt;/p&gt;
-&lt;p&gt;As always, thanks for reading.&lt;/p&gt;
-&lt;/div&gt;
-</summary><category term="Plone"></category></entry></feed>
+</summary><category term="Django"></category><category term="Mozilla"></category><category term="Plone"></category><category term="Python"></category></entry></feed>

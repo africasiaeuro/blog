@@ -33,8 +33,93 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://aclark.net/blog/2013/07/19/introducing-plock/">Introducing Plock</a></h1> 
+                    <h1 class="entry-title"><a href="http://aclark.net/blog/2013/07/29/whats-new-as-of-plock-0-1-2/">What's new as of Plock 0-1-2?</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2013-07-29T22:00:00">
+                Mon 29 July 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://aclark.net/blog/author/aclark.html">aclark</a>
+        </address>
+        <p>In <a href="http://aclark.net/blog/category/blog.html">Blog</a>. </p>
+<p>tags: <a href="http://aclark.net/blog/tag/plone.html">Plone</a><a href="http://aclark.net/blog/tag/python.html">Python</a></p></footer><!-- /.post-info --><p><em>Plock is a Plone Installer for the Pip-Loving Crowd</em></p>
+<p>I blogged about Plock after 0.0.1 was released and a lot of progress has been made since then, so I thought I'd give an update. But rather than a traditional list-the-changelog-style-blog-entry, I thought I'd walk you through what you can do with Plock as of version 0.1.2.</p>
+<div class="section" id="install-plone">
+<h2>Install Plone</h2>
+<p>Plock exists to the eliminate cognitive dissonance experienced by Python programmers who want to install Plone but don't want to think about installing Plone. Such folks can now type the following to install Plone 4.3 (inside an activated virtualenv of course):</p>
+<pre class="literal-block">
+$ pip install plock
+$ plock
+Installing Plone. This may take a while.......(3)....(4)....(4)....(4)....(5)....(5)....(9)....(14)....(21)....(24)....(29)....(33)....(38)....(43)....(48)....(54)....(58)....(62)....(66)....(71)....(74)....(78)....(78)....(83)....(87)....(89)....(92)....(97)....(98)....(98)....(98)....(98)....(98)....(100)....(102)....(103)....(108)....(110)....(113)....(115)....(120)....(123)....(128)....(133)....(138)....(142)....(148)....(153)....(158)....(161)....(163)....(168)....(171)....(175)....(179)....(181)....(184)....(189)....(193)....(195)....(198)....(203)....(205)....(210)....(214)....(221)....(224)....(228)....(234). done.
+</pre>
+</div>
+<div class="section" id="run-plone">
+<h2>Run Plone</h2>
+<p>With Plock, you can <strong>truly</strong> run Plone because you are not running scripts with any of the following not-plone names: client, instance, zope.</p>
+<pre class="literal-block">
+$ plone fg
+</pre>
+</div>
+<div class="section" id="list-add-ons">
+<h2>List add-ons</h2>
+<p>One of the biggest attractions to using Plone is all the work on your new web project that has already been done for you. There are over 1,200 packages on PyPI with &quot;plone&quot; in either the description, keywords list, or summary. Some of these are part of the core, and some don't work with the latest release, but there are still a lot of add-ons available (I'm currently working on an accurate count.)</p>
+<pre class="literal-block">
+$ plock -l
+</pre>
+<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/plock-list-addons.png" class="align-center" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/plock-list-addons.png" style="width: 95%;" />
+</div>
+<div class="section" id="install-add-ons">
+<h2>Install add-ons</h2>
+<p>With Plock, installing add-ons is done from the command line. Pick a Python package name and install-away:</p>
+<pre class="literal-block">
+$ plock -i Products.PloneFormGen
+Installing Plone. This may take a while... done.
+</pre>
+<p>Or pick two or more:</p>
+<pre class="literal-block">
+$ plock -i Products.PloneFormGen collective.cover
+Installing Plone. This may take a while... done.
+</pre>
+<p>(If you have already installed an add-on with Plock, you can preserve the currently installed list with <tt class="docutils literal"><span class="pre">-p</span></tt>. Otherwise, the add-ons installed are replaced with each new call to <tt class="docutils literal"><span class="pre">-i</span></tt>.)</p>
+<p>If you pick a bad one, Plock has your back:</p>
+<pre class="literal-block">
+$ plock -i foo
+Installing Plone. This may take a while... error!
+</pre>
+<p>In the above scenario, Plock restored your previous configuration before reporting the error and exiting.</p>
+</div>
+<div class="section" id="all-the-rest">
+<h2>All the rest</h2>
+<p>For more details, please see:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/aclark4life/plock/blob/master/CHANGES.rst#changelog">https://github.com/aclark4life/plock/blob/master/CHANGES.rst#changelog</a></li>
+</ul>
+</div>
+<div class="section" id="issues">
+<h2>Issues</h2>
+<p>If you use Plock and have an issue, please report it here:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/aclark4life/plock/issues">https://github.com/aclark4life/plock/issues</a></li>
+</ul>
+</div>
+<p>There are <a href="http://aclark.net/blog/2013/07/29/whats-new-as-of-plock-0-1-2/#disqus_thread">comments</a>.</p>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="http://aclark.net/blog/2013/07/19/introducing-plock/" rel="bookmark"
+                           title="Permalink to Introducing Plock">Introducing Plock</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2013-07-19T00:00:00">
                 Fri 19 July 2013
         </abbr>
@@ -43,7 +128,7 @@
                 By <a class="url fn" href="http://aclark.net/blog/author/aclark.html">aclark</a>
         </address>
         <p>In <a href="http://aclark.net/blog/category/blog.html">Blog</a>. </p>
-<p>tags: <a href="http://aclark.net/blog/tag/plone.html">Plone</a><a href="http://aclark.net/blog/tag/python.html">Python</a></p></footer><!-- /.post-info --><p><em>Plock is a Plone Installer for the Pip-Loving Crowd. Plone is a Python-based CMS.</em></p>
+<p>tags: <a href="http://aclark.net/blog/tag/plone.html">Plone</a><a href="http://aclark.net/blog/tag/python.html">Python</a></p></footer><!-- /.post-info -->                <p><em>Plock is a Plone Installer for the Pip-Loving Crowd. Plone is a Python-based CMS.</em></p>
 <p>Installing Plone with <a class="reference external" href="https://github.com/aclark4life/plock">Plock</a> looks like this:</p>
 <pre class="literal-block">
 $ pip install plock
@@ -52,46 +137,11 @@ $ bin/plone fg
 </pre>
 <div class="section" id="configuration">
 <h2>Configuration</h2>
-<p>Plone uses <a class="reference external" href="https://pypi.python.org/pypi/zc.buildout">Buildout</a> to manage its installation and configuration. Plock creates a <tt class="docutils literal">buildout.cfg</tt> file for you that looks like this:</p>
-<pre class="literal-block">
-[buildout]
-extends = https://raw.github.com/pythonpackages/buildout-plone/master/latest
-
-[plone]
-eggs +=
-# Add-ons go here e.g.:
-#    Products.PloneFormGen
-</pre>
-<div class="section" id="add-ons">
-<h3>Add-ons</h3>
-<p>See <a class="reference external" href="https://pypi.python.org/pypi?:action=browse&amp;show=all&amp;c=563">https://pypi.python.org/pypi?:action=browse&amp;show=all&amp;c=563</a> for a complete list of add-ons compatible with Plone 4.3.</p>
-<p>To install add-ons, add the desired Python package name(s) to the <tt class="docutils literal">eggs +=</tt> parameter e.g.:</p>
-<pre class="literal-block">
-[buildout]
-extends = https://raw.github.com/pythonpackages/buildout-plone/master/latest
-
-[plone]
-eggs +=
-    Products.PloneFormGen
-</pre>
-<p>Stop Plone and run Buildout:</p>
-<pre class="literal-block">
-$ bin/buildout
-</pre>
-<p>Start Plone:</p>
-<pre class="literal-block">
-$ bin/plone fg
-</pre>
-<p>Install the add-on(s) in Plone via Site Setup -&gt; Add-ons.</p>
-</div>
-</div>
-<p>There are <a href="http://aclark.net/blog/2013/07/19/introducing-plock/#disqus_thread">comments</a>.</p>                </article>
-                            </aside><!-- /#featured -->
-                            <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-                                                
+<p>Plone uses <a class="reference external" href="https://pypi.python.org/pypi/zc.buildout">Buildout</a> to manage its installation and configuration. Plock creates a <tt class="docutils literal">buildout.cfg</tt> file for you that looks like ...</p></div>
+                <a class="readmore" href="http://aclark.net/blog/2013/07/19/introducing-plock/">read more</a>
+                <p>There are <a href="http://aclark.net/blog/2013/07/19/introducing-plock/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
 
                  
                         <li><article class="hentry">    
@@ -301,32 +351,6 @@ Plone in ...</p>
 <li>Running flake8 on 10s or 100s of source files ...</li></ul>
                 <a class="readmore" href="http://aclark.net/blog/2013/01/10/python-3-porting/">read more</a>
                 <p>There are <a href="http://aclark.net/blog/2013/01/10/python-3-porting/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="http://aclark.net/blog/2013/01/10/about-my-work/" rel="bookmark"
-                           title="Permalink to About My Work">About My Work</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2013-01-10T11:45:00">
-                Thu 10 January 2013
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="http://aclark.net/blog/author/aclark.html">aclark</a>
-        </address>
-        <p>In <a href="http://aclark.net/blog/category/blog.html">Blog</a>. </p>
-<p>tags: <a href="http://aclark.net/blog/tag/plone.html">Plone</a></p></footer><!-- /.post-info -->                <p>Regarding some of the criticism or objection to some of the content of my blog entries, etc., here are my thoughts:</p>
-<div class="section" id="i-hear-you">
-<h2>I hear you</h2>
-<p>No one is more critical of my work than me. If you have feedback, criticism, etc. then please do let me know. I consider very carefully ...</p></div>
-                <a class="readmore" href="http://aclark.net/blog/2013/01/10/about-my-work/">read more</a>
-                <p>There are <a href="http://aclark.net/blog/2013/01/10/about-my-work/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->
                             <p class="paginator">

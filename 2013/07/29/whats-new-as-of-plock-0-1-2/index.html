@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>What's new as of Plock 0-1-2?</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://aclark.net/blog/theme/css/main.css" type="text/css" />
+                <link href="http://aclark.net/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Alex Clark - Python Web Developer Atom Feed" />
+                
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://aclark.net/blog/css/ie.css"/>
+                <script src="http://aclark.net/blog/js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="http://aclark.net/blog/css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+<a href="https://github.com/ACLARKNET/blog">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+</a>
+        <header id="banner" class="body">
+                <h1><a href="http://aclark.net/blog">Alex Clark - Python Web Developer </a></h1>
+                <nav><ul>
+                                                                                                    <li class="active"><a href="http://aclark.net/blog/category/blog.html">Blog</a></li>
+                                </ul></nav>
+        </header><!-- /#banner -->
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="2013/07/29/whats-new-as-of-plock-0-1-2/" rel="bookmark"
+           title="Permalink to What's new as of Plock 0-1-2?">What's new as of Plock 0-1-2?</a></h1>
+      <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="aclark4life">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2013-07-29T22:00:00">
+                Mon 29 July 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://aclark.net/blog/author/aclark.html">aclark</a>
+        </address>
+        <p>In <a href="http://aclark.net/blog/category/blog.html">Blog</a>. </p>
+<p>tags: <a href="http://aclark.net/blog/tag/plone.html">Plone</a><a href="http://aclark.net/blog/tag/python.html">Python</a></p></footer><!-- /.post-info -->      <p><em>Plock is a Plone Installer for the Pip-Loving Crowd</em></p>
+<p>I blogged about Plock after 0.0.1 was released and a lot of progress has been made since then, so I thought I'd give an update. But rather than a traditional list-the-changelog-style-blog-entry, I thought I'd walk you through what you can do with Plock as of version 0.1.2.</p>
+<div class="section" id="install-plone">
+<h2>Install Plone</h2>
+<p>Plock exists to the eliminate cognitive dissonance experienced by Python programmers who want to install Plone but don't want to think about installing Plone. Such folks can now type the following to install Plone 4.3 (inside an activated virtualenv of course):</p>
+<pre class="literal-block">
+$ pip install plock
+$ plock
+Installing Plone. This may take a while.......(3)....(4)....(4)....(4)....(5)....(5)....(9)....(14)....(21)....(24)....(29)....(33)....(38)....(43)....(48)....(54)....(58)....(62)....(66)....(71)....(74)....(78)....(78)....(83)....(87)....(89)....(92)....(97)....(98)....(98)....(98)....(98)....(98)....(100)....(102)....(103)....(108)....(110)....(113)....(115)....(120)....(123)....(128)....(133)....(138)....(142)....(148)....(153)....(158)....(161)....(163)....(168)....(171)....(175)....(179)....(181)....(184)....(189)....(193)....(195)....(198)....(203)....(205)....(210)....(214)....(221)....(224)....(228)....(234). done.
+</pre>
+</div>
+<div class="section" id="run-plone">
+<h2>Run Plone</h2>
+<p>With Plock, you can <strong>truly</strong> run Plone because you are not running scripts with any of the following not-plone names: client, instance, zope.</p>
+<pre class="literal-block">
+$ plone fg
+</pre>
+</div>
+<div class="section" id="list-add-ons">
+<h2>List add-ons</h2>
+<p>One of the biggest attractions to using Plone is all the work on your new web project that has already been done for you. There are over 1,200 packages on PyPI with &quot;plone&quot; in either the description, keywords list, or summary. Some of these are part of the core, and some don't work with the latest release, but there are still a lot of add-ons available (I'm currently working on an accurate count.)</p>
+<pre class="literal-block">
+$ plock -l
+</pre>
+<img alt="https://raw.github.com/ACLARKNET/blog/gh-pages/images/plock-list-addons.png" class="align-center" src="https://raw.github.com/ACLARKNET/blog/gh-pages/images/plock-list-addons.png" style="width: 95%;" />
+</div>
+<div class="section" id="install-add-ons">
+<h2>Install add-ons</h2>
+<p>With Plock, installing add-ons is done from the command line. Pick a Python package name and install-away:</p>
+<pre class="literal-block">
+$ plock -i Products.PloneFormGen
+Installing Plone. This may take a while... done.
+</pre>
+<p>Or pick two or more:</p>
+<pre class="literal-block">
+$ plock -i Products.PloneFormGen collective.cover
+Installing Plone. This may take a while... done.
+</pre>
+<p>(If you have already installed an add-on with Plock, you can preserve the currently installed list with <tt class="docutils literal"><span class="pre">-p</span></tt>. Otherwise, the add-ons installed are replaced with each new call to <tt class="docutils literal"><span class="pre">-i</span></tt>.)</p>
+<p>If you pick a bad one, Plock has your back:</p>
+<pre class="literal-block">
+$ plock -i foo
+Installing Plone. This may take a while... error!
+</pre>
+<p>In the above scenario, Plock restored your previous configuration before reporting the error and exiting.</p>
+</div>
+<div class="section" id="all-the-rest">
+<h2>All the rest</h2>
+<p>For more details, please see:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/aclark4life/plock/blob/master/CHANGES.rst#changelog">https://github.com/aclark4life/plock/blob/master/CHANGES.rst#changelog</a></li>
+</ul>
+</div>
+<div class="section" id="issues">
+<h2>Issues</h2>
+<p>If you use Plock and have an issue, please report it here:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/aclark4life/plock/issues">https://github.com/aclark4life/plock/issues</a></li>
+</ul>
+</div>
+
+    </div><!-- /.entry-content -->
+        <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_identifier = "2013/07/29/whats-new-as-of-plock-0-1-2/";
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://aclark-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+    </div>
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                                                    <li><a href="http://aclark.net">ACLARK.NET, LLC</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://aclark.net/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                    <li><a href="http://aclark.net/blog/feeds/Django.atom.xml">atom feed (Django)</a></li>
+                                                    <li><a href="http://aclark.net/blog/feeds/Mozilla.atom.xml">atom feed (Mozilla)</a></li>
+                                                    <li><a href="http://aclark.net/blog/feeds/Plone.atom.xml">atom feed (Plone)</a></li>
+                                                    <li><a href="http://aclark.net/blog/feeds/Python.atom.xml">atom feed (Python)</a></li>
+                                                    <li><a href="http://twitter.com/aclark4life">aclark4life</a></li>
+                                                    <li><a href="https://www.gittip.com/aclark4life">aclark4life (Gittip)</a></li>
+                                                    <li><a href="http:///about.me/alex.clark">alex.clark (about.me)</a></li>
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34988446-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+<script type="text/javascript">
+    var disqus_shortname = 'aclark-blog';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>
